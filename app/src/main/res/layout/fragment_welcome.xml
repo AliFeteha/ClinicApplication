@@ -8,8 +8,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".InstructionFragment"
-        android:background="#d3ffce"
-        >
+        android:background="#d3ffce">
         <ImageView
             android:id="@+id/logoWelcome"
             android:layout_width="155dp"
