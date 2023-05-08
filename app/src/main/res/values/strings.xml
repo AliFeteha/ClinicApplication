@@ -8,4 +8,10 @@
     <string name="or">or</string>
     <string name="sign_in_your_email">log in</string>
     <string name="sign_up">Sign up</string>
+    <string name="login">Login</string>
+    <string name="example_gmail">example@gmail.com</string>
+    <string name="password">password</string>
+    <string name="Continue">continue</string>
+    <string name="name">name</string>
+    <string name="choose">choose doctor or patient</string>
 </resources>
