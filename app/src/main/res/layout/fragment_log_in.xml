@@ -32,7 +32,7 @@
             app:layout_constraintTop_toBottomOf="@+id/logoWelcome" />
 
         <TextView
-            android:id="@+id/text2Welcome"
+            android:id="@+id/text2login"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/mid"
@@ -59,7 +59,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.355"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/text2Welcome"
+            app:layout_constraintTop_toBottomOf="@+id/text2login"
             android:autofillHints="no"
             android:padding="@dimen/small"/>
         <EditText
