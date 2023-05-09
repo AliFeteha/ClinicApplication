@@ -9,9 +9,14 @@
         android:layout_height="match_parent"
         android:id="@+id/container"
         tools:context=".MainActivity">
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/welcomeFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:layout="@layout/fragment_welcome" />
 
         <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar2"
+            android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/design_default_color_primary_dark"
