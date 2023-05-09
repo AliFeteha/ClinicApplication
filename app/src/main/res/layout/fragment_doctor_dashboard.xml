@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".doctorDashboard">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#e1e1ef">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/card1"
+            android:layout_width="170sp"
+            android:layout_height="300sp"
+            android:layout_marginStart="20sp"
+            android:layout_marginTop="20sp"
+            android:background="@drawable/radius"
+            android:clickable="true"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView"
+            tools:ignore="MissingConstraints">
+
+
+            <TextView
+                android:id="@+id/doctorText1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/appointments"
+                android:textAlignment="center"
+                android:textColor="#0d2b4e"
+                android:textStyle="bold"
+                tools:layout_editor_absoluteX="-16dp"
+                tools:layout_editor_absoluteY="16dp" />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/small"
+                android:layout_marginBottom="@dimen/small"
+                android:layout_marginLeft="@dimen/small"
+                android:layout_marginRight="@dimen/small"
+                android:src="@drawable/appointment"
+                tools:layout_editor_absoluteX="26dp"
+                tools:layout_editor_absoluteY="0dp"
+                android:contentDescription="@string/appointments" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/card2"
+            android:layout_width="170sp"
+            android:layout_height="300sp"
+            android:layout_marginEnd="20sp"
+            android:background="@drawable/radius"
+            android:clickable="true"
+            app:layout_constraintBottom_toBottomOf="@+id/card1"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:ignore="MissingConstraints">
+            <TextView
+                android:id="@+id/doctorText2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/patient"
+                android:textAlignment="center"
+                android:textColor="#0d2b4e"
+                android:textStyle="bold"
+                tools:layout_editor_absoluteX="-16dp"
+                tools:layout_editor_absoluteY="16dp" />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/small"
+                android:layout_marginBottom="@dimen/small"
+                android:layout_marginLeft="@dimen/small"
+                android:layout_marginRight="@dimen/small"
+                android:src="@drawable/patients"
+                tools:layout_editor_absoluteX="26dp"
+                tools:layout_editor_absoluteY="0dp"
+                android:contentDescription="@string/patient" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/card3"
+            android:layout_width="170sp"
+            android:layout_height="300sp"
+            android:layout_marginStart="20sp"
+            android:layout_marginTop="20sp"
+            android:layout_marginBottom="20sp"
+            android:background="@drawable/radius"
+            android:clickable="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/card1"
+            tools:ignore="MissingConstraints">
+            <TextView
+                android:id="@+id/doctorText3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/forum"
+                android:textAlignment="center"
+                android:textColor="#0d2b4e"
+                android:textStyle="bold"
+                tools:layout_editor_absoluteX="-16dp"
+                tools:layout_editor_absoluteY="16dp" />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/small"
+                android:layout_marginBottom="@dimen/small"
+                android:layout_marginLeft="@dimen/small"
+                android:layout_marginRight="@dimen/small"
+                android:src="@drawable/forum"
+                tools:layout_editor_absoluteX="26dp"
+                tools:layout_editor_absoluteY="0dp"
+                android:contentDescription="@string/forum" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/card4"
+            android:layout_width="170sp"
+            android:layout_height="300sp"
+            android:layout_marginEnd="20sp"
+            android:background="@drawable/radius"
+            android:clickable="true"
+            app:layout_constraintBottom_toBottomOf="@+id/card3"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:ignore="MissingConstraints">
+            <TextView
+                android:id="@+id/doctorText4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/profile"
+                android:textAlignment="center"
+                android:textColor="#0d2b4e"
+                android:textStyle="bold"
+                tools:layout_editor_absoluteX="-16dp"
+                tools:layout_editor_absoluteY="16dp" />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/small"
+                android:layout_marginBottom="@dimen/small"
+                android:layout_marginLeft="@dimen/small"
+                android:layout_marginRight="@dimen/small"
+                android:src="@drawable/doctor"
+                tools:layout_editor_absoluteX="26dp"
+                tools:layout_editor_absoluteY="0dp"
+                android:contentDescription="@string/profile" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="160dp"
+            android:layout_height="41dp"
+            android:layout_marginTop="16dp"
+            android:text="@string/dashboard"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="#0d2b4e"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.045"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
