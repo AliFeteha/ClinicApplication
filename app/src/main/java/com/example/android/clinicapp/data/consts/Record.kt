@@ -1,6 +1,6 @@
 package com.example.android.clinicapp.data.consts
 
-data class Records (
+data class Record (
     val id :Int,
     val patient: String,
     val patientId: Int,
