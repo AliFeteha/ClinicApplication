@@ -1,10 +1,11 @@
-package com.example.android.clinicapp
+package com.example.android.clinicapp.dashboard
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.example.android.clinicapp.R
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -13,10 +14,10 @@ private const val ARG_PARAM2 = "param2"
 
 /**
  * A simple [Fragment] subclass.
- * Use the [bookAnAppointment.newInstance] factory method to
+ * Use the [patientDashboard.newInstance] factory method to
  * create an instance of this fragment.
  */
-class bookAnAppointment : Fragment() {
+class patientDashboard : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
@@ -34,7 +35,7 @@ class bookAnAppointment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_book_an_appointment, container, false)
+        return inflater.inflate(R.layout.fragment_patient_dashboard, container, false)
     }
 
     companion object {
@@ -44,12 +45,12 @@ class bookAnAppointment : Fragment() {
          *
          * @param param1 Parameter 1.
          * @param param2 Parameter 2.
-         * @return A new instance of fragment bookAnAppointment.
+         * @return A new instance of fragment patientDashboard.
          */
         // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
-            bookAnAppointment().apply {
+            patientDashboard().apply {
                 arguments = Bundle().apply {
                     putString(ARG_PARAM1, param1)
                     putString(ARG_PARAM2, param2)

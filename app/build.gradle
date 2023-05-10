@@ -51,6 +51,12 @@ dependencies {
     // Testing Navigation
     androidTestImplementation("androidx.navigation:navigation-testing:2.5.3")
 
+
+    //Koin
+    // Koin for Android
+    implementation ("io.insert-koin:koin-android:3.4.0")
+
+
     // Jetpack Compose Integration
     implementation("androidx.navigation:navigation-compose:2.5.3")
     implementation 'androidx.core:core-ktx:1.7.0'

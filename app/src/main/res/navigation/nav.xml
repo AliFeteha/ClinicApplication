@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/welcome"
-        android:name="com.example.android.clinicapp.welcome"
+        android:name="com.example.android.clinicapp.auth.welcome"
         android:label="welcome" >
         <action
             android:id="@+id/action_welcome_to_signUp"
@@ -47,7 +47,7 @@
         tools:layout="@layout/fragment_doctor_dashboard" />
     <fragment
         android:id="@+id/patientAppointments"
-        android:name="com.example.android.clinicapp.patientAppointments"
+        android:name="com.example.android.clinicapp.patiant.patientAppointments"
         android:label="fragment_patient_appointments"
         tools:layout="@layout/fragment_patient_appointments" >
         <action

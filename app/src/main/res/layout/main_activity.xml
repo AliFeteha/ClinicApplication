@@ -1,22 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    >
-    <!--using constrain layout because it make you free to add item freely in the Layout and make relations between views -->
+    xmlns:tools="http://schemas.android.com/tools">
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/container"
         tools:context=".MainActivity">
+
         <androidx.fragment.app.FragmentContainerView
-            android:id="@+id/welcomeFragment"
+            android:id="@+id/nav_host_fragment"
+            android:name="androidx.navigation.fragment.NavHostFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:layout="@layout/fragment_welcome"
-            app:navGraph="@navigation/nav"
-            app:defaultNavHost="true"
-            />
+            app:defaultNavHost="true" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

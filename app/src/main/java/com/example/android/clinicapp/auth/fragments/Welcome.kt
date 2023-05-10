@@ -1,4 +1,4 @@
-package com.example.android.clinicapp
+package com.example.android.clinicapp.auth
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -6,11 +6,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
-import androidx.databinding.ViewDataBinding
 import androidx.navigation.Navigation
+import com.example.android.clinicapp.R
+import com.example.android.clinicapp.base.BaseFragment
 import com.example.android.clinicapp.databinding.FragmentWelcomeBinding
+import org.koin.android.ext.android.inject
 
-class welcome : Fragment() {
+class Welcome : BaseFragment() {
+
+    override val _viewModel: LoginViewModel by  inject()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

@@ -1,12 +1,14 @@
-package com.example.android.clinicapp
+package com.example.android.clinicapp.patiant
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
+import com.example.android.clinicapp.R
+import com.example.android.clinicapp.base.BaseFragment
+import com.example.android.clinicapp.base.BaseViewModel
 
-class patientAppointments : Fragment() {
+class patientAppointments(override val _viewModel: BaseViewModel) : BaseFragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater,
