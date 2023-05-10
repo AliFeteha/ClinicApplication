@@ -1,7 +1,7 @@
 package com.example.android.clinicapp.data
 
-data class user(
-    var id :String?=null,
+data class Patient(
+    var id :Int?=null,
     var name :String?=null,
     var gender :String?=null,
     var email :String?=null,
@@ -12,4 +12,6 @@ data class user(
     var mobilePhone :String?=null,
     var bloodType :String?=null,
     val medicalIssues: MutableList<String> = mutableListOf(),
+    val emergencyContact: EmergencyContact? = null,
+    val insurance: MedicalInsurance? = null
 )
