@@ -1,4 +1,4 @@
-package com.example.android.clinicapp.data
+package com.example.android.clinicapp.data.consts
 
 
 enum class Days{

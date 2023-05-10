@@ -1,4 +1,4 @@
-package com.example.android.clinicapp.data
+package com.example.android.clinicapp.data.consts
 
 data class Doctor(
     val id : Int,
