@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/welcome"
-        android:name="com.example.android.clinicapp.auth.welcome"
+        android:name="com.example.android.clinicapp.auth.Welcome"
         android:label="welcome" >
         <action
             android:id="@+id/action_welcome_to_signUp"
@@ -18,7 +18,7 @@
     </fragment>
     <fragment
         android:id="@+id/logIn"
-        android:name="com.example.android.clinicapp.logIn"
+        android:name="com.example.android.clinicapp.auth.fragments.LogIn"
         android:label="logIn" >
         <action
             android:id="@+id/action_logIn_to_patientDashboard"
@@ -29,11 +29,11 @@
     </fragment>
     <fragment
         android:id="@+id/signUp"
-        android:name="com.example.android.clinicapp.signUp"
+        android:name="com.example.android.clinicapp.auth.fragments.SignUp"
         android:label="signUp" />
     <fragment
         android:id="@+id/patientDashboard"
-        android:name="com.example.android.clinicapp.patientDashboard"
+        android:name="com.example.android.clinicapp.dashboard.patientDashboard"
         android:label="fragment_patient_dashboard"
         tools:layout="@layout/fragment_patient_dashboard" >
         <action
@@ -42,7 +42,7 @@
     </fragment>
     <fragment
         android:id="@+id/doctorDashboard"
-        android:name="com.example.android.clinicapp.doctorDashboard"
+        android:name="com.example.android.clinicapp.dashboard.doctorDashboard"
         android:label="fragment_doctor_dashboard"
         tools:layout="@layout/fragment_doctor_dashboard" />
     <fragment
@@ -56,7 +56,7 @@
     </fragment>
     <fragment
         android:id="@+id/bookAnAppointment"
-        android:name="com.example.android.clinicapp.bookAnAppointment"
+        android:name="com.example.android.clinicapp.patiant.appointments.bookAnAppointment"
         android:label="fragment_book_an_appointment"
         tools:layout="@layout/fragment_book_an_appointment" />
 </navigation>

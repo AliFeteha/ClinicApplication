@@ -15,11 +15,14 @@ import org.koin.android.ext.android.inject
 class Welcome : BaseFragment() {
 
     override val _viewModel: LoginViewModel by  inject()
+
+    private lateinit var binding: FragmentWelcomeBinding
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val binding: FragmentWelcomeBinding = DataBindingUtil.inflate(
+
+        binding = DataBindingUtil.inflate(
             inflater, R.layout.fragment_welcome, container, false
         )
         binding.button1Welcome.setOnClickListener{view: View ->
