@@ -112,4 +112,5 @@
     <string name="my_appointments">My Appointments</string>
     <string name="slash">-</string>
     <string name="book_a_new_appointment">Book a new appointment</string>
+    <string name="book_an_appointment">Book an appointment</string>
 </resources>
