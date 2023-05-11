@@ -1,22 +1,21 @@
-package com.example.android.clinicapp
+package com.example.android.clinicapp.auth
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
-import com.example.android.clinicapp.databinding.MainActivityBinding
+import com.example.android.clinicapp.R
+import com.example.android.clinicapp.databinding.LoginActivityBinding
 
-class MainActivity : AppCompatActivity() {
+class LoginActivity : AppCompatActivity() {
 
-    private lateinit var binding:MainActivityBinding
+    private lateinit var binding: LoginActivityBinding
     private lateinit var appBarConfiguration: AppBarConfiguration
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        binding = DataBindingUtil.setContentView(this, R.layout.main_activity)
-        window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_FULLSCREEN
+        binding = DataBindingUtil.setContentView(this, R.layout.login_activity)
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         val navController = navHostFragment.navController

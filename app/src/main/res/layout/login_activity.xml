@@ -8,12 +8,13 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/container"
-        tools:context=".MainActivity">
+        tools:context=".auth.LoginActivity">
 
         <androidx.fragment.app.FragmentContainerView
-            android:id="@+id/welcomeFragment"
+            android:id="@+id/nav_host_fragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:name="androidx.navigation.fragment.NavHostFragment"
             app:defaultNavHost="true"
             app:navGraph="@navigation/nav"
             tools:layout="@layout/fragment_welcome"
