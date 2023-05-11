@@ -113,4 +113,18 @@
     <string name="slash">-</string>
     <string name="book_a_new_appointment">Book a new appointment</string>
     <string name="book_an_appointment">Book an appointment</string>
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="invalid_username">Not a valid username</string>
+    <string name="invalid_password">Password must be >5 characters</string>
+    <string name="login_failed">"Login failed"</string>
+    <string name="main_activity">Main Activity</string>
+    <string name="patient_activity">Patient Activity</string>
+    <string name="doctor_activity">Doctor Activity</string>
+    <string name="user_preferance_file">User Preference</string>
+    <string name="preference_id">id</string>
+    <string name="preference_type">type</string>
 </resources>

@@ -5,17 +5,18 @@ import android.os.Bundle
 import android.view.View
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.fragment.NavHostFragment
+
 import androidx.navigation.ui.AppBarConfiguration
-import com.example.android.clinicapp.databinding.MainActivityBinding
+import com.example.android.clinicapp.databinding.PatientActivityBinding
 
-class MainActivity : AppCompatActivity() {
+class PatientActivity : AppCompatActivity() {
 
-    private lateinit var binding:MainActivityBinding
+    private lateinit var binding:PatientActivityBinding
     private lateinit var appBarConfiguration: AppBarConfiguration
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        binding = DataBindingUtil.setContentView(this, R.layout.main_activity)
+        binding = DataBindingUtil.setContentView(this, R.layout.patient_activity)
         window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_FULLSCREEN
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
