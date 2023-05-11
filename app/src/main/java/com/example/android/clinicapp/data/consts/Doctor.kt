@@ -1,12 +1,14 @@
 package com.example.android.clinicapp.data.consts
 
 data class Doctor(
-    val id: String,
-    val name: String,
-    val workingDays: List<Days>,
-    val email: String,
-    val imageURL: String,
+    val address: String,
     val city: String,
+    val email: String,
+    val id: String,
+    val imageURL: String,
+    val name: String,
     val telephone: String,
-    val address: String
+    val workingDays: List<Days>,
+
+
 )
