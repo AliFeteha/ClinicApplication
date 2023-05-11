@@ -1,7 +1,7 @@
 package com.example.android.clinicapp.data.consts
 
 data class Doctor(
-    val id : Int,
+    val id: String,
     val name: String,
     val workingDays: List<Days>,
     val email: String,
