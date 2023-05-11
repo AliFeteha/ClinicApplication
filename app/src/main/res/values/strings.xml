@@ -124,4 +124,7 @@
     <string name="main_activity">Main Activity</string>
     <string name="patient_activity">Patient Activity</string>
     <string name="doctor_activity">Doctor Activity</string>
+    <string name="user_preferance_file">User Preference</string>
+    <string name="preference_id">id</string>
+    <string name="preference_type">type</string>
 </resources>
