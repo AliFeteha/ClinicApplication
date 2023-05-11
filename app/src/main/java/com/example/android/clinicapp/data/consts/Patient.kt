@@ -1,7 +1,7 @@
 package com.example.android.clinicapp.data.consts
 
 data class Patient(
-    var id :Int?=null,
+    var id :String?=null,
     var name :String?=null,
     var gender :String?=null,
     var email :String?=null,
