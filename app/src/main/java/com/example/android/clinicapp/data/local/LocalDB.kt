@@ -26,11 +26,11 @@ object LocalDB {
         ).build().userDDao()
     }
 
-    fun createUserDao(context: Context): DoctorsDao {
+    fun createDatabaseDao(context: Context): FormDao {
         return Room.databaseBuilder(
             context.applicationContext,
-            UserDataBase::class.java, "User.db"
-        ).build().userDao()
+            FormDatabase::class.java, "form.db"
+        ).build().formDao()
     }
 
 

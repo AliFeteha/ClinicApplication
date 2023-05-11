@@ -5,25 +5,23 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.example.android.clinicapp.data.consts.Doctor
-import com.example.android.clinicapp.data.consts.Patient
-import com.example.android.clinicapp.data.consts.Record
+import com.example.android.clinicapp.data.consts.Comment
 import com.example.android.clinicapp.data.dto.DoctorsDTO
 import com.example.android.clinicapp.data.dto.PatientsDTO
 import com.example.android.clinicapp.data.dto.RecordsDTO
-import com.example.android.clinicapp.data.dto.UserDTO
+import com.example.android.clinicapp.data.dto.FormDTO
 
 @Dao
 interface RecordsDao{
 
         @Query("SELECT * FROM records")
-        suspend fun getRecords(): List<Record>
+        suspend fun getRecords(): List<RecordsDTO>
 
         @Query("SELECT * FROM records where patient_id = :patientId")
-        suspend fun getRecordsByPatientId(patientId: Int): Record?
+        suspend fun getRecordsByPatientId(patientId: Int): RecordsDTO?
 
         @Query("SELECT * FROM records where doctor_id = :doctorId")
-        suspend fun getRecordsByDoctorId(patientId: Int): Record?
+        suspend fun getRecordsByDoctorId(patientId: Int): RecordsDTO?
 
         @Insert(onConflict = OnConflictStrategy.REPLACE)
         suspend fun saveRecord(record: RecordsDTO)
@@ -37,7 +35,7 @@ interface RecordsDao{
 interface PatientsDao{
 
         @Query("SELECT * FROM patients where id = :patientId")
-        suspend fun getProfileById(patientId: Int): Patient?
+        suspend fun getProfileById(patientId: Int): PatientsDTO?
 
         @Insert(onConflict = OnConflictStrategy.REPLACE)
         suspend fun saveRecord(patient: PatientsDTO)
@@ -51,7 +49,7 @@ interface PatientsDao{
 interface DoctorsDao{
 
         @Query("SELECT * FROM doctors where id = :doctorId")
-        suspend fun getProfileById(doctorId: Int): Patient?
+        suspend fun getProfileById(doctorId: Int): DoctorsDTO?
 
         @Insert(onConflict = OnConflictStrategy.REPLACE)
         suspend fun saveRecord(doctor: DoctorsDTO)
@@ -62,15 +60,21 @@ interface DoctorsDao{
 }
 
 @Dao
-interface UserDao{
+interface FormDao{
 
-        @Query("SELECT * FROM user ORDER BY ROWID ASC LIMIT 1")
-        suspend fun getProfile():Doctor
+        @Query("SELECT * FROM form")
+        suspend fun getForm():List<FormDTO>
 
         @Insert(onConflict = OnConflictStrategy.REPLACE)
-        suspend fun saveLog(user : UserDTO)
+        suspend fun saveQuestion(user : FormDTO)
 
-        @Query("DELETE FROM user")
+        @Query("UPDATE form SET comment= :comment WHERE id LIKE :id ")
+        suspend fun updateComments(id: Int, comment:Comment)
+
+        @Query("DELETE FROM patients WHERE id LIKE :id")
+        suspend fun delete(id: Int)
+
+        @Query("DELETE FROM form")
         suspend fun clear()
 
 }

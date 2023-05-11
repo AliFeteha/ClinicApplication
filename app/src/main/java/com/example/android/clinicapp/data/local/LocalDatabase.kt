@@ -5,7 +5,7 @@ import androidx.room.RoomDatabase
 import com.example.android.clinicapp.data.dto.RecordsDTO
 import com.example.android.clinicapp.data.dto.DoctorsDTO
 import com.example.android.clinicapp.data.dto.PatientsDTO
-import com.example.android.clinicapp.data.dto.UserDTO
+import com.example.android.clinicapp.data.dto.FormDTO
 
 
 @Database(entities = [RecordsDTO::class], version = 1, exportSchema = false)
@@ -27,8 +27,8 @@ abstract class DoctorsDatabase : RoomDatabase() {
     abstract fun userDDao(): DoctorsDao
 }
 
-@Database(entities = [UserDTO::class], version = 1, exportSchema = false)
-abstract class UserDataBase : RoomDatabase() {
+@Database(entities = [FormDTO::class], version = 1, exportSchema = false)
+abstract class FormDatabase : RoomDatabase() {
 
-    abstract fun userDao(): DoctorsDao
+    abstract fun formDao(): FormDao
 }
