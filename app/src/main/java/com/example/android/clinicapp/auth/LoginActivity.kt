@@ -28,10 +28,8 @@ class LoginActivity : AppCompatActivity() {
         }
         else if (checkLogin() == Type.Doctor.toString()){
             initializeLoginUI(Type.Doctor)
-            finishActivity()
         }else {
             initializeLoginUI(Type.Patient)
-            finishActivity()
         }
     }
     //Checks the saved preference if it already existed to require a login process
@@ -57,6 +55,8 @@ class LoginActivity : AppCompatActivity() {
             startActivity(Intent(this, PatientActivity::class.java))
         else
             startActivity(Intent(this, DoctorActivity::class.java))
+
+        finishActivity()
     }
 
 }
