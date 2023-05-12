@@ -131,7 +131,12 @@
     <string name="user_preferance_file">User Preference</string>
     <string name="preference_id">id</string>
     <string name="preference_type">type</string>
-    <string name="email">example@ejust.edu.eg</string>
+    <string name="emailExample">example@ejust.edu.eg</string>
+    <string name="blood">BloodType</string>
+    <string name="email">Email</string>
+    <string name="city">City</string>
+    <string name="imgUrl">ImageUrl</string>
+    <string name="gender">Gender</string>
     <string name="phone_number">Phone Number</string>
     <string name="address">Address</string>
     <string name="exampleEmail">example@ejust.edu.eg</string>

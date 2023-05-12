@@ -10,7 +10,11 @@ import androidx.lifecycle.Observer
 import com.example.android.clinicapp.R
 import com.example.android.clinicapp.auth.LoginViewModel
 import com.example.android.clinicapp.base.BaseFragment
+import com.example.android.clinicapp.data.consts.Doctor
+import com.example.android.clinicapp.data.consts.Patient
+import com.example.android.clinicapp.data.consts.Type
 import com.example.android.clinicapp.databinding.FragmentLogInBinding
+import com.example.android.clinicapp.utils.PreferenceControl
 import org.koin.android.ext.android.inject
 
 class LogIn : BaseFragment() {
@@ -31,7 +35,7 @@ class LogIn : BaseFragment() {
             if (it) {
                 if(checkAccountValidity(_viewModel.email)){
                     if (checkEmailAndPassword(_viewModel.email,_viewModel.password)) {
-                        _viewModel.writePreference()
+                        writePreference(_viewModel.type)
                         _viewModel.finishActivity()
                     }
                 }
@@ -41,7 +45,13 @@ class LogIn : BaseFragment() {
         })
 
     }
-
+    private fun writePreference(type: Type?) {
+        val id = _viewModel.id;val name = _viewModel.name;val email = _viewModel.email
+        if (type == Type.Patient)
+            PreferenceControl().write(Patient(id = id,name = name, email =  email))
+        if (type == Type.Doctor)
+            PreferenceControl().write(Doctor(id = id, name = name, email =  email))
+    }
     private fun checkAccountValidity(email:String) :Boolean{
         //Todo check if the account already existed in the email remote database table and return
         // ----->True<----- if it does existed

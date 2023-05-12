@@ -29,12 +29,13 @@ class Welcome : BaseFragment() {
         binding = DataBindingUtil.inflate(
             inflater, R.layout.fragment_welcome, container, false
         )
+        binding.viewModel = _viewModel
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        var database: DatabaseReference = Firebase.database.reference;
+        var database: DatabaseReference = Firebase.database.reference
         database.child("users").get().addOnSuccessListener {
             Log.i("fireeeeebase", "Got value ${it.value}")
         }.addOnFailureListener{

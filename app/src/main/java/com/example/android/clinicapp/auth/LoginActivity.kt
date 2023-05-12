@@ -17,7 +17,7 @@ import org.koin.android.ext.android.inject
 class LoginActivity : AppCompatActivity() {
 
     private lateinit var binding: LoginActivityBinding
-    val _viewModel: LoginViewModel = LoginViewModel(application)
+    val _viewModel: LoginViewModel by inject()
     private lateinit var appBarConfiguration: AppBarConfiguration
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

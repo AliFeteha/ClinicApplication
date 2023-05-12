@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     >
+
     <!--using constrain layout because it make you free to add item freely in the Layout and make relations between views -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"

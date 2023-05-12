@@ -24,7 +24,6 @@ class LoginViewModel(app: Application) : BaseViewModel(app) {
     var type:Type? = null
     val login = MutableLiveData(false)
     val register = MutableLiveData(false)
-    private val preferenceControl = PreferenceControl()
     // Welcoming and login viewModel
     fun navigateToLogin(){
         navigationCommand.value = NavigationCommand.To(WelcomeDirections.actionWelcomeToLogIn())
@@ -96,12 +95,6 @@ class LoginViewModel(app: Application) : BaseViewModel(app) {
     }
     fun invalidPasswordLogin(){
         showSnackBarInt.value = R.string.invalidPasswordLogin
-    }
-    fun writePreference(){
-        if (type == Type.Patient)
-            preferenceControl.write(Patient(id = id,name = name, email =  email))
-        if (type == Type.Doctor)
-            preferenceControl.write(Doctor(id = id, name = name, email =  email))
     }
 
 }
