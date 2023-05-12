@@ -1,0 +1,371 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="viewModel"
+            type="com.example.android.clinicapp.profile.ProfileViewModel" />
+    </data>
+    <androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:textAlignment="textEnd">
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="23dp"
+        android:layout_height="31dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:contentDescription="@string/back_buttion"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/back" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="-115dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/profileTextView"
+                android:layout_width="55dp"
+                android:layout_height="19dp"
+                android:layout_marginTop="10dp"
+                android:fontFamily="sans-serif-medium"
+                android:text="@string/profile"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toTopOf="@+id/imageView4"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.384" />
+
+            <TextView
+                android:id="@+id/NameTextView"
+                android:layout_width="55dp"
+                android:layout_height="19dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="5dp"
+                android:fontFamily="sans-serif-medium"
+                android:text="@string/exampleName"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toTopOf="@+id/emailTextView"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageView4" />
+
+            <TextView
+                android:id="@+id/emailTextView"
+                android:layout_width="172dp"
+                android:layout_height="18dp"
+                android:layout_marginStart="119dp"
+                android:layout_marginTop="7dp"
+                android:layout_marginEnd="120dp"
+                android:layout_marginBottom="20dp"
+                android:fontFamily="sans-serif-medium"
+                android:text="@string/exampleEmail"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toTopOf="@+id/nameEditText"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/NameTextView" />
+
+            <ImageView
+                android:id="@+id/imageView4"
+                android:layout_width="227dp"
+                android:layout_height="153dp"
+                android:layout_marginStart="92dp"
+                android:layout_marginTop="68dp"
+                android:layout_marginEnd="92dp"
+                android:layout_marginBottom="8dp"
+                android:contentDescription="@string/personal_photo"
+                app:layout_constraintBottom_toTopOf="@+id/NameTextView"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/Avatar" />
+
+            <EditText
+                android:id="@+id/nameEditText"
+                android:layout_width="350dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="34dp"
+                android:layout_marginTop="60dp"
+                android:layout_marginEnd="37dp"
+                android:autofillHints=""
+                android:ems="10"
+                android:fallbackLineSpacing="false"
+                android:fontFamily="monospace"
+                android:hint="@string/name"
+                android:inputType="text"
+                android:letterSpacing="0.1d"
+                android:lineSpacingExtra="8sp"
+                android:maxLines="1"
+                android:minLines="1"
+                android:singleLine="true"
+                android:text="@string/name"
+                android:textAlignment="gravity"
+                android:textColor="#000000"
+                android:textColorHint="@android:color/darker_gray"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/NameTextView" />
+
+            <EditText
+                android:id="@+id/emergencyNameEditText4"
+                android:layout_width="352dp"
+                android:layout_height="53dp"
+                android:layout_marginStart="34dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="37dp"
+                android:autofillHints=""
+                android:ems="10"
+                android:fallbackLineSpacing="false"
+                android:fontFamily="monospace"
+                android:hint="@string/emergencyContact"
+                android:inputType="text"
+                android:letterSpacing="0.1d"
+                android:lineSpacingExtra="8sp"
+                android:maxLines="1"
+                android:minLines="1"
+                android:singleLine="true"
+                android:text="@string/emergencyContact"
+                android:textAlignment="gravity"
+                android:textColor="#000000"
+                android:textColorHint="@android:color/darker_gray"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/insuranceNumberEdit" />
+
+            <EditText
+                android:id="@+id/emailEditText"
+                android:layout_width="203dp"
+                android:layout_height="54dp"
+                android:layout_marginStart="34dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="35dp"
+                android:ems="10"
+                android:fallbackLineSpacing="false"
+                android:fontFamily="monospace"
+                android:inputType="textEmailAddress"
+                android:letterSpacing="0.1d"
+                android:lineSpacingExtra="8sp"
+                android:maxLines="1"
+                android:minLines="1"
+                android:singleLine="true"
+                android:text="@string/email"
+                android:textAlignment="gravity"
+                android:textColor="#000000"
+                android:textColorHint="@android:color/darker_gray"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/nameEditText"
+                tools:ignore="DuplicateSpeakableTextCheck"
+                android:autofillHints="" />
+
+            <EditText
+                android:id="@+id/addressEditText"
+                android:layout_width="346dp"
+                android:layout_height="51dp"
+                android:layout_marginStart="34dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="35dp"
+                android:autofillHints=""
+                android:ems="10"
+                android:fallbackLineSpacing="false"
+                android:fontFamily="monospace"
+                android:hint="@string/address"
+                android:inputType="text"
+                android:letterSpacing="0.1d"
+                android:lineSpacingExtra="8sp"
+                android:maxLines="1"
+                android:minLines="1"
+                android:singleLine="true"
+                android:text="@string/address"
+                android:textAlignment="gravity"
+                android:textColor="@color/black"
+                android:textColorHint="@android:color/darker_gray"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/conactPhone" />
+
+            <EditText
+                android:id="@+id/insuranceNumberEdit"
+                android:layout_width="202dp"
+                android:layout_height="48dp"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="16dp"
+                android:autofillHints=""
+                android:ems="10"
+                android:fallbackLineSpacing="false"
+                android:fontFamily="monospace"
+                android:hint="@string/insurenceNumber"
+                android:inputType="number"
+                android:letterSpacing="0.05d"
+                android:lineSpacingExtra="8sp"
+                android:maxLines="1"
+                android:minLines="1"
+                android:singleLine="true"
+                android:text="@string/insurenceNumber"
+                android:textAlignment="gravity"
+                android:textColor="@color/black"
+                android:textColorHint="@android:color/darker_gray"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/editTextBirthDate" />
+
+            <EditText
+                android:id="@+id/insuranceProviderEdit"
+                android:layout_width="138dp"
+                android:layout_height="48dp"
+                android:layout_marginEnd="28dp"
+                android:autofillHints=""
+                android:ems="10"
+                android:fallbackLineSpacing="false"
+                android:fontFamily="monospace"
+                android:hint="@string/insurance_provider"
+                android:inputType="text"
+                android:letterSpacing="0.1d"
+                android:lineSpacingExtra="8sp"
+                android:maxLines="1"
+                android:minLines="1"
+                android:singleLine="true"
+                android:text="@string/insurance_provider"
+                android:textAlignment="gravity"
+                android:textColor="@color/black"
+                android:textColorHint="@android:color/darker_gray"
+                app:layout_constraintBaseline_toBaselineOf="@+id/insuranceNumberEdit"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <EditText
+                android:id="@+id/conactPhone"
+                android:layout_width="198dp"
+                android:layout_height="56dp"
+                android:autofillHints=""
+                android:ems="10"
+                android:hint="@string/phone_number"
+                android:inputType="phone"
+                android:textColorHint="@android:color/darker_gray"
+                app:layout_constraintBaseline_toBaselineOf="@+id/citiesSpinner"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.164"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:text="+20" />
+
+            <EditText
+                android:id="@+id/emergencyPhone"
+                android:layout_width="352dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="12dp"
+                android:autofillHints=""
+                android:ems="10"
+                android:hint="@string/contactNumber"
+                android:inputType="phone"
+                android:textColorHint="#757575"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.576"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/emergencyNameEditText4" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_begin="34dp" />
+
+            <Spinner
+                android:id="@+id/citiesSpinner"
+                android:layout_width="124dp"
+                android:layout_height="51dp"
+                android:layout_marginTop="16dp"
+                android:entries="@array/Cities"
+                android:spinnerMode="dropdown"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.425"
+                app:layout_constraintStart_toEndOf="@+id/conactPhone"
+                app:layout_constraintTop_toBottomOf="@+id/emailEditText" />
+
+            <Spinner
+                android:id="@+id/citiesSpinner2"
+                android:layout_width="126dp"
+                android:layout_height="55dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="12dp"
+                android:entries="@array/gender"
+                android:spinnerMode="dropdown"
+                app:layout_constraintStart_toEndOf="@+id/emailEditText"
+                app:layout_constraintTop_toBottomOf="@+id/nameEditText" />
+
+            <Spinner
+                android:id="@+id/bloodTypeSpinner"
+                android:layout_width="101dp"
+                android:layout_height="48dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="34dp"
+                android:entries="@array/bloodTypes"
+                android:spinnerMode="dropdown"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toEndOf="@+id/editTextBirthDate"
+                app:layout_constraintTop_toBottomOf="@+id/addressEditText" />
+
+            <EditText
+                android:id="@+id/editTextBirthDate"
+                android:layout_width="226dp"
+                android:layout_height="48dp"
+                android:layout_marginStart="34dp"
+                android:ems="10"
+                android:hint="@string/birthDate"
+                android:inputType="date"
+                android:textColorHint="@android:color/darker_gray"
+                app:layout_constraintBaseline_toBaselineOf="@+id/bloodTypeSpinner"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:text="@string/birthDate"
+                android:autofillHints="" />
+
+            <ImageView
+                android:id="@+id/upload_Button"
+                android:layout_width="27dp"
+                android:layout_height="24dp"
+                android:layout_marginStart="152dp"
+                android:layout_marginTop="144dp"
+                app:layout_constraintStart_toStartOf="@+id/imageView4"
+                app:layout_constraintTop_toTopOf="@+id/imageView4"
+                app:srcCompat="@drawable/upload"
+                android:contentDescription="@string/uploadButton" />
+
+            <Button
+                android:id="@+id/saveButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:background="@color/purple_700"
+                android:text="@string/save"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/emergencyPhone" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

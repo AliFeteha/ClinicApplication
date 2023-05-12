@@ -127,4 +127,19 @@
     <string name="user_preferance_file">User Preference</string>
     <string name="preference_id">id</string>
     <string name="preference_type">type</string>
+    <string name="email">example@ejust.edu.eg</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="address">Address</string>
+    <string name="exampleEmail">example@ejust.edu.eg</string>
+    <string name="exampleName">Mr. Lol</string>
+    <string name="back_buttion">Back Buttion</string>
+    <string name="personal_photo">Personal photo</string>
+    <string name="birthDate">BirthDate</string>
+    <string name="insurance_provider">Provider</string>
+    <string name="insurenceNumber">Insurence Number</string>
+    <string name="uploadButton">Upload Button</string>
+    <string name="emergencyContact">Emergency Contact</string>
+    <string name="contactNumber">Contact Number</string>
+    <string name="save">Save</string>
+    <string name="workngDays">Workng Days</string>
 </resources>
