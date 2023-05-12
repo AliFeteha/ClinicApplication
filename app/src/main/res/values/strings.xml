@@ -10,6 +10,9 @@
     <string name="sign_up">Sign up</string>
     <string name="login">Login</string>
     <string name="invalidInput">Invalid Input</string>
+    <string name="invalidEmail">Email Not registered</string>
+    <string name="invalidPassword">Password must be longer than 8 chars</string>
+    <string name="invalidPasswordLogin">Incorrect Password</string>
     <string name="example_gmail">example@gmail.com</string>
     <string name="password">password</string>
     <string name="Continue">continue</string>

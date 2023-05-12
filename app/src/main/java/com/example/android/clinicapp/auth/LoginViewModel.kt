@@ -6,20 +6,25 @@ import androidx.lifecycle.MutableLiveData
 import com.example.android.clinicapp.R
 import com.example.android.clinicapp.base.BaseViewModel
 import com.example.android.clinicapp.base.NavigationCommand
+import com.example.android.clinicapp.data.consts.Doctor
+import com.example.android.clinicapp.data.consts.Patient
 import com.example.android.clinicapp.data.consts.Type
+import com.example.android.clinicapp.utils.PreferenceControl
 
 class LoginViewModel(app: Application) : BaseViewModel(app) {
 
     private val _finishedFlag = MutableLiveData(false)
     val finishedFlag :LiveData<Boolean>
         get() = _finishedFlag
+    val id:String?= null
     val name :String = ""
     val email :String = ""
     val password:String = ""
-    val inputAccountType:String = ""
+    private val inputAccountType:String = ""
     var type:Type? = null
     val login = MutableLiveData(false)
     val register = MutableLiveData(false)
+    private val preferenceControl = PreferenceControl()
     // Welcoming and login viewModel
     fun navigateToLogin(){
         navigationCommand.value = NavigationCommand.To(WelcomeDirections.actionWelcomeToLogIn())
@@ -27,7 +32,7 @@ class LoginViewModel(app: Application) : BaseViewModel(app) {
     fun navigateToRegistration(){
         navigationCommand.value = NavigationCommand.To(WelcomeDirections.actionWelcomeToSignUp())
     }
-    fun navigateToDashBoard(){
+    fun finishActivity(){
         _finishedFlag.value = true
     }
     fun login(){
@@ -50,6 +55,11 @@ class LoginViewModel(app: Application) : BaseViewModel(app) {
         }
         else{
             if (email != "" || password != "" || inputAccountType != "" || name != ""){
+                if (password.length < 8)
+                {
+                    invalidPassword()
+                    return false
+                }
                 convertType()
                 return true
             }
@@ -68,6 +78,30 @@ class LoginViewModel(app: Application) : BaseViewModel(app) {
     }
     private fun showInvalidInput(){
         showSnackBarInt.value = R.string.invalidInput
+    }
+    fun invalidEmail(){
+        showToast.value = "Already exciting email"
+    }
+    fun loggedIn(){
+        showToast.value = "Logged In successfully"
+    }
+    fun registered(){
+        showToast.value = "Signed Up successfully"
+    }
+    fun invalidEmailLogin(){
+        showSnackBarInt.value = R.string.invalidEmail
+    }
+    private fun invalidPassword(){
+        showSnackBarInt.value = R.string.invalidPassword
+    }
+    fun invalidPasswordLogin(){
+        showSnackBarInt.value = R.string.invalidPasswordLogin
+    }
+    fun writePreference(){
+        if (type == Type.Patient)
+            preferenceControl.write(Patient(id = id,name = name, email =  email))
+        if (type == Type.Doctor)
+            preferenceControl.write(Doctor(id = id, name = name, email =  email))
     }
 
 }
