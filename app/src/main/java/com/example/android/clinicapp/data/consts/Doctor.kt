@@ -8,6 +8,5 @@ data class Doctor(
     val imageURL: String,
     val name: String,
     val telephone: String,
-    val workingDays: List<Days>
-
+    val workingDays: List<Days>,
 )
