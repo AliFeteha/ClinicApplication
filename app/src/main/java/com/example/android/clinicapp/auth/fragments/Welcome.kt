@@ -29,13 +29,6 @@ class Welcome : BaseFragment() {
         binding = DataBindingUtil.inflate(
             inflater, R.layout.fragment_welcome, container, false
         )
-        binding.button1Welcome.setOnClickListener{view: View ->
-            Navigation.findNavController(view).navigate(R.id.action_welcome_to_logIn)
-        }
-        binding.button2Welcome.setOnClickListener{view: View ->
-            Navigation.findNavController(view).navigate(R.id.action_welcome_to_signUp)
-        }
-        Log.i("hey","from welcome");
         return binding.root
     }
 

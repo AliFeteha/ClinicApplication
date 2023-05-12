@@ -2,6 +2,11 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="viewModel"
+            type="com.example.android.clinicapp.auth.LoginViewModel" />
+    </data>
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/logInFragment"
         android:layout_width="match_parent"
@@ -54,6 +59,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginRight="5sp"
             android:background="@drawable/radius"
+            android:text="@{viewModel.name}"
             android:hint="@string/name"
             android:ems="10"
             app:layout_constraintEnd_toEndOf="parent"
@@ -128,6 +134,7 @@
             android:backgroundTint="#5e899e"
             android:ems="10"
             android:text="@string/Continue"
+            android:onClick="@{()->viewModel.register()}"
             android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

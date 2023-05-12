@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="Cities">
+        <item>City</item>
+        <item>Cairo</item>
+        <item>Alexandria</item>
+        <item>Giza</item>
+        <item>Shubra El-Kheima</item>
+        <item>Port Said</item>
+        <item>Suez</item>
+        <item>Luxor</item>
+        <item>Aswan</item>
+        <item>Mansoura</item>
+        <item>Tanta</item>
+        <item>Zagazig</item>
+        <item>Damietta</item>
+        <item>Hurghada</item>
+        <item>Sharm El-Sheikh</item>
+        <item>Marsa Alam</item>
+        <item>Qena</item>
+        <item>Sohag</item>
+        <item>Beni Suef</item>
+        <item>Minya</item>
+        <item>Fayoum</item>
+        <item>Ismailia</item>
+        <item>Kafr El Sheikh</item>
+        <item>El Arish</item>
+        <item>Damanhour</item>
+        <item>Mallawi</item>
+    </string-array>
+
+    <string-array name="bloodTypes">
+        <item>Blood</item>
+        <item>A+</item>
+        <item>A-</item>
+        <item>B+</item>
+        <item>B-</item>
+        <item>AB+</item>
+        <item>AB-</item>
+        <item>O+</item>
+        <item>O-</item>
+    </string-array>
+
+    <string-array name="gender">
+        <item>gender</item>
+        <item>Male</item>
+        <item>Female</item>
+    </string-array>
+
+    <string-array name="daysOfWeek">
+        <item>Sunday</item>
+        <item>Monday</item>
+        <item>Tuesday</item>
+        <item>Wednesday</item>
+        <item>Thursday</item>
+        <item>Friday</item>
+        <item>Saturday</item>
+    </string-array>
+</resources>
