@@ -3,6 +3,8 @@ package com.example.android.clinicapp.data
 import android.content.Context
 import android.text.BoringLayout
 import androidx.lifecycle.MutableLiveData
+import com.example.android.clinicapp.data.consts.Doctor
+import com.example.android.clinicapp.data.consts.Patient
 import com.example.android.clinicapp.data.consts.Type
 import com.example.android.clinicapp.data.consts.FirebaseControl
 import com.example.android.clinicapp.data.dto.DoctorsDTO
@@ -47,6 +49,19 @@ class Repo(context: Context) {
         }
         return patient
     }
+    suspend fun signUpPatient(patient: Patient,password:String){
+        withContext(Dispatchers.IO) {
+            remote.signUpPatient(patient,password)
+            patientsDao.saveRecord(PatientsDTO(patient.id,patient.name,patient.gender,patient.email,patient.birthDate,patient.imageUrl,patient.address,patient.city,patient.mobilePhone,patient.bloodType,patient.medicalIssues,patient.emergencyContact,patient.insurance))
+        }
+    }
+    suspend fun signUpDoctor(doctor: Doctor, password:String){
+        withContext(Dispatchers.IO) {
+            remote.signUpDoctor(doctor,password)
+            doctorDao.saveRecord(DoctorsDTO(doctor.id,doctor.name,doctor.gender,doctor.workingDays,doctor.email,doctor.imageURL,doctor.city,doctor.telephone,doctor.address))
+        }
+    }
+
 
 
     //Remote Connections
