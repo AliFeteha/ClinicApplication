@@ -23,9 +23,6 @@ class ExampleInstrumentedTest {
     fun useAppContext() = runBlocking{
         // Context of the app under test.
         val appContext = InstrumentationRegistry.getInstrumentation().targetContext
-        val recordsDatabase = Room.inMemoryDatabaseBuilder(appContext, RecordsDatabase::class.java).build()
-        val recordsDao = recordsDatabase.recordsDao()
-        recordsDao.saveRecord(RecordsDTO(false,id= "lol", pName = "sdf", date = "s/df", dId = "dsfd", dName = "dfsf", pId = "dsfsdf"))
         assertEquals("com.example.android.clinicapp", appContext.packageName)
 
     }

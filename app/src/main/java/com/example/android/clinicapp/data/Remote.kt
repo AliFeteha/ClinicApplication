@@ -8,7 +8,7 @@ import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.delay
 
-class remote {
+class Remote {
     val typeConverter = TypeConverter()
 
     private var remoteDataBase: DatabaseReference = Firebase.database.reference;
@@ -100,9 +100,9 @@ class remote {
         delay(2000)
         return doctors
     }
-    suspend fun fireBaseControl(email : String):firebaseControl {
+    suspend fun fireBaseAuthentication(email : String):firebaseControl {
         val list: MutableList<String> = mutableListOf()
-        var firebaseControl:firebaseControl = firebaseControl("","","")
+        var firebaseControl = firebaseControl("","","")
         remoteDataBase.child("Authentication").child(email).get().addOnSuccessListener {
             Log.i(Tag,"get i nto snapshot")
             for (childSnapshot in it.children) {
