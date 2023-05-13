@@ -100,6 +100,23 @@ class remote {
         delay(2000)
         return doctors
     }
+    suspend fun fireBaseControl(email : String):firebaseControl {
+        val list: MutableList<String> = mutableListOf()
+        var firebaseControl:firebaseControl = firebaseControl("","","")
+        remoteDataBase.child("Authentication").child(email).get().addOnSuccessListener {
+            Log.i(Tag,"get i nto snapshot")
+            for (childSnapshot in it.children) {
+                val value = childSnapshot.value
+                value?.let { list.add(value.toString()) }
+            }
+            Log.i("aaa",list.toString())
+            firebaseControl = firebaseControl(list[0],list[1],list[2])
+        }.addOnFailureListener {
+            Log.i(Tag, "Error getting data", it)
+        }
+        delay(2000)
+        return firebaseControl
+    }
     companion object{
         const val Tag = "Remote Class"
     }
