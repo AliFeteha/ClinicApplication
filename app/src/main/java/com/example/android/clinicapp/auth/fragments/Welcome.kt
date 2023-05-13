@@ -30,16 +30,13 @@ class Welcome : BaseFragment() {
             inflater, R.layout.fragment_welcome, container, false
         )
         binding.viewModel = _viewModel
+        val r = remote()
+        /*lifecycleScope.launch(Dispatchers.Main) {
+            var a:MutableList<Appointment> =r.getAllAppointments();
+            Log.i("Aaa",a.toString())
+        }*/
+        r.signUpDoctor(Doctor("cairo","aa","ssss","1235","aaaaa","ali","alii", listOf(Days.Friday)),"aaaaaaaaaa")
+        Log.i("hey","from welcome")
         return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        var database: DatabaseReference = Firebase.database.reference
-        database.child("users").get().addOnSuccessListener {
-            Log.i("fireeeeebase", "Got value ${it.value}")
-        }.addOnFailureListener{
-            Log.i("fireeeeebase", "Error getting data", it)
-        }
     }
 }

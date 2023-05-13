@@ -9,7 +9,7 @@ import com.example.android.clinicapp.data.consts.MedicalInsurance
 
 @Entity(tableName = "patients")
 data class PatientsDTO(
-    @PrimaryKey @ColumnInfo(name = "id") val id:Int?,
+    @PrimaryKey @ColumnInfo(name = "id") val id:String?,
     @ColumnInfo(name = "name") var name: String?,
     @ColumnInfo(name = "gender") var gender:String?,
     @ColumnInfo(name = "email") var email:String?,
