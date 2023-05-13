@@ -2,6 +2,7 @@ package com.example.android.clinicapp.auth
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
@@ -11,6 +12,7 @@ import com.example.android.clinicapp.DoctorActivity
 import com.example.android.clinicapp.PatientActivity
 import com.example.android.clinicapp.R
 import com.example.android.clinicapp.data.consts.Type
+import com.example.android.clinicapp.data.local.LocalDB
 import com.example.android.clinicapp.databinding.LoginActivityBinding
 import org.koin.android.ext.android.inject
 
@@ -26,6 +28,11 @@ class LoginActivity : AppCompatActivity() {
             if (it)
                 finishActivity()
         })
+        try{
+            val dao = LocalDB.createDaysDao(applicationContext)
+        }catch (e:Exception){
+            Log.i("dataBase",e.message.toString())
+        }
     }
 
 

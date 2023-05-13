@@ -10,7 +10,7 @@ import com.example.android.clinicapp.data.consts.Doctor
 
 data class DoctorsDTO(
 
-    @PrimaryKey @ColumnInfo(name = "id") val id:String?,
+    @PrimaryKey @ColumnInfo(name = "id") val id:String,
     @ColumnInfo(name = "name") var name: String?,
     @ColumnInfo(name = "gender") var gender:String?,
     @ColumnInfo(name = "working_days") var workDays: List<Days>?,

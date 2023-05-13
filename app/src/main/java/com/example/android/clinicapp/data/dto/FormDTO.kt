@@ -9,8 +9,8 @@ import com.example.android.clinicapp.data.consts.Type
 
 @Entity(tableName = "form")
 data class FormDTO(
-    @PrimaryKey @ColumnInfo(name = "id") val id:Int?,
-    @ColumnInfo(name = "askerId") var askerId: Int?,
+    @PrimaryKey @ColumnInfo(name = "id") val id:String,
+    @ColumnInfo(name = "askerId") var askerId: String?,
     @ColumnInfo(name = "name") var name: String?,
     @ColumnInfo(name = "img_url") var imageUrl: String?,
     @ColumnInfo(name = "question") var question: String?,

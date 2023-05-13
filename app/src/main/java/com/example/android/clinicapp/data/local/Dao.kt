@@ -7,10 +7,8 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.example.android.clinicapp.data.consts.Comment
-import com.example.android.clinicapp.data.dto.DoctorsDTO
-import com.example.android.clinicapp.data.dto.PatientsDTO
-import com.example.android.clinicapp.data.dto.RecordsDTO
-import com.example.android.clinicapp.data.dto.FormDTO
+import com.example.android.clinicapp.data.dto.*
+import com.example.android.clinicapp.utils.TypeConverter
 
 @Dao
 interface RecordsDao{
@@ -22,7 +20,7 @@ interface RecordsDao{
         suspend fun getRecordsByPatientId(patientId: String): RecordsDTO?
 
         @Query("SELECT * FROM records where doctor_id = :doctorId")
-        suspend fun getRecordsByDoctorId(patientId: String): RecordsDTO?
+        suspend fun getRecordsByDoctorId(doctorId: String): RecordsDTO?
 
         @Insert(onConflict = OnConflictStrategy.REPLACE)
         suspend fun saveRecord(record: RecordsDTO)
@@ -69,15 +67,30 @@ interface FormDao{
         @Insert(onConflict = OnConflictStrategy.REPLACE)
         suspend fun saveQuestion(user : FormDTO)
 
-        @Query("UPDATE form SET comment= :comment WHERE id LIKE :id ")
-        suspend fun updateComments(id: Int, comment:Comment)
+        @Query("UPDATE form SET comments = :comment WHERE id LIKE :id ")
+        suspend fun updateComments(id: Int, comment: Comment)
 
-        @Query("DELETE FROM patients WHERE id LIKE :id")
+        @Query("DELETE FROM form WHERE id LIKE :id")
         suspend fun delete(id: Int)
 
         @Query("DELETE FROM form")
         suspend fun clear()
 
 }
+
+@Dao
+interface DaysDao{
+
+        @Query("SELECT * FROM days")
+        suspend fun getDays():List<DaysDTO>
+
+        @Insert(onConflict = OnConflictStrategy.REPLACE)
+        suspend fun saveDays(daysDTO : DaysDTO)
+
+        @Query("DELETE FROM days")
+        suspend fun clear()
+
+}
+
 
 

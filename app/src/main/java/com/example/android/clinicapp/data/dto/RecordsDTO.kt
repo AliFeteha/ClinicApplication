@@ -14,6 +14,6 @@ data class RecordsDTO(
     @ColumnInfo(name = "doctor") var dName: String?,
     @ColumnInfo(name = "date") var date: String?,
     @ColumnInfo(name = "doctor_id") var dId: String?,
-    @PrimaryKey @ColumnInfo(name = "id") val id:String?
+    @PrimaryKey @ColumnInfo(name = "id") val id:String
 )
 

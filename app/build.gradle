@@ -3,7 +3,10 @@ plugins {
     id 'org.jetbrains.kotlin.android'
     id 'com.google.gms.google-services'
 }
+apply plugin: 'kotlin-kapt'
 apply plugin: "androidx.navigation.safeargs.kotlin"
+apply plugin: 'kotlin-android'
+
 android {
     namespace 'com.example.android.clinicapp'
     compileSdk 33
@@ -17,6 +20,7 @@ android {
         targetSdk 33
         versionCode 1
         versionName "1.0"
+        multiDexEnabled true
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -37,11 +41,18 @@ android {
     buildFeatures {
         viewBinding true
     }
+
+    testOptions {
+        unitTests {
+            includeAndroidResources = true
+        }
+    }
 }
 configurations.all {
     resolutionStrategy.force("junit:junit:4.13.2")
 }
 dependencies {
+
     // Java language implementation
     implementation("androidx.navigation:navigation-fragment:2.5.3")
     implementation("androidx.navigation:navigation-ui:2.5.3")
@@ -71,7 +82,8 @@ dependencies {
     // optional - Kotlin Extensions and Coroutines support for Room
     implementation("androidx.room:room-ktx:$room_version")
 
-
+    //junitParameters for testing
+    testImplementation 'pl.pragmatists:JUnitParams:1.1.1'
 
     // Jetpack Compose Integration
     implementation("androidx.navigation:navigation-compose:2.5.3")
@@ -83,7 +95,6 @@ dependencies {
     implementation 'androidx.databinding:databinding-runtime:7.3.1'
     implementation 'androidx.navigation:navigation-fragment-ktx:2.5.3'
     implementation 'androidx.navigation:navigation-ui-ktx:2.5.3'
-    testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
 // Required -- JUnit 4 framework
@@ -96,5 +107,10 @@ dependencies {
     testImplementation "org.mockito.kotlin:mockito-kotlin:4.13.2"
     // Optional -- Mockk framework
     testImplementation "io.mockk:mockk:4.13.2"
+
+    implementation "androidx.lifecycle:lifecycle-extensions:2.2.0"
+    implementation "androidx.lifecycle:lifecycle-common-java8:2.6.1"
+    implementation "androidx.room:room-runtime:2.6.0-alpha01"
+    kapt "androidx.room:room-compiler:2.6.0-alpha01"
 }
 apply plugin: 'com.google.gms.google-services'

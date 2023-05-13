@@ -2,6 +2,7 @@ package com.example.android.clinicapp.data.local
 
 import android.content.Context
 import androidx.room.Room
+import com.example.android.clinicapp.utils.TypeConverter
 
 object LocalDB {
 
@@ -26,11 +27,17 @@ object LocalDB {
         ).build().userDDao()
     }
 
-    fun createDatabaseDao(context: Context): FormDao {
+    fun createFormDao(context: Context): FormDao {
         return Room.databaseBuilder(
             context.applicationContext,
             FormDatabase::class.java, "form.db"
         ).build().formDao()
+    }
+    fun createDaysDao(context: Context): DaysDao {
+        return Room.databaseBuilder(
+            context.applicationContext,
+            DaysDb::class.java, "days.db"
+        ).build().DaysDao()
     }
 
 

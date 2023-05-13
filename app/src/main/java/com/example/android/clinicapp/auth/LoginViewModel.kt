@@ -6,10 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import com.example.android.clinicapp.R
 import com.example.android.clinicapp.base.BaseViewModel
 import com.example.android.clinicapp.base.NavigationCommand
-import com.example.android.clinicapp.data.consts.Doctor
-import com.example.android.clinicapp.data.consts.Patient
 import com.example.android.clinicapp.data.consts.Type
-import com.example.android.clinicapp.utils.PreferenceControl
 
 class LoginViewModel(app: Application) : BaseViewModel(app) {
 
