@@ -3,9 +3,11 @@ package com.example.android.clinicapp.data
 import android.util.Log
 import com.example.android.clinicapp.data.consts.*
 import com.example.android.clinicapp.utils.TypeConverter
+import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 
 class Remote {
@@ -39,7 +41,7 @@ class Remote {
         }.addOnFailureListener {
             Log.i(Tag, "Error getting data", it)
         }
-        delay(2000)
+        delay(1400)
         return doctor
     }
     suspend fun getPatientProfile(id:String):Patient{
@@ -80,26 +82,27 @@ class Remote {
         }.addOnFailureListener {
             Log.i(Tag, "Error getting data", it)
         }
-        delay(2000)
+        delay(1400)
         return appointments
     }
     suspend fun getAllDoctors():List<Doctor>{
         val list: MutableList<String> = mutableListOf()
-        var doctors : List<Doctor> = mutableListOf();
-        remoteDataBase.child("Doctors").get().addOnSuccessListener {
-            Log.i(Tag,"get i nto snapshot")
-            for (childSnapshot in it.children) {
-                val value = childSnapshot.value
-                value?.let { list.add(value.toString()) }
+            val dataSnapshot:MutableIterable<DataSnapshot>
+            with(Dispatchers.IO) {
+                remoteDataBase.child("Doctors").get().addOnFailureListener { Log.i(Tag, connectionFailed) }
+                    .addOnSuccessListener {
+                        for (childSnapshot in it.children) {
+                            val value = childSnapshot.value
+                            value?.let { list.add(value.toString()) }
+                        }
+                    }
+                delay(1400)
             }
-            Log.i("aaa",list.toString())
-            doctors = typeConverter.listStringsToListDoctors(list)
-        }.addOnFailureListener {
-            Log.i(Tag, "Error getting data", it)
-        }
-        delay(2000)
-        return doctors
+
+
+            return typeConverter.listStringsToListDoctors(list)
     }
+
     suspend fun fireBaseAuthentication(email : String):firebaseControl {
         val list: MutableList<String> = mutableListOf()
         var firebaseControl = firebaseControl("","","")
@@ -114,10 +117,12 @@ class Remote {
         }.addOnFailureListener {
             Log.i(Tag, "Error getting data", it)
         }
-        delay(2000)
+        delay(1400)
         return firebaseControl
     }
+
     companion object{
         const val Tag = "Remote Class"
+        const val connectionFailed = "Connection Failed"
     }
 }

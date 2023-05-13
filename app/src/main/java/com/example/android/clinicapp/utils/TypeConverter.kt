@@ -1,5 +1,6 @@
 package com.example.android.clinicapp.utils
 
+import android.util.Log
 import androidx.room.TypeConverter
 import com.example.android.clinicapp.data.consts.*
 
@@ -189,14 +190,18 @@ class TypeConverter{
     }
 
     @TypeConverter
-    fun listStringsToListDoctors(string: List<String>):List<Doctor>{
+    fun listStringsToListDoctors(string: List<String>?):List<Doctor>{
         val doctors : MutableList<Doctor> = mutableListOf()
-        for(str in string){
-            val trimmedString = str.trim('[', ']')
-            val keyValuePairs = trimmedString.split(',')
-            val values = keyValuePairs.map { it.split('=')[1].trim() }
-            val doctor = Doctor(values[0],values[1],values[2],values[3],values[4],values[5],values[6],values[7],stringToDaysList(values[8]))
-            doctors.add(doctor)
+        if (string != null) {
+            for(str in string){
+                Log.i(" Testing",str)
+                val trimmedString = str.trim('[', '}',']')
+                val keyValuePairs = trimmedString.split(',')
+                val values = keyValuePairs.map { it.split('=')[0].trim() }
+                Log.i(" Testing",values.toString())
+                val doctor = Doctor(values[0],values[1],values[2],values[3],values[4],values[5],values[6],values[7],stringToDaysList(values[8]))
+                doctors.add(doctor)
+            }
         }
         return doctors
     }
@@ -236,5 +241,8 @@ class TypeConverter{
             patient.id, medicalInsuranceToString(patient.insurance!!),"",
             patient.mobilePhone,patient.name)
     }
+
+
+
 
 }

@@ -29,7 +29,7 @@ class Repo(private val R:Remote, private val doctorDao:DoctorsDao, private val p
     suspend fun refreshPatientProfile(id:String){
         withContext(Dispatchers.IO) {
             val refreshedProfile = R.getPatientProfile(id)
-            patientsDao.saveRecord(PatientsDTO(refreshedProfile.id,refreshedProfile.name,refreshedProfile.gender,refreshedProfile.email,refreshedProfile.birthDate,refreshedProfile.imageUrl,refreshedProfile.id,refreshedProfile.city,refreshedProfile.mobilePhone,refreshedProfile.bloodType,refreshedProfile.medicalIssues,refreshedProfile.emergencyContact,refreshedProfile.insurance))
+            patientsDao.saveRecord(PatientsDTO(refreshedProfile.id!!,refreshedProfile.name,refreshedProfile.gender,refreshedProfile.email,refreshedProfile.birthDate,refreshedProfile.imageUrl,refreshedProfile.id,refreshedProfile.city,refreshedProfile.mobilePhone,refreshedProfile.bloodType,refreshedProfile.medicalIssues,refreshedProfile.emergencyContact,refreshedProfile.insurance))
         }
     }
     suspend fun getPatientProfile(id:String):MutableLiveData<PatientsDTO>{
