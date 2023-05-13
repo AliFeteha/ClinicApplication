@@ -3,6 +3,7 @@ package com.example.android.clinicapp.data
 import androidx.lifecycle.MutableLiveData
 import com.example.android.clinicapp.data.dto.DoctorsDTO
 import com.example.android.clinicapp.data.dto.FormDTO
+import com.example.android.clinicapp.data.dto.PatientsDTO
 import com.example.android.clinicapp.data.local.DoctorsDao
 import com.example.android.clinicapp.data.local.PatientsDao
 import com.example.android.clinicapp.data.local.RecordsDao
@@ -24,4 +25,18 @@ class Repo(private val R:Remote, private val doctorDao:DoctorsDao, private val p
         }
         return doctor
     }
+    var patient = MutableLiveData<PatientsDTO>()
+    suspend fun refreshPatientProfile(id:String){
+        withContext(Dispatchers.IO) {
+            val refreshedProfile = R.getPatientProfile(id)
+            patientsDao.saveRecord(PatientsDTO(refreshedProfile.id,refreshedProfile.name,refreshedProfile.gender,refreshedProfile.email,refreshedProfile.birthDate,refreshedProfile.imageUrl,refreshedProfile.id,refreshedProfile.city,refreshedProfile.mobilePhone,refreshedProfile.bloodType,refreshedProfile.medicalIssues,refreshedProfile.emergencyContact,refreshedProfile.insurance))
+        }
+    }
+    suspend fun getPatientProfile(id:String):MutableLiveData<PatientsDTO>{
+        withContext(Dispatchers.IO) {
+            patient.value = patientsDao.getProfileById(id)
+        }
+        return patient
+    }
+
 }
