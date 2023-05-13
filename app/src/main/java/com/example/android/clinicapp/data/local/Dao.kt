@@ -1,6 +1,7 @@
 package com.example.android.clinicapp.data.local
 
 
+import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
@@ -18,10 +19,10 @@ interface RecordsDao{
         suspend fun getRecords(): List<RecordsDTO>
 
         @Query("SELECT * FROM records where patient_id = :patientId")
-        suspend fun getRecordsByPatientId(patientId: Int): RecordsDTO?
+        suspend fun getRecordsByPatientId(patientId: String): RecordsDTO?
 
         @Query("SELECT * FROM records where doctor_id = :doctorId")
-        suspend fun getRecordsByDoctorId(patientId: Int): RecordsDTO?
+        suspend fun getRecordsByDoctorId(patientId: String): RecordsDTO?
 
         @Insert(onConflict = OnConflictStrategy.REPLACE)
         suspend fun saveRecord(record: RecordsDTO)
@@ -35,7 +36,7 @@ interface RecordsDao{
 interface PatientsDao{
 
         @Query("SELECT * FROM patients where id = :patientId")
-        suspend fun getProfileById(patientId: Int): PatientsDTO?
+        suspend fun getProfileById(patientId: String): PatientsDTO?
 
         @Insert(onConflict = OnConflictStrategy.REPLACE)
         suspend fun saveRecord(patient: PatientsDTO)
@@ -49,7 +50,7 @@ interface PatientsDao{
 interface DoctorsDao{
 
         @Query("SELECT * FROM doctors where id = :doctorId")
-        suspend fun getProfileById(doctorId: Int): DoctorsDTO?
+        suspend fun getProfileById(doctorId: String): DoctorsDTO
 
         @Insert(onConflict = OnConflictStrategy.REPLACE)
         suspend fun saveRecord(doctor: DoctorsDTO)
