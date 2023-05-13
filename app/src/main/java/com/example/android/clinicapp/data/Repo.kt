@@ -1,6 +1,7 @@
 package com.example.android.clinicapp.data
 
 import androidx.lifecycle.MutableLiveData
+import com.example.android.clinicapp.data.consts.Patient
 import com.example.android.clinicapp.data.dto.DoctorsDTO
 import com.example.android.clinicapp.data.dto.FormDTO
 import com.example.android.clinicapp.data.dto.PatientsDTO
@@ -38,5 +39,12 @@ class Repo(private val R:remote, private val doctorDao:DoctorsDao,private val pa
         }
         return patient
     }
+    suspend fun signUpPatient(patient: Patient,password:String){
+        withContext(Dispatchers.IO) {
+            R.signUpPatient(patient,password)
+            patientsDao.saveRecord(PatientsDTO(patient.id,patient.name,patient.gender,patient.email,patient.birthDate,patient.imageUrl,patient.address,patient.city,patient.mobilePhone,patient.bloodType,patient.medicalIssues,patient.emergencyContact,patient.insurance))
+        }
+    }
+
 
 }
