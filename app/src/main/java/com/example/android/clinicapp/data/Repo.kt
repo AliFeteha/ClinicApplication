@@ -10,14 +10,18 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
 class Repo(private val R:remote, private val doctorDao:DoctorsDao,private val patientsDao: PatientsDao,
-           private val recordsDao: RecordsDao, private val formDTO: FormDTO,docId:String) {
-    val doctor: MutableLiveData<DoctorsDTO> = MutableLiveData()
-
+           private val recordsDao: RecordsDao, private val formDTO: FormDTO) {
+    var doctor = MutableLiveData<DoctorsDTO>()
     suspend fun refreshDoctorProfile(id:String){
-        doctor.value = doctorDao.getProfileById(id) //todo
         withContext(Dispatchers.IO) {
-            val doctor = R.getDoctorProfile(id)
-            doctorDao.saveRecord(DoctorsDTO(doctor.id!!,doctor.name,doctor.gender,doctor.workingDays,doctor.email,doctor.imageURL,doctor.city,doctor.telephone,doctor.address))
+            val refreshedProfile = R.getDoctorProfile(id)
+            doctorDao.saveRecord(DoctorsDTO(refreshedProfile.id,refreshedProfile.name,refreshedProfile.gender,refreshedProfile.workingDays,refreshedProfile.email,refreshedProfile.imageURL,refreshedProfile.city,refreshedProfile.telephone,refreshedProfile.address))
         }
+    }
+    suspend fun getDoctorProfile(id:String):MutableLiveData<DoctorsDTO>{
+        withContext(Dispatchers.IO) {
+            doctor.value = doctorDao.getProfileById(id)
+        }
+        return doctor
     }
 }
