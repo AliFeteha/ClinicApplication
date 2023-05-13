@@ -73,7 +73,7 @@ class remote {
             val trimmedString = str.trim('[', ']')
             val keyValuePairs = trimmedString.split(',')
             val values = keyValuePairs.map { it.split('=')[1].trim() }
-            val doctor:Doctor = Doctor(values[0],values[1],values[2],values[3],values[4],values[5],values[6],stringToDaysList(values[7]))
+            val doctor:Doctor = Doctor(values[0],values[1],values[2],values[3],values[4],values[5],values[6],values[7],stringToDaysList(values[8]))
             doctors.add(doctor)
         }
         return doctors
@@ -92,7 +92,7 @@ class remote {
     suspend fun getDoctorProfile(id:String):Doctor{
         Log.i("aaaaa","get i nto function")
         val list: MutableList<String> = mutableListOf()
-        var doctor : Doctor = Doctor("","","","","","","", listOf());
+        var doctor : Doctor = Doctor("","","","","","","", "",listOf());
         remoteDataBase.child("Doctors").child(id).get().addOnSuccessListener {
             Log.i("aaaaa","get i nto snapshot")
             for (childSnapshot in it.children) {
@@ -100,7 +100,7 @@ class remote {
                 value?.let { list.add(value.toString()) }
             }
             Log.i("aaaaa",list.toString())
-            doctor = Doctor(list[0],list[1],list[2],list[3],list[4],list[5],list[6],stringToDaysList(list[7]))
+            doctor = Doctor(list[0],list[1],list[2],list[3],list[4],list[5],list[6],list[7],stringToDaysList(list[8]))
         }.addOnFailureListener {
             Log.i("aaaaaaaa", "Error getting data", it)
         }
