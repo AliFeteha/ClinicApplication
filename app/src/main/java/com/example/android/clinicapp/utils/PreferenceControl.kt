@@ -40,34 +40,42 @@ class PreferenceControl {
             apply()
         }
     }
+    fun writeId(id:String){
+        with (sharedPreferences.edit()) {
+            putString(Resources.getSystem().getString(R.string.preference_id), id)
+            apply()
+        }
+    }
+    fun readId():String? = sharedPreferences.getString(Resources.getSystem().getString(R.string.preference_id),null)
+
     fun readPatient():Patient{
         val profile = Patient()
         with(sharedPreferences){
-            getString(Resources.getSystem().getString(R.string.name),profile.name)
-            getString(Resources.getSystem().getString(R.string.email), profile.email)
-            getString(Resources.getSystem().getString(R.string.address), profile.address)
-            getString(Resources.getSystem().getString(R.string.preference_id), profile.id)
-            getString(Resources.getSystem().getString(R.string.birthDate), profile.birthDate)
-            getString(Resources.getSystem().getString(R.string.blood), profile.bloodType)
-            getString(Resources.getSystem().getString(R.string.city), profile.city)
-            getString(Resources.getSystem().getString(R.string.gender), profile.gender)
-            getString(Resources.getSystem().getString(R.string.imgUrl), profile.imageUrl)
-            getString(Resources.getSystem().getString(R.string.phone_number), profile.mobilePhone)
+            profile.name = getString(Resources.getSystem().getString(R.string.name),null)
+            profile.email = getString(Resources.getSystem().getString(R.string.email), null)
+            profile.address = getString(Resources.getSystem().getString(R.string.address), null)
+            profile.id = getString(Resources.getSystem().getString(R.string.preference_id), null)
+            profile.birthDate = getString(Resources.getSystem().getString(R.string.birthDate), null)
+            profile.bloodType = getString(Resources.getSystem().getString(R.string.blood), null)
+            profile.city = getString(Resources.getSystem().getString(R.string.city), null)
+            profile.gender = getString(Resources.getSystem().getString(R.string.gender), null)
+            profile.imageUrl = getString(Resources.getSystem().getString(R.string.imgUrl), null)
+            profile.mobilePhone = getString(Resources.getSystem().getString(R.string.phone_number), null)
         }
         return profile
     }
     fun readDoctor():Doctor{
         val profile = Doctor()
         with(sharedPreferences){
-            getString(Resources.getSystem().getString(R.string.name), profile.name)
-            getString(Resources.getSystem().getString(R.string.emailExample), profile.email)
-            getString(Resources.getSystem().getString(R.string.email), profile.email)
-            getString(Resources.getSystem().getString(R.string.address), profile.address)
-            getString(Resources.getSystem().getString(R.string.preference_id), profile.id)
-            getString(Resources.getSystem().getString(R.string.birthDate), profile.telephone)
-            getString(Resources.getSystem().getString(R.string.city), profile.city)
-            getString(Resources.getSystem().getString(R.string.imgUrl), profile.imageURL)
-            getString(Resources.getSystem().getString(R.string.phone_number), profile.telephone)
+             profile.name = getString(Resources.getSystem().getString(R.string.name),null)
+             profile.email = getString(Resources.getSystem().getString(R.string.emailExample),null)
+             profile.email = getString(Resources.getSystem().getString(R.string.email),null)
+             profile.address = getString(Resources.getSystem().getString(R.string.address),null)
+             profile.id = getString(Resources.getSystem().getString(R.string.preference_id),null)
+             profile.telephone = getString(Resources.getSystem().getString(R.string.birthDate),null)
+             profile.city = getString(Resources.getSystem().getString(R.string.city),null)
+             profile.imageURL = getString(Resources.getSystem().getString(R.string.imgUrl),null)
+             profile.telephone = getString(Resources.getSystem().getString(R.string.phone_number),null)
         }
         return profile
     }

@@ -9,6 +9,7 @@ import androidx.lifecycle.Observer
 import com.example.android.clinicapp.R
 import com.example.android.clinicapp.auth.LoginViewModel
 import com.example.android.clinicapp.base.BaseFragment
+import com.example.android.clinicapp.data.Repo
 import com.example.android.clinicapp.data.consts.Doctor
 import com.example.android.clinicapp.data.consts.Patient
 import com.example.android.clinicapp.data.consts.Type
@@ -19,6 +20,7 @@ import org.koin.android.ext.android.inject
 class LogIn : BaseFragment() {
     override val _viewModel: LoginViewModel by  inject()
     lateinit var binding:FragmentLogInBinding
+    val repo = context?.let { Repo(it.applicationContext) }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -54,7 +56,7 @@ class LogIn : BaseFragment() {
     private fun checkAccountValidity(email:String) :Boolean{
         //Todo check if the account already existed in the email remote database table and return
         // ----->True<----- if it does existed
-        if (TODO(" fn call to return if it does existed"))
+        if (TODO("lol"))
             return true
         else
             _viewModel.invalidEmailLogin()

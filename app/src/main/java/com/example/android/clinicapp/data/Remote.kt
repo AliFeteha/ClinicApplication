@@ -16,12 +16,12 @@ class Remote {
     private var remoteDataBase: DatabaseReference = Firebase.database.reference;
     fun signUpDoctor(doctor: Doctor,password:String){
         remoteDataBase.child("Doctors").child(doctor.id!!).setValue(doctor)
-        val control:firebaseControl = firebaseControl(doctor.email,doctor.id,password)
+        val control:FirebaseControl = FirebaseControl(doctor.email,doctor.id,password)
         remoteDataBase.child("Authentication").child(doctor.email!!).setValue(control)
     }
     fun signUpPatient(patient: Patient,password:String){
         remoteDataBase.child("Patients").child(patient.id!!).setValue(patient)
-        val control:firebaseControl = firebaseControl(patient.email,patient.id,password)
+        val control:FirebaseControl = FirebaseControl(patient.email,patient.id,password)
         remoteDataBase.child("Authentication").child(patient.email!!).setValue(control)
     }
     suspend fun getDoctorProfile(id:String):Doctor{
@@ -103,9 +103,9 @@ class Remote {
             return typeConverter.listStringsToListDoctors(list)
     }
 
-    suspend fun fireBaseAuthentication(email : String):firebaseControl {
+    suspend fun fireBaseAuthentication(email : String):FirebaseControl {
         val list: MutableList<String> = mutableListOf()
-        var firebaseControl = firebaseControl("","","")
+        var firebaseControl = FirebaseControl("","","")
         remoteDataBase.child("Authentication").child(email).get().addOnSuccessListener {
             Log.i(Tag,"get i nto snapshot")
             for (childSnapshot in it.children) {
@@ -113,7 +113,7 @@ class Remote {
                 value?.let { list.add(value.toString()) }
             }
             Log.i("aaa",list.toString())
-            firebaseControl = firebaseControl(list[0],list[1],list[2])
+            firebaseControl = FirebaseControl(list[0],list[1],list[2])
         }.addOnFailureListener {
             Log.i(Tag, "Error getting data", it)
         }
