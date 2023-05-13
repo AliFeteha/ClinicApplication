@@ -12,11 +12,11 @@ data class DoctorsDTO(
 
     @PrimaryKey @ColumnInfo(name = "id") val id:String?,
     @ColumnInfo(name = "name") var name: String?,
-    @ColumnInfo(name = "gender") var gender:Doctor?,
+    @ColumnInfo(name = "gender") var gender:String?,
     @ColumnInfo(name = "working_days") var workDays: List<Days>?,
     @ColumnInfo(name = "email") var email: String?,
     @ColumnInfo(name = "img_url") var img_url: String?,
     @ColumnInfo(name = "city") var city: String?,
     @ColumnInfo(name = "telephone") var telephone: String?,
-    @ColumnInfo(name = "address") var address:String
+    @ColumnInfo(name = "address") var address:String?
 )
