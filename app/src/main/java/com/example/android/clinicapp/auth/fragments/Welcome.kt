@@ -7,13 +7,21 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.Navigation
 import com.example.android.clinicapp.R
 import com.example.android.clinicapp.base.BaseFragment
+import com.example.android.clinicapp.data.consts.Appointment
+import com.example.android.clinicapp.data.consts.Days
+import com.example.android.clinicapp.data.consts.Doctor
+import com.example.android.clinicapp.data.consts.Patient
+import com.example.android.clinicapp.data.remote
 import com.example.android.clinicapp.databinding.FragmentWelcomeBinding
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
 
 class Welcome : BaseFragment() {
@@ -29,16 +37,13 @@ class Welcome : BaseFragment() {
         binding = DataBindingUtil.inflate(
             inflater, R.layout.fragment_welcome, container, false
         )
+        val r = remote()
+        /*lifecycleScope.launch(Dispatchers.Main) {
+            var a:MutableList<Appointment> =r.getAllAppointments();
+            Log.i("Aaa",a.toString())
+        }*/
+        r.signUpDoctor(Doctor("cairo","aa","ssss","1235","aaaaa","ali","alii", listOf(Days.Friday)),"aaaaaaaaaa")
+        Log.i("hey","from welcome")
         return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        var database: DatabaseReference = Firebase.database.reference;
-        database.child("users").get().addOnSuccessListener {
-            Log.i("fireeeeebase", "Got value ${it.value}")
-        }.addOnFailureListener{
-            Log.i("fireeeeebase", "Error getting data", it)
-        }
     }
 }
