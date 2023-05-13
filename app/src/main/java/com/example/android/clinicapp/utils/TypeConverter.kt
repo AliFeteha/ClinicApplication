@@ -1,6 +1,5 @@
 package com.example.android.clinicapp.utils
 
-import androidx.annotation.NonNull
 import androidx.room.TypeConverter
 import com.example.android.clinicapp.data.consts.*
 
@@ -15,8 +14,12 @@ class TypeConverter{
         return Comment(list[0],list[1],list[2],list[3])
     }
     @TypeConverter
-    fun listCommentToString(comments: List<Comment>):String{
-        return comments.joinToString(separator = ";"){ commentToString(it) }
+    fun commentListToString(comments: List<Comment>): String {
+        val stringBuilder = StringBuilder()
+        for (comment in comments) {
+            stringBuilder.append("{id=${comment.id}, name=${comment.name}, image_url=${comment.image_url}, body=${comment.body}}")
+        }
+        return stringBuilder.toString()
     }
     @TypeConverter
     fun stringToCommentList(string: String): List<Comment> {
@@ -125,11 +128,11 @@ class TypeConverter{
         return emergencyContact
     }
     @TypeConverter
-    fun emergencyContactToString(emergencyContact: EmergencyContact): String {
+    fun emergencyContactToString(emergencyContact: EmergencyContact?): String {
         val stringBuilder = StringBuilder()
         stringBuilder.append("{")
-        stringBuilder.append("name=${emergencyContact.name},")
-        stringBuilder.append("phone=${emergencyContact.phoneNumber}")
+        stringBuilder.append("name=${emergencyContact?.name},")
+        stringBuilder.append("phone=${emergencyContact?.phoneNumber}")
         stringBuilder.append("}")
         return stringBuilder.toString()
     }
@@ -143,11 +146,11 @@ class TypeConverter{
         return medicalInsurance
     }
     @TypeConverter
-    fun medicalInsuranceToString(medicalInsurance: MedicalInsurance): String {
+    fun medicalInsuranceToString(medicalInsurance: MedicalInsurance?): String {
         val stringBuilder = StringBuilder()
         stringBuilder.append("{")
-        stringBuilder.append("provider=${medicalInsurance.insuranceProvider},")
-        stringBuilder.append("policyNumber=${medicalInsurance.id}")
+        stringBuilder.append("provider=${medicalInsurance?.insuranceProvider},")
+        stringBuilder.append("policyNumber=${medicalInsurance?.id}")
         stringBuilder.append("}")
         return stringBuilder.toString()
     }
@@ -165,20 +168,22 @@ class TypeConverter{
         return appointments
     }
     @TypeConverter
-    fun listAppointmentsToListStrings(appointments: List<Appointment>): List<String> {
+    fun listAppointmentsToListStrings(appointments: List<Appointment>?): List<String> {
         val stringList: MutableList<String> = mutableListOf()
-        for (appointment in appointments) {
-            val stringBuilder = StringBuilder()
-            stringBuilder.append("{")
-            stringBuilder.append("date=${appointment.date},")
-            stringBuilder.append("doctorId=${appointment.dId},")
-            stringBuilder.append("doctorName=${appointment.dName},")
-            stringBuilder.append("id=${appointment.id},")
-            stringBuilder.append("patientId=${appointment.pId},")
-            stringBuilder.append("patientName=${appointment.pName},")
-            stringBuilder.append("title=${appointment.title},")
-            stringBuilder.append("}")
-            stringList.add(stringBuilder.toString())
+        if (appointments != null) {
+            for (appointment in appointments) {
+                val stringBuilder = StringBuilder()
+                stringBuilder.append("{")
+                stringBuilder.append("date=${appointment.date},")
+                stringBuilder.append("doctorId=${appointment.dId},")
+                stringBuilder.append("doctorName=${appointment.dName},")
+                stringBuilder.append("id=${appointment.id},")
+                stringBuilder.append("patientId=${appointment.pId},")
+                stringBuilder.append("patientName=${appointment.pName},")
+                stringBuilder.append("title=${appointment.title},")
+                stringBuilder.append("}")
+                stringList.add(stringBuilder.toString())
+            }
         }
         return stringList
     }
@@ -196,22 +201,24 @@ class TypeConverter{
         return doctors
     }
     @TypeConverter
-    fun listDoctorsToListStrings(doctors: List<Doctor>): List<String> {
+    fun listDoctorsToListStrings(doctors: List<Doctor>?): List<String> {
         val stringList: MutableList<String> = mutableListOf()
-        for (doctor in doctors) {
-            val stringBuilder = StringBuilder()
-            stringBuilder.append("[")
-            stringBuilder.append("address=${doctor.address},")
-            stringBuilder.append("city=${doctor.city},")
-            stringBuilder.append("email=${doctor.email},")
-            stringBuilder.append("gender=${doctor.gender},")
-            stringBuilder.append("id=${doctor.id},")
-            stringBuilder.append("imageUrl=${doctor.imageURL},")
-            stringBuilder.append("name=${doctor.name},")
-            stringBuilder.append("telephone=${doctor.telephone},")
-            stringBuilder.append("days=${daysListToString(doctor.workingDays!!)}")
-            stringBuilder.append("]")
-            stringList.add(stringBuilder.toString())
+        if (doctors != null) {
+            for (doctor in doctors) {
+                val stringBuilder = StringBuilder()
+                stringBuilder.append("[")
+                stringBuilder.append("address=${doctor.address},")
+                stringBuilder.append("city=${doctor.city},")
+                stringBuilder.append("email=${doctor.email},")
+                stringBuilder.append("gender=${doctor.gender},")
+                stringBuilder.append("id=${doctor.id},")
+                stringBuilder.append("imageUrl=${doctor.imageURL},")
+                stringBuilder.append("name=${doctor.name},")
+                stringBuilder.append("telephone=${doctor.telephone},")
+                stringBuilder.append("days=${daysListToString(doctor.workingDays!!)}")
+                stringBuilder.append("]")
+                stringList.add(stringBuilder.toString())
+            }
         }
         return stringList
     }

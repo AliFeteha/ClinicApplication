@@ -2,10 +2,7 @@ package com.example.android.clinicapp.data.local
 
 
 import androidx.lifecycle.LiveData
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
 import com.example.android.clinicapp.data.consts.Comment
 import com.example.android.clinicapp.data.dto.*
 import com.example.android.clinicapp.utils.TypeConverter
@@ -67,11 +64,22 @@ interface FormDao{
         @Insert(onConflict = OnConflictStrategy.REPLACE)
         suspend fun saveQuestion(user : FormDTO)
 
-        @Query("UPDATE form SET comments = :comment WHERE id LIKE :id ")
-        suspend fun updateComments(id: Int, comment: Comment)
+        @Query("UPDATE form SET comments = :comments WHERE id LIKE :id ")
+        suspend fun updateComments(id: String, comments: List<Comment>)
+
+        @Query("SELECT comments FROM form WHERE id = :entityId")
+        suspend fun getStringField(entityId: String): String?
+
+        @Transaction
+        suspend fun appendComment(entityId: String, comment: Comment) {
+                val existingString = getStringField(entityId) ?: ""
+                val list:MutableList<Comment> = TypeConverter().stringToCommentList(existingString) as MutableList<Comment>
+                list.add(comment)
+                updateComments(entityId, list)
+        }
 
         @Query("DELETE FROM form WHERE id LIKE :id")
-        suspend fun delete(id: Int)
+        suspend fun delete(id: String)
 
         @Query("DELETE FROM form")
         suspend fun clear()

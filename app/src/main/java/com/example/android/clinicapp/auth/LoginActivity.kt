@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import androidx.compose.ui.platform.LocalContext
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.NavHostFragment
@@ -28,10 +29,11 @@ class LoginActivity : AppCompatActivity() {
             if (it)
                 finishActivity()
         })
+
         try{
             val dao = LocalDB.createDaysDao(applicationContext)
         }catch (e:Exception){
-            Log.i("dataBase",e.message.toString())
+            Log.i("dataBase",e.toString())
         }
     }
 

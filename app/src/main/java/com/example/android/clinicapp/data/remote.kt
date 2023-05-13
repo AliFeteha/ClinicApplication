@@ -101,6 +101,6 @@ class remote {
         return doctors
     }
     companion object{
-        val Tag = "Remote Class"
+        const val Tag = "Remote Class"
     }
 }

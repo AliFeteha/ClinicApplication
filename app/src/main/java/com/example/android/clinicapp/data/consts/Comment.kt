@@ -4,5 +4,5 @@ data class Comment (
     val id:String,
     val name:String,
     val image_url:String,
-    val body:String
+    var body:String
 )
