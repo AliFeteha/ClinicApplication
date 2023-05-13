@@ -67,14 +67,27 @@ class remote {
         }
         return appointments
     }
-    private var remoteDataBase: DatabaseReference = Firebase.database.reference;
-    fun signUpDoctor(doctor: Doctor){
-        Log.i("aaaa","come")
-        remoteDataBase.child("Doctors").child(doctor.id).setValue(doctor)
-        //remoteDataBase.child("Authentication").child(doctor.email).setValue(doctor.id,doctor.)
+    private fun listStringsToListDoctors(string: List<String>):MutableList<Doctor>{
+        var doctors : MutableList<Doctor> = mutableListOf()
+        for(str in string){
+            val trimmedString = str.trim('[', ']')
+            val keyValuePairs = trimmedString.split(',')
+            val values = keyValuePairs.map { it.split('=')[1].trim() }
+            val doctor:Doctor = Doctor(values[0],values[1],values[2],values[3],values[4],values[5],values[6],stringToDaysList(values[7]))
+            doctors.add(doctor)
+        }
+        return doctors
     }
-    fun signUpPatient(patient: Patient){
+    private var remoteDataBase: DatabaseReference = Firebase.database.reference;
+    fun signUpDoctor(doctor: Doctor,password:String){
+        remoteDataBase.child("Doctors").child(doctor.id!!).setValue(doctor)
+        val control:firebaseControl = firebaseControl(doctor.email,doctor.id,password)
+        remoteDataBase.child("Authentication").child(doctor.email!!).setValue(control)
+    }
+    fun signUpPatient(patient: Patient,password:String){
         remoteDataBase.child("Patients").child(patient.id!!).setValue(patient)
+        val control:firebaseControl = firebaseControl(patient.email,patient.id,password)
+        remoteDataBase.child("Authentication").child(patient.email!!).setValue(control)
     }
     suspend fun getDoctorProfile(id:String):Doctor{
         Log.i("aaaaa","get i nto function")
@@ -133,5 +146,22 @@ class remote {
         }
         delay(2000)
         return appointments
+    }
+    suspend fun getAllDoctors():MutableList<Doctor>{
+        val list: MutableList<String> = mutableListOf()
+        var doctors : MutableList<Doctor> = mutableListOf();
+        remoteDataBase.child("Doctors").get().addOnSuccessListener {
+            Log.i("aaaaa","get i nto snapshot")
+            for (childSnapshot in it.children) {
+                val value = childSnapshot.value
+                value?.let { list.add(value.toString()) }
+            }
+            Log.i("aaa",list.toString())
+            doctors = listStringsToListDoctors(list)
+        }.addOnFailureListener {
+            Log.i("aaaaaaaa", "Error getting data", it)
+        }
+        delay(2000)
+        return doctors
     }
 }
