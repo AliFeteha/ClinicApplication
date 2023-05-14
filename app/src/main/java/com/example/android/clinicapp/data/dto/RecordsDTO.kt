@@ -8,7 +8,7 @@ import java.util.*
 
 @Entity(tableName = "records")
 data class RecordsDTO(
-    @ColumnInfo(name = "done") var title: Boolean?,
+    @ColumnInfo(name = "done") var title: String?,
     @ColumnInfo(name = "patient") var pName: String?,
     @ColumnInfo(name = "patient_id") var pId: String?,
     @ColumnInfo(name = "doctor") var dName: String?,
