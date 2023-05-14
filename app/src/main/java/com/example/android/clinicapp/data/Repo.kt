@@ -3,12 +3,10 @@ package com.example.android.clinicapp.data
 import android.content.Context
 import android.text.BoringLayout
 import androidx.lifecycle.MutableLiveData
-import com.example.android.clinicapp.data.consts.Doctor
-import com.example.android.clinicapp.data.consts.Patient
-import com.example.android.clinicapp.data.consts.Type
-import com.example.android.clinicapp.data.consts.FirebaseControl
+import com.example.android.clinicapp.data.consts.*
 import com.example.android.clinicapp.data.dto.DoctorsDTO
 import com.example.android.clinicapp.data.dto.PatientsDTO
+import com.example.android.clinicapp.data.dto.RecordsDTO
 import com.example.android.clinicapp.data.local.*
 import com.example.android.clinicapp.utils.PreferenceControl
 import kotlinx.coroutines.Dispatchers
@@ -24,6 +22,7 @@ class Repo(context: Context) {
 
     var doctor = MutableLiveData<DoctorsDTO>()
     var patient = MutableLiveData<PatientsDTO>()
+    var appointments = MutableLiveData<List<RecordsDTO>>()
 
     suspend fun refreshDoctorProfile(id:String){
         withContext(Dispatchers.IO) {
@@ -52,13 +51,13 @@ class Repo(context: Context) {
     suspend fun signUpPatient(patient: Patient,password:String){
         withContext(Dispatchers.IO) {
             remote.signUpPatient(patient,password)
-            patientsDao.saveRecord(PatientsDTO(patient.id,patient.name,patient.gender,patient.email,patient.birthDate,patient.imageUrl,patient.address,patient.city,patient.mobilePhone,patient.bloodType,patient.medicalIssues,patient.emergencyContact,patient.insurance))
+            patientsDao.saveRecord(PatientsDTO(patient.id!!,patient.name,patient.gender,patient.email,patient.birthDate,patient.imageUrl,patient.address,patient.city,patient.mobilePhone,patient.bloodType,patient.medicalIssues,patient.emergencyContact,patient.insurance))
         }
     }
     suspend fun signUpDoctor(doctor: Doctor, password:String){
         withContext(Dispatchers.IO) {
             remote.signUpDoctor(doctor,password)
-            doctorDao.saveRecord(DoctorsDTO(doctor.id,doctor.name,doctor.gender,doctor.workingDays,doctor.email,doctor.imageURL,doctor.city,doctor.telephone,doctor.address))
+            doctorDao.saveRecord(DoctorsDTO(doctor.id!!,doctor.name,doctor.gender,doctor.workingDays,doctor.email,doctor.imageURL,doctor.city,doctor.telephone,doctor.address))
         }
     }
 
@@ -104,5 +103,36 @@ class Repo(context: Context) {
     private fun checkProfile(id: String?) {
         TODO("Not yet implemented")
     }
-}
+    private fun appointmentsToRecords(it:List<Appointment>):List<RecordsDTO>{
+        val records : MutableList<RecordsDTO> = mutableListOf()
+        for (appointment in it){
+            records.add(RecordsDTO(appointment.title,appointment.pName,appointment.pId,appointment.dName,appointment.date,appointment.dId,appointment.id))
+        }
+        return records
+    }
+    suspend fun addAppointment(appointment:Appointment){
+        withContext(Dispatchers.IO) {
+            remote.addAppointment(appointment)
+            recordsDao.saveRecord(RecordsDTO(appointment.title,appointment.pName,appointment.pId,appointment.dName,appointment.date,appointment.dId,appointment.id))
+        }
+    }
+    suspend fun refreshAllAppointments(){
+        withContext(Dispatchers.IO) {
+            val refreshedAppointments = remote.getAllAppointments()
+            recordsDao.saveRecords(appointmentsToRecords(refreshedAppointments))
+        }
+    }
+    suspend fun getPatientRecords(id:String):MutableLiveData<List<RecordsDTO>>{
+        withContext(Dispatchers.IO) {
+            appointments.value = recordsDao.getRecordsByPatientId(id)
+        }
+        return appointments
+    }
+    suspend fun getDoctorRecords(id:String):MutableLiveData<List<RecordsDTO>>{
+        withContext(Dispatchers.IO) {
+            appointments.value = recordsDao.getRecordsByDoctorId(id)
+        }
+        return appointments
+    }
 
+}
