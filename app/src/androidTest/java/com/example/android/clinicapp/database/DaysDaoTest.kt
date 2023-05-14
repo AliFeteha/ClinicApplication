@@ -3,7 +3,10 @@ package com.example.android.clinicapp
 import androidx.room.Room
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
+import com.example.android.clinicapp.data.consts.Days
+import com.example.android.clinicapp.data.consts.Doctor
 import com.example.android.clinicapp.data.dto.DaysDTO
+import com.example.android.clinicapp.data.dto.DoctorsDTO
 import com.example.android.clinicapp.data.local.*
 import com.example.android.clinicapp.data.local.DaysDao
 import kotlinx.coroutines.runBlocking
@@ -21,8 +24,41 @@ class DaysDaoTest {
     private lateinit var daysDb: DaysDb
 
     //Days prepared Data
-    private val example = listOf<String>("1","1","1")
-    private val exampleDayDto = DaysDTO("1",example,example,example,example,example,example,example)
+    private val example = Doctor(
+        id = "1",
+        name = "John Doe",
+        gender = "Male",
+        email = "johndoe@example.com",
+        city = "New York",
+        workingDays = listOf(Days.Sunday),
+        imageURL = "lk;lk;l",
+        telephone = "1234567890",
+        address = "123 Main St"
+    )
+    private val example2 = Doctor(
+        id = "2",
+        name = "John Doe",
+        gender = "Male",
+        email = "johndoe@example.com",
+        city = "New York",
+        workingDays = listOf(Days.Sunday),
+        imageURL = "mnkj",
+        telephone = "1234567890",
+        address = "123 Main St"
+    )
+    private val example3 = Doctor(
+        id = "3",
+        name = "John Doe",
+        gender = "Male",
+        email = "johndoe@example.com",
+        workingDays = listOf(Days.Sunday),
+        imageURL = "kjkjkj",
+        city = "New York",
+        telephone = "1234567890",
+        address = "123 Main St"
+    )
+
+    private val exampleDayDto = DaysDTO(Days.Sunday, listOf(example,example2,example3))
 
 
     @Before
@@ -50,7 +86,7 @@ class DaysDaoTest {
         //listing
         val list = daysDao.getDays()
         //it should have 3 elements in each column
-        Assert.assertEquals(3, list[0].friday.size)
+        Assert.assertEquals(Days.Sunday, list[0].day)
     }
     @Test
     fun daysClearTest() = runBlocking {
