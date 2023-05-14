@@ -1,11 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".patiant.patientAppointments">
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="viewModel"
+            type="com.example.android.clinicapp.patiant.appointments.AppontmentsViewModel" />
+    </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/linearLayout"
+
+        tools:context=".PatientActivity"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#e1e1ef"
@@ -41,28 +47,34 @@
             android:id="@+id/time_picker"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="77dp"
+            android:layout_marginTop="15dp"
             android:timePickerMode="spinner"
-            tools:layout_editor_absoluteX="77dp"
-            tools:layout_editor_absoluteY="378dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/calendarView2"
             tools:ignore="MissingConstraints" />
 
         <Button
             android:id="@+id/newAppointmentButton"
             android:layout_width="321dp"
             android:layout_height="41dp"
+            android:layout_marginStart="45dp"
+            android:layout_marginTop="32dp"
             android:background="@drawable/radius"
             android:backgroundTint="#092c86"
             android:text="@string/book_a_new_appointment"
-            tools:layout_editor_absoluteX="45dp"
-            tools:layout_editor_absoluteY="622dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/time_picker"
             tools:ignore="MissingConstraints" />
 
         <CalendarView
             android:id="@+id/calendarView2"
             android:layout_width="351dp"
             android:layout_height="245dp"
-            tools:layout_editor_absoluteX="30dp"
-            tools:layout_editor_absoluteY="118dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="46dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/materialToolbar2"
             tools:ignore="MissingConstraints" />
 
 
