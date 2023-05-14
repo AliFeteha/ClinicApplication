@@ -14,17 +14,17 @@ interface RecordsDao{
         suspend fun getRecords(): List<RecordsDTO>
 
         @Query("SELECT * FROM records where patient_id = :patientId")
-        suspend fun getRecordsByPatientId(patientId: String): RecordsDTO?
+        suspend fun getRecordsByPatientId(patientId: String): List<RecordsDTO>?
 
         @Query("SELECT * FROM records where doctor_id = :doctorId")
-        suspend fun getRecordsByDoctorId(doctorId: String): RecordsDTO?
+        suspend fun getRecordsByDoctorId(doctorId: String): List<RecordsDTO>?
 
         @Transaction
         suspend fun saveRecords(records : List<RecordsDTO>) {
                 records.forEach { saveRecord(it)}
         }
 
-        @Insert(onConflict = OnConflictStrategy.REPLACE)
+        @Insert
         suspend fun saveRecord(record: RecordsDTO)
 
         @Query("DELETE FROM records")
