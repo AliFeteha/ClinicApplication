@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_doctor"
+    app:startDestination="@id/doctorDashboard">
+
+    <fragment
+        android:id="@+id/doctorProfileFragment"
+        android:name="com.example.android.clinicapp.profile.DoctorProfileFragment"
+        android:label="DoctorProfileFragment" />
+    <fragment
+        android:id="@+id/doctorDashboard"
+        android:name="com.example.android.clinicapp.dashboard.fragments.DoctorDashboard"
+        android:label="DoctorDashboard" >
+        <action
+            android:id="@+id/action_doctorDashboard_to_doctorProfileFragment"
+            app:destination="@id/doctorProfileFragment" />
+    </fragment>
+</navigation>

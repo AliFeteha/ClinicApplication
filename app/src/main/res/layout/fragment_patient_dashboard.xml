@@ -38,6 +38,7 @@
                 tools:layout_editor_absoluteY="16dp" />
 
             <ImageView
+                android:onClick="@{()->viewModel.navigateToAppointments()}"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="@dimen/small"
@@ -148,6 +149,7 @@
                 tools:layout_editor_absoluteY="16dp" />
 
             <ImageView
+                android:onClick="@{()->viewModel.navigateToPatientProfile()}"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="@dimen/small"

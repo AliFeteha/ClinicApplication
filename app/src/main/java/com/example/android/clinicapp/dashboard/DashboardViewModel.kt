@@ -10,22 +10,17 @@ import com.example.android.clinicapp.data.consts.Type
 class DashboardViewModel(val app:Application): BaseViewModel(app) {
 
 
-    fun navigateToAppointments(type:String){
-        if (type == Type.Doctor.toString())
-            navigationCommand.value =
-                NavigationCommand.To(DoctorDashboardDirections.actionDoctorDashboardToPatientAppointments())
-        else
-            navigationCommand.value =
+    fun navigateToAppointments(){
+        navigationCommand.value =
                 NavigationCommand.To(PatientDashboardDirections.actionPatientDashboardToPatientAppointments())
     }
 
-    fun navigateToForm(type:String){
-        if (type == Type.Doctor.toString())
-            navigationCommand.value =
-                NavigationCommand.To(DoctorDashboardDirections.actionWelcomeToLogIn())
-        else
-            navigationCommand.value =
-                NavigationCommand.To(PatientDashboardDirections.actionPatientDashboardToPatientAppointments())
+    fun navigateToDoctorProfile() {
+        navigationCommand.value =
+            NavigationCommand.To(DoctorDashboardDirections.actionDoctorDashboardToDoctorProfileFragment())
     }
-
+    fun navigateToPatientProfile(){
+        navigationCommand.value =
+            NavigationCommand.To(PatientDashboardDirections.actionPatientDashboardToPatientProfileFragment())
+    }
 }
