@@ -113,7 +113,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/Avatar" />
+                    app:srcCompat="@drawable/avatar" />
 
                 <EditText
                     android:id="@+id/nameEditText"
@@ -128,7 +128,6 @@
                     android:fontFamily="monospace"
                     android:hint="@string/name"
                     android:inputType="text"
-                    android:letterSpacing="0.1d"
                     android:lineSpacingExtra="8sp"
                     android:maxLines="1"
                     android:minLines="1"
@@ -154,7 +153,6 @@
                     android:fallbackLineSpacing="false"
                     android:fontFamily="monospace"
                     android:inputType="textEmailAddress"
-                    android:letterSpacing="0.1d"
                     android:lineSpacingExtra="8sp"
                     android:maxLines="1"
                     android:minLines="1"
@@ -183,7 +181,6 @@
                     android:fontFamily="monospace"
                     android:hint="@string/address"
                     android:inputType="text"
-                    android:letterSpacing="0.1d"
                     android:lineSpacingExtra="8sp"
                     android:maxLines="1"
                     android:minLines="1"
