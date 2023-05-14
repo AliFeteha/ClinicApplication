@@ -1,5 +1,6 @@
 package com.example.android.clinicapp.auth.fragments
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,18 +10,20 @@ import androidx.lifecycle.Observer
 import com.example.android.clinicapp.R
 import com.example.android.clinicapp.auth.LoginViewModel
 import com.example.android.clinicapp.base.BaseFragment
+import com.example.android.clinicapp.data.Repo
 import com.example.android.clinicapp.data.consts.Doctor
 import com.example.android.clinicapp.data.consts.Patient
 import com.example.android.clinicapp.data.consts.Type
 import com.example.android.clinicapp.databinding.FragmentSignUpBinding
 import com.example.android.clinicapp.utils.PreferenceControl
+import kotlinx.coroutines.runBlocking
 import org.koin.android.ext.android.inject
 
 
 class SignUp : BaseFragment() {
     override val _viewModel: LoginViewModel by  inject()
     lateinit var binding:FragmentSignUpBinding
-
+    private val repo = _viewModel.repo
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -31,48 +34,7 @@ class SignUp : BaseFragment() {
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        _viewModel.register.observe(viewLifecycleOwner, Observer {
-            if (it) {
-                if(checkAccountValidity(_viewModel.email)) {
-                    registerNewAccount()
-                    // todo write a fn to write the current profile to the preference file
-                    getProfileId(email = _viewModel.email)
-                    writePreference(_viewModel.type)
-                    _viewModel.finishActivity()
-                }
 
-            }
-            _viewModel.register.value = false
-        })
-
-    }
-
-    private fun writePreference(type: Type?) {
-        val id = _viewModel.id;val name = _viewModel.name;val email = _viewModel.email
-        if (type == Type.Patient)
-            PreferenceControl().write(Patient(id = id,name = name, email =  email))
-        if (type == Type.Doctor)
-            PreferenceControl().write(Doctor(id = id, name = name, email =  email))
-    }
-
-    private fun getProfileId(email:String) {
-        TODO("make a remote call and get the id of the profile and write it to (_viewModel.id)")
-        _viewModel.id = TODO()
-    }
-
-    private fun checkAccountValidity(email:String) :Boolean{
-        //Todo check if the account already existed in the email remote database table and return false if it does existed
-        if (TODO( "fn call to return if it wasn't existed"))
-            return true
-        else
-            _viewModel.invalidEmail()
-        return false
-    }
-    private fun registerNewAccount(){
-        //todo register new profile with the viewmodel's value name, email, password.....etc
-    }
 
 
 }

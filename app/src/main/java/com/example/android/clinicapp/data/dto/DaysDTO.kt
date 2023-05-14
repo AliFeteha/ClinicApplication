@@ -9,5 +9,5 @@ import com.example.android.clinicapp.data.consts.Doctor
 @Entity(tableName = "days")
 data class DaysDTO(
     @PrimaryKey @ColumnInfo(name = "day") val day:Days,
-    @ColumnInfo(name = "Doctors") val doctors:List<Doctor>
+    @ColumnInfo(name = "Doctors") val doctors:List<Doctor>?
 )
