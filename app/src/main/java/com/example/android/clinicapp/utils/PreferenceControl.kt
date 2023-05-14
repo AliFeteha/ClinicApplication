@@ -49,7 +49,7 @@ class PreferenceControl {
             apply()
         }
     }
-    fun readType():String? = sharedPreferences.getString(Resources.getSystem().getString(R.string.type),null)
+    fun readType():String? = sharedPreferences.getString(Resources.getSystem().getString(R.string.type),"Patient")
 
 
     fun writeType(value :String ) {
@@ -58,7 +58,6 @@ class PreferenceControl {
 
 
     fun readId():String? = sharedPreferences.getString(Resources.getSystem().getString(R.string.preference_id),null)
-
     fun readPatient():Patient{
         val profile = Patient()
         with(sharedPreferences){
