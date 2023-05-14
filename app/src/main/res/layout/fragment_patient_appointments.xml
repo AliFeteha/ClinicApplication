@@ -5,7 +5,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.example.android.clinicapp.patiant.appointments.AppointmentViewModel" />
+            type="com.example.android.clinicapp.patiant.appointments.AppointmentsViewModel" />
     </data>
     <LinearLayout
         android:layout_width="match_parent"

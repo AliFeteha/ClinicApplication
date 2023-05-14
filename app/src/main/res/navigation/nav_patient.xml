@@ -28,7 +28,7 @@
     </fragment>
     <fragment
         android:id="@+id/bookAnAppointment"
-        android:name="com.example.android.clinicapp.patiant.PatientAppointments"
+        android:name="com.example.android.clinicapp.patiant.appointments.fragments.patientAppointments"
         android:label="fragmentBookAnAppointment"
         tools:layout="@layout/fragment_book_an_appointment" />
     <fragment

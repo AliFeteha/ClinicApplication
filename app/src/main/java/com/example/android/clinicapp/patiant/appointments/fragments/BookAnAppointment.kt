@@ -7,13 +7,12 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import com.example.android.clinicapp.R
 import com.example.android.clinicapp.base.BaseFragment
+import com.example.android.clinicapp.base.BaseViewModel
 import com.example.android.clinicapp.databinding.FragmentBookAnAppointmentBinding
-import com.example.android.clinicapp.patiant.appointments.AppontmentsViewModel
 import org.koin.android.ext.android.inject
 
-class BookAnAppointment : BaseFragment() {
+class BookAnAppointment(override val _viewModel: BaseViewModel) : BaseFragment() {
 
-    override val _viewModel: AppontmentsViewModel by inject()
     lateinit var binding: FragmentBookAnAppointmentBinding
 
     override fun onCreateView(
@@ -24,7 +23,6 @@ class BookAnAppointment : BaseFragment() {
         binding = DataBindingUtil.inflate(
             inflater, R.layout.fragment_book_an_appointment, container, false
         )
-        binding.viewModel = _viewModel
         return binding.root
     }
 }

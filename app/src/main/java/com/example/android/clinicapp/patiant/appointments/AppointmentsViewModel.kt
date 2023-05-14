@@ -12,7 +12,7 @@ import com.example.android.clinicapp.utils.PreferenceControl
 import kotlinx.coroutines.launch
 
 
-class AppointmentViewModel(app: Application) : BaseViewModel(app) {
+class AppointmentsViewModel(app: Application) : BaseViewModel(app) {
     val preferenceControl = PreferenceControl()
     private val repo = Repo(app.applicationContext)
     var appointments = MutableLiveData<List<Appointment>>()

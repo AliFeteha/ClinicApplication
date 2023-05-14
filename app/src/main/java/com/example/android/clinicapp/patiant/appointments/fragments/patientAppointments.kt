@@ -1,4 +1,4 @@
-package com.example.android.clinicapp.patiant.appointments
+package com.example.android.clinicapp.patiant.appointments.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,14 +8,14 @@ import androidx.databinding.DataBindingUtil
 import com.example.android.clinicapp.R
 import com.example.android.clinicapp.base.BaseFragment
 import com.example.android.clinicapp.databinding.FragmentPatientAppointmentsBinding
-import com.example.android.clinicapp.patiant.appointments.AppointmentViewModel
+import com.example.android.clinicapp.patiant.appointments.AppointmentsViewModel
 import com.example.android.clinicapp.patiant.appointments.appointmentsListAdapter
 import com.example.android.clinicapp.utils.PreferenceControl
 import com.example.android.clinicapp.utils.setup
 import org.koin.android.ext.android.inject
 
-class PatientAppointments() : BaseFragment() {
-    override val _viewModel: AppointmentViewModel by inject()
+class patientAppointments() : BaseFragment() {
+    override val _viewModel: AppointmentsViewModel by inject()
     private lateinit var binding: FragmentPatientAppointmentsBinding
     private val preferenceControl=PreferenceControl()
     override fun onCreateView(
