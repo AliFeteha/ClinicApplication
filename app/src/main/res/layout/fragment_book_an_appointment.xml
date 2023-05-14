@@ -2,44 +2,69 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".bookAnAppointment">
-    <LinearLayout
+    tools:context=".patiant.patientAppointments">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#e1e1ef"
         android:orientation="vertical">
 
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/materialToolbar2"
+            android:layout_width="409dp"
+            android:layout_height="72dp"
+            android:background="@color/white"
+            android:minHeight="?attr/actionBarSize"
+            android:theme="?attr/actionBarTheme"
+            tools:layout_editor_absoluteX="1dp"
+            tools:layout_editor_absoluteY="0dp" />
+
+
         <TextView
-            android:id="@+id/bookAnAppointmentText1"
-            android:layout_width="match_parent"
-            android:layout_height="41dp"
-            android:layout_marginTop="16dp"
-            android:text="@string/book_an_appointment"
+            android:id="@+id/patientAppointmentsText1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="@string/my_appointments"
+            android:textColor="#0d2b4e"
             android:textSize="20sp"
             android:textStyle="bold"
-            android:textColor="#0d2b4e"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.045"
+            app:layout_constraintHorizontal_bias="0.497"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <DatePicker
-            android:id="@+id/simpleDatePicker"
-            android:layout_width="match_parent"
-            android:layout_height="375dp"
-            android:datePickerMode="spinner" />
+        <TimePicker
+            android:id="@+id/time_picker"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:timePickerMode="spinner"
+            tools:layout_editor_absoluteX="77dp"
+            tools:layout_editor_absoluteY="378dp" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/appointmentsRecyclerView"
-            android:layout_width="match_parent"
-            android:layout_height="299dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+        <Button
+            android:id="@+id/newAppointmentButton"
+            android:layout_width="321dp"
+            android:layout_height="41dp"
+            android:background="@drawable/radius"
+            android:backgroundTint="#092c86"
+            android:text="@string/book_a_new_appointment"
+            tools:layout_editor_absoluteX="45dp"
+            tools:layout_editor_absoluteY="622dp"
+            tools:ignore="MissingConstraints" />
+
+        <CalendarView
+            android:id="@+id/calendarView2"
+            android:layout_width="351dp"
+            android:layout_height="245dp"
+            tools:layout_editor_absoluteX="30dp"
+            tools:layout_editor_absoluteY="118dp"
+            tools:ignore="MissingConstraints" />
 
 
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 
