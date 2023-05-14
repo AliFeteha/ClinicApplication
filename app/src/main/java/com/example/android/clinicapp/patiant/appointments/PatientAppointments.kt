@@ -1,4 +1,4 @@
-package com.example.android.clinicapp.patiant
+package com.example.android.clinicapp.patiant.appointments
 
 import android.os.Bundle
 import android.view.LayoutInflater
