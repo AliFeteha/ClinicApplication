@@ -27,7 +27,7 @@ class LoginActivity : AppCompatActivity() {
         activityFlow()
         _viewModel.finishedFlag.observe(this, Observer {
             if (it)
-                finishActivity()
+                initializeLoginUI(_viewModel.type!!)
         })
 
         try{
