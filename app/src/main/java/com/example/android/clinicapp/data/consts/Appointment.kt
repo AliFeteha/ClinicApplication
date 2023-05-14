@@ -1,5 +1,6 @@
 package com.example.android.clinicapp.data.consts
 
+import java.io.Serializable
 import javax.sql.StatementEvent
 
 data class Appointment(
@@ -10,4 +11,4 @@ data class Appointment(
     var pId:String,
     var pName: String,
     var title :String
-)
+): Serializable
