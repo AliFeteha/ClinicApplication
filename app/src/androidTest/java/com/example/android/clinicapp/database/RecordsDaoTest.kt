@@ -37,7 +37,7 @@ class RecordsDaoTest {
     fun testSaveAndGetRecords() = runBlocking {
         // Create a test record
         val record = RecordsDTO(
-            title = true,
+            title = "true",
             pName = "John",
             pId = "1",
             dName = "Dr. Smith",
@@ -55,12 +55,43 @@ class RecordsDaoTest {
         // Verify that the list contains the saved record
         Assert.assertEquals(true, records.contains(record))
     }
+    @Test
+    fun testRecordsSaveAndGetRecords() = runBlocking {
+        // Create a test record
+        val record1 = RecordsDTO(
+            title = "true",
+            pName = "John",
+            pId = "1",
+            dName = "Dr. Smith",
+            date = "2022-05-13",
+            dId = "2",
+            id = "123445"
+        )
+        val record2 = RecordsDTO(
+            title = "true",
+            pName = "John",
+            pId = "2",
+            dName = "Dr. Smith",
+            date = "2022-05-13",
+            dId = "2",
+            id = "12344"
+        )
+        val recordsList = listOf(record1,record2)
+        // Save the record to the database
+        recordsDao.saveRecords(recordsList)
+
+        // Get the list of records from the database
+        val records = recordsDao.getRecords()
+
+        // Verify that the list contains the saved record
+        Assert.assertEquals(recordsList,records)
+    }
 
     @Test
     fun testGetRecordsByPatientId() = runBlocking {
         // Create a test record
         val record = RecordsDTO(
-            title = true,
+            title = "true",
             pName = "John",
             pId = "1",
             dName = "Dr. Smith",
@@ -68,22 +99,30 @@ class RecordsDaoTest {
             dId = "2",
             id = "123"
         )
-
+        val record2 = RecordsDTO(
+            title = "true",
+            pName = "John",
+            pId = "1",
+            dName = "Dr. Smith",
+            date = "2022-05-13",
+            dId = "2",
+            id = "12355"
+        )
         // Save the record to the database
         recordsDao.saveRecord(record)
-
+        recordsDao.saveRecord(record2)
         // Get the record by patient ID from the database
         val result = recordsDao.getRecordsByPatientId("1")
 
         // Verify that the result is the saved record
-        Assert.assertEquals(result, record)
+        Assert.assertEquals(result, listOf(record,record2))
     }
 
     @Test
     fun testGetRecordsByDoctorId() = runBlocking {
         // Create a test record
         val record = RecordsDTO(
-            title = true,
+            title = "true",
             pName = "John",
             pId = "1",
             dName = "Dr. Smith",
@@ -106,7 +145,7 @@ class RecordsDaoTest {
     fun testClear() = runBlocking {
         // Create some test records
         val record1 = RecordsDTO(
-            title = true,
+            title = "true",
             pName = "John",
             pId = "1",
             dName = "Dr. Smith",
@@ -115,7 +154,7 @@ class RecordsDaoTest {
             id = "123"
         )
         val record2 = RecordsDTO(
-            title = false,
+            title = "false",
             pName = "Jane",
             pId = "3",
             dName = "Dr. Lee",
