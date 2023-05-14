@@ -6,6 +6,7 @@ import android.content.res.Resources
 import com.example.android.clinicapp.R
 import com.example.android.clinicapp.data.consts.Doctor
 import com.example.android.clinicapp.data.consts.Patient
+import com.example.android.clinicapp.data.consts.Type
 
 class PreferenceControl {
     
@@ -25,6 +26,7 @@ class PreferenceControl {
             putString(Resources.getSystem().getString(R.string.phone_number), profile.mobilePhone)
             apply()
         }
+        writeType(Type.Patient.toString())
     }
     fun write(profile: Doctor){
         with (sharedPreferences.edit()) {
@@ -39,6 +41,7 @@ class PreferenceControl {
             putString(Resources.getSystem().getString(R.string.phone_number), profile.telephone)
             apply()
         }
+        writeType(Type.Doctor.toString())
     }
     fun writeId(id:String){
         with (sharedPreferences.edit()) {
@@ -46,6 +49,14 @@ class PreferenceControl {
             apply()
         }
     }
+    fun readType():String? = sharedPreferences.getString(Resources.getSystem().getString(R.string.type),null)
+
+
+    fun writeType(value :String ) {
+        sharedPreferences.edit().putString(Resources.getSystem().getString(R.string.type), value).apply()
+    }
+
+
     fun readId():String? = sharedPreferences.getString(Resources.getSystem().getString(R.string.preference_id),null)
 
     fun readPatient():Patient{

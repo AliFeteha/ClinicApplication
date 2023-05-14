@@ -15,7 +15,7 @@ import org.koin.android.ext.android.inject
 
 class Welcome : BaseFragment() {
 
-    override val _viewModel: LoginViewModel by  inject()
+    override val _viewModel: LoginViewModel by inject()
 
     private lateinit var binding: FragmentWelcomeBinding
     override fun onCreateView(
@@ -29,4 +29,5 @@ class Welcome : BaseFragment() {
         binding.viewModel = _viewModel
         return binding.root
     }
+
 }

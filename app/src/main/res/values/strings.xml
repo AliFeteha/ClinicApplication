@@ -146,7 +146,7 @@
     <string name="personal_photo">Personal photo</string>
     <string name="birthDate">BirthDate</string>
     <string name="insurance_provider">Provider</string>
-    <string name="insurenceNumber">Insurence Number</string>
+    <string name="insurenceNumber">Insurance Number</string>
     <string name="uploadButton">Upload Button</string>
     <string name="emergencyContact">Emergency Contact</string>
     <string name="contactNumber">Contact Number</string>

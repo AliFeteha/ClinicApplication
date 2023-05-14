@@ -7,45 +7,60 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
+import kotlinx.coroutines.*
+import java.util.UUID
 
 class Remote {
     val typeConverter = TypeConverter()
 
     private var remoteDataBase: DatabaseReference = Firebase.database.reference;
+
+    private fun generateId():String = UUID.randomUUID().toString()
+
     fun signUpDoctor(doctor: Doctor,password:String){
+        doctor.id = generateId()
         remoteDataBase.child("Doctors").child(doctor.id!!).setValue(doctor)
-        val control:FirebaseControl = FirebaseControl(doctor.email,doctor.id,password)
+        val control = FirebaseControl(doctor.email,doctor.id,password)
         remoteDataBase.child("Authentication").child(doctor.email!!).setValue(control)
     }
+
     fun signUpPatient(patient: Patient,password:String){
+        patient.id = generateId()
         remoteDataBase.child("Patients").child(patient.id!!).setValue(patient)
-        val control:FirebaseControl = FirebaseControl(patient.email,patient.id,password)
+        val control = FirebaseControl(patient.email,patient.id,password)
         remoteDataBase.child("Authentication").child(patient.email!!).setValue(control)
     }
-    suspend fun getDoctorProfile(id:String):Doctor{
+
+    suspend fun getDoctorProfile(id:String) :Doctor
+    {
         Log.i(Tag,"get i nto function")
         val list: MutableList<String> = mutableListOf()
-        var doctor = Doctor("","","","","","","", "",listOf());
-        remoteDataBase.child("Doctors").child(id).get().addOnSuccessListener {
-            Log.i(Tag,"get i nto snapshot")
-            for (childSnapshot in it.children) {
-                val value = childSnapshot.value
-                value?.let { list.add(value.toString()) }
-            }
-            Log.i(Tag,list.toString())
-            doctor = Doctor(list[0],list[1],list[2],list[3],list[4],
-                list[5],list[6],list[7],typeConverter.stringToDaysList(list[8]))
+        var doctor = Doctor()
+        runBlocking {
+            launch(Dispatchers.Unconfined) {
+                remoteDataBase.child("Doctors").child(id).get().addOnSuccessListener {
+                    Log.i(Tag, "get i nto snapshot")
+                    for (childSnapshot in it.children) {
+                        val value = childSnapshot.value
+                        value?.let { list.add(value.toString()) }
+                    }
+                    Log.i(Tag, list.toString())
+                    doctor = Doctor(
+                        list[0], list[1], list[2], list[3], list[4],
+                        list[5], list[6], list[7], typeConverter.stringToDaysList(list[8])
+                    )
 
-        }.addOnFailureListener {
-            Log.i(Tag, "Error getting data", it)
+                }.addOnFailureListener {
+                    Log.i(Tag, "Error getting data", it)
+                }
+            }
+            delay(1500)
         }
-        delay(1400)
         return doctor
     }
+
     suspend fun getPatientProfile(id:String):Patient{
-        Log.i("aaaaa","get i nto function")
+        Log.i(Tag,"get i nto function")
         val list: MutableList<String> = mutableListOf()
         val medicalInsurance : MedicalInsurance = MedicalInsurance("","")
         val emergencyContact : EmergencyContact = EmergencyContact("","")
@@ -62,12 +77,14 @@ class Remote {
         }.addOnFailureListener {
             Log.i(Tag, "Error getting data", it)
         }
-        delay(2000)
+        delay(1500)
         return patient
     }
+
     fun addAppointment(appointment: Appointment){
         remoteDataBase.child("Appointments").child(appointment.id).setValue(appointment)
     }
+
     suspend fun getAllAppointments():List<Appointment>{
         val list: MutableList<String> = mutableListOf()
         var appointments : List<Appointment> = mutableListOf();
@@ -85,18 +102,25 @@ class Remote {
         delay(1400)
         return appointments
     }
+
     suspend fun getAllDoctors():List<Doctor>{
+
         val list: MutableList<String> = mutableListOf()
-            val dataSnapshot:MutableIterable<DataSnapshot>
-            with(Dispatchers.IO) {
-                remoteDataBase.child("Doctors").get().addOnFailureListener { Log.i(Tag, connectionFailed) }
-                    .addOnSuccessListener {
-                        for (childSnapshot in it.children) {
-                            val value = childSnapshot.value
-                            value?.let { list.add(value.toString()) }
+        val dataSnapshot:MutableIterable<DataSnapshot>
+        runBlocking {
+            launch(Dispatchers.Unconfined) {
+
+                    remoteDataBase.child("Doctors").get()
+                        .addOnFailureListener { Log.i(Tag, connectionFailed) }
+                        .addOnSuccessListener {
+                            for (childSnapshot in it.children) {
+                                val value = childSnapshot.value
+                                value?.let { list.add(value.toString()) }
+                            }
                         }
-                    }
-                delay(1400)
+
+                delay(2000)
+            }
             }
 
 
