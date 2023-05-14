@@ -19,7 +19,8 @@
             android:minHeight="?attr/actionBarSize"
             android:theme="?attr/actionBarTheme"
             tools:layout_editor_absoluteX="1dp"
-            tools:layout_editor_absoluteY="0dp" />
+            tools:layout_editor_absoluteY="0dp"
+            tools:ignore="MissingConstraints" />
 
 
         <TextView
@@ -42,7 +43,8 @@
             android:layout_height="wrap_content"
             android:timePickerMode="spinner"
             tools:layout_editor_absoluteX="77dp"
-            tools:layout_editor_absoluteY="378dp" />
+            tools:layout_editor_absoluteY="378dp"
+            tools:ignore="MissingConstraints" />
 
         <Button
             android:id="@+id/newAppointmentButton"

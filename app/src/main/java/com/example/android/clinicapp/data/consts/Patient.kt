@@ -1,5 +1,7 @@
 package com.example.android.clinicapp.data.consts
 
+import java.io.Serializable
+
 data class Patient(
     var address :String?=null,
     var birthDate :String?=null,
@@ -16,4 +18,4 @@ data class Patient(
     var name :String?=null,
 
 
-)
+): Serializable

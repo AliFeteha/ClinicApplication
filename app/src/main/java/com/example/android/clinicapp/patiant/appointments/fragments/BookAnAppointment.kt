@@ -24,7 +24,6 @@ class BookAnAppointment : BaseFragment() {
         binding = DataBindingUtil.inflate(
             inflater, R.layout.fragment_book_an_appointment, container, false
         )
-        binding.viewModel = _viewModel
         return binding.root
     }
 }
