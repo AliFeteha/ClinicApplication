@@ -3,6 +3,8 @@ package com.example.android.clinicapp.utils
 import android.util.Log
 import androidx.room.TypeConverter
 import com.example.android.clinicapp.data.consts.*
+import com.example.android.clinicapp.data.dto.DoctorsDTO
+import com.example.android.clinicapp.data.dto.PatientsDTO
 
 
 class TypeConverter{
@@ -241,6 +243,16 @@ class TypeConverter{
             patient.id, medicalInsuranceToString(patient.insurance!!),"",
             patient.mobilePhone,patient.name)
     }
+    @TypeConverter
+    fun patientToPatientDto(patient: Patient):PatientsDTO {
+        return PatientsDTO(patient.id!!,patient.name,patient.gender,patient.email,
+            patient.birthDate,patient.imageUrl,patient.address,patient.city,patient.mobilePhone,
+            patient.bloodType,patient.medicalIssues,patient.emergencyContact,patient.insurance)
+    }
+    @TypeConverter
+    fun doctorToDoctorDTO(doctor: Doctor):DoctorsDTO {
+        return DoctorsDTO(doctor.id!!,doctor.name,doctor.gender,doctor.workingDays!!,doctor.email,doctor.imageURL,doctor.city,doctor.telephone,doctor.address)
+     }
 
 
 
