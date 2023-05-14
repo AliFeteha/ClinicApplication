@@ -25,7 +25,7 @@ class Repo(context: Context) {
 
     var doctor = MutableLiveData<DoctorsDTO>()
     var patient = MutableLiveData<PatientsDTO>()
-    var appointments = MutableLiveData<List<RecordsDTO>>()
+    var appointments = MutableLiveData<List<Appointment>>()
 
     //local db gets refresh by remote
     suspend fun refreshDoctorProfile(id:String){
@@ -132,26 +132,36 @@ class Repo(context: Context) {
         return records
     }
     suspend fun addAppointment(appointment:Appointment){
-        withContext(Dispatchers.IO) {
+        withContext(Dispatchers.Unconfined) {
             remote.addAppointment(appointment)
             recordsDao.saveRecord(RecordsDTO(appointment.title,appointment.pName,appointment.pId,appointment.dName,appointment.date,appointment.dId,appointment.id))
         }
     }
     suspend fun refreshAllAppointments(){
-        withContext(Dispatchers.IO) {
+        withContext(Dispatchers.Unconfined) {
             val refreshedAppointments = remote.getAllAppointments()
             recordsDao.saveRecords(appointmentsToRecords(refreshedAppointments))
         }
     }
-    suspend fun getPatientRecords(id:String):MutableLiveData<List<RecordsDTO>>{
-        withContext(Dispatchers.IO) {
-            appointments.value = recordsDao.getRecordsByPatientId(id)
+    suspend fun getPatientRecords(id:String):MutableLiveData<List<Appointment>>{
+        val getAppointment = mutableListOf<Appointment>()
+        withContext(Dispatchers.Unconfined) {
+            val appointment = recordsDao.getRecordsByPatientId(id)
+            for(app in appointment!!){
+                getAppointment.add(Appointment(app.date!!,app.dId!!,app.dName!!,app.id,app.pId!!,app.pName!!,app.title!!))
+            }
+            appointments.value = getAppointment
         }
         return appointments
     }
-    suspend fun getDoctorRecords(id:String):MutableLiveData<List<RecordsDTO>>{
-        withContext(Dispatchers.IO) {
-            appointments.value = recordsDao.getRecordsByDoctorId(id)
+    suspend fun getDoctorRecords(id:String):MutableLiveData<List<Appointment>>{
+        val getAppointment = mutableListOf<Appointment>()
+        withContext(Dispatchers.Unconfined) {
+            val appointment = recordsDao.getRecordsByDoctorId(id)
+            for(app in appointment!!){
+                getAppointment.add(Appointment(app.date!!,app.dId!!,app.dName!!,app.id,app.pId!!,app.pName!!,app.title!!))
+            }
+            appointments.value = getAppointment
         }
         return appointments
     }
