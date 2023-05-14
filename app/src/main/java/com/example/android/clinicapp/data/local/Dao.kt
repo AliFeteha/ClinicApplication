@@ -19,6 +19,11 @@ interface RecordsDao{
         @Query("SELECT * FROM records where doctor_id = :doctorId")
         suspend fun getRecordsByDoctorId(doctorId: String): RecordsDTO?
 
+        @Transaction
+        suspend fun saveRecords(records : List<RecordsDTO>) {
+                records.forEach { saveRecord(it)}
+        }
+
         @Insert(onConflict = OnConflictStrategy.REPLACE)
         suspend fun saveRecord(record: RecordsDTO)
 
