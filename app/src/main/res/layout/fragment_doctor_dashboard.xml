@@ -10,16 +10,15 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#e1e1ef">
+        style="@style/background"
+        android:background="#ECF1FA">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/card1"
             android:layout_width="170sp"
             android:layout_height="300sp"
-            android:layout_marginStart="20sp"
-            android:layout_marginTop="20sp"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="32dp"
             android:background="@drawable/radius"
             android:clickable="true"
             app:layout_constraintStart_toStartOf="parent"
@@ -39,29 +38,26 @@
                 tools:layout_editor_absoluteY="16dp" />
 
             <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="@dimen/small"
-                android:layout_marginBottom="@dimen/small"
-                android:layout_marginLeft="@dimen/small"
-                android:layout_marginRight="@dimen/small"
-                android:src="@drawable/appointment"
-                tools:layout_editor_absoluteX="26dp"
-                tools:layout_editor_absoluteY="0dp"
-                android:contentDescription="@string/appointments" />
+                android:layout_width="127dp"
+                android:layout_height="250dp"
+                android:contentDescription="@string/appointments"
+                android:src="@drawable/Appointmentt"
+                tools:layout_editor_absoluteX="22dp"
+                tools:layout_editor_absoluteY="35dp" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/card2"
-            android:layout_width="170sp"
-            android:layout_height="300sp"
-            android:layout_marginEnd="20sp"
+            android:layout_width="172dp"
+            android:layout_height="305dp"
+            android:layout_marginEnd="40dp"
             android:background="@drawable/radius"
             android:clickable="true"
-            app:layout_constraintBottom_toBottomOf="@+id/card1"
             app:layout_constraintEnd_toEndOf="parent"
-            tools:ignore="MissingConstraints">
+            tools:ignore="MissingConstraints"
+            tools:layout_editor_absoluteY="89dp">
+
             <TextView
                 android:id="@+id/doctorText2"
                 android:layout_width="match_parent"
@@ -70,20 +66,16 @@
                 android:textAlignment="center"
                 android:textColor="#0d2b4e"
                 android:textStyle="bold"
-                tools:layout_editor_absoluteX="-16dp"
+                tools:layout_editor_absoluteX="21dp"
                 tools:layout_editor_absoluteY="16dp" />
 
             <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="@dimen/small"
-                android:layout_marginBottom="@dimen/small"
-                android:layout_marginLeft="@dimen/small"
-                android:layout_marginRight="@dimen/small"
-                android:src="@drawable/patients"
-                tools:layout_editor_absoluteX="26dp"
-                tools:layout_editor_absoluteY="0dp"
-                android:contentDescription="@string/patient" />
+                android:layout_width="128dp"
+                android:layout_height="239dp"
+                android:contentDescription="@string/patient"
+                android:src="@drawable/recordss"
+                tools:layout_editor_absoluteX="20dp"
+                tools:layout_editor_absoluteY="46dp" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -92,15 +84,18 @@
             android:id="@+id/card3"
             android:layout_width="170sp"
             android:layout_height="300sp"
-            android:layout_marginStart="20sp"
+            android:layout_marginStart="40dp"
             android:layout_marginTop="20sp"
             android:layout_marginBottom="20sp"
             android:background="@drawable/radius"
             android:clickable="true"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/card4"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/card1"
             tools:ignore="MissingConstraints">
+
             <TextView
                 android:id="@+id/doctorText3"
                 android:layout_width="match_parent"
@@ -113,16 +108,12 @@
                 tools:layout_editor_absoluteY="16dp" />
 
             <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="@dimen/small"
-                android:layout_marginBottom="@dimen/small"
-                android:layout_marginLeft="@dimen/small"
-                android:layout_marginRight="@dimen/small"
-                android:src="@drawable/forum"
-                tools:layout_editor_absoluteX="26dp"
-                tools:layout_editor_absoluteY="0dp"
-                android:contentDescription="@string/forum" />
+                android:layout_width="121dp"
+                android:layout_height="259dp"
+                android:contentDescription="@string/forum"
+                android:src="@drawable/forumm"
+                tools:layout_editor_absoluteX="25dp"
+                tools:layout_editor_absoluteY="35dp" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -131,12 +122,13 @@
             android:id="@+id/card4"
             android:layout_width="170sp"
             android:layout_height="300sp"
-            android:layout_marginEnd="20sp"
+            android:layout_marginEnd="40dp"
             android:background="@drawable/radius"
             android:clickable="true"
             app:layout_constraintBottom_toBottomOf="@+id/card3"
             app:layout_constraintEnd_toEndOf="parent"
             tools:ignore="MissingConstraints">
+
             <TextView
                 android:id="@+id/doctorText4"
                 android:layout_width="match_parent"
@@ -149,34 +141,53 @@
                 tools:layout_editor_absoluteY="16dp" />
 
             <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="@dimen/small"
-                android:layout_marginBottom="@dimen/small"
-                android:layout_marginLeft="@dimen/small"
-                android:layout_marginRight="@dimen/small"
-                android:src="@drawable/doctor"
+                android:layout_width="119dp"
+                android:layout_height="260dp"
+                android:contentDescription="@string/profile"
+                android:src="@drawable/docprofilee"
                 tools:layout_editor_absoluteX="26dp"
-                tools:layout_editor_absoluteY="0dp"
-                android:contentDescription="@string/profile" />
+                tools:layout_editor_absoluteY="24dp" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/materialToolbar"
+            android:layout_width="458dp"
+            android:layout_height="68dp"
+            android:background="#FFFFFF"
+            android:minHeight="?attr/actionBarSize"
+            android:theme="?attr/actionBarTheme"
+            tools:layout_editor_absoluteX="-1dp"
+            tools:layout_editor_absoluteY="0dp" />
 
         <TextView
             android:id="@+id/textView"
             android:layout_width="160dp"
             android:layout_height="41dp"
             android:layout_marginTop="16dp"
+            android:gravity="center"
             android:text="@string/dashboard"
-            android:textSize="20sp"
-            android:textStyle="bold"
             android:textColor="#0d2b4e"
+            android:textSize="30sp"
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.045"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="203dp"
+        android:layout_height="174dp"
+        android:text="Button" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Button" />
 
 </layout>

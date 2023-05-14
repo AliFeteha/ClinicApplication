@@ -14,42 +14,32 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".InstructionFragment"
-        android:background="#d3ffce">
+        android:background="#ECF1FA">
+
         <ImageView
             android:id="@+id/logoWelcome"
-            android:layout_width="155dp"
-            android:layout_height="154dp"
+            android:layout_width="174dp"
+            android:layout_height="191dp"
             android:layout_marginVertical="130dp"
-            android:src="@drawable/logo"
+            android:layout_marginTop="128dp"
+            android:contentDescription="@string/logo"
+            android:src="@drawable/logoo"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:contentDescription="@string/logo" />
-
-        <TextView
-            android:id="@+id/text1Welcome"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/small"
-            android:text="@string/app_name"
-            android:textSize="@dimen/mid"
-            android:textColor="#5e899e"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/logoWelcome" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/text2Welcome"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/mid"
             android:text="@string/welcome"
-            android:textSize="@dimen/mid"
             android:textColor="#131313"
+            android:textSize="@dimen/mid"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/text1Welcome"  />
+            tools:layout_editor_absoluteY="348dp" />
         <TextView
             android:id="@+id/text3Welcome"
             android:layout_width="wrap_content"
@@ -61,22 +51,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/text2Welcome"  />
-
-        <Button
-            android:id="@+id/button1Welcome"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/big"
-            android:layout_marginTop="@dimen/mid"
-            android:layout_marginEnd="@dimen/big"
-            android:backgroundTint="#0d2b4e"
-            android:text="@string/sign_in_your_email"
-            android:onClick="@{()->viewModel.navigateToLogin()}"
-            android:textColor="#f0f8ff"
-            android:textSize="20sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/text3Welcome" />
 
         <TextView
             android:id="@+id/text4Welcome"
@@ -92,19 +66,37 @@
 
         <Button
             android:id="@+id/button2Welcome"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_width="280dp"
+            android:layout_height="45dp"
             android:layout_marginStart="@dimen/big"
+            android:layout_marginTop="8dp"
             android:layout_marginEnd="@dimen/big"
-            android:backgroundTint="#5e899e"
+            android:background="@drawable/radius"
+            android:backgroundTint="#2A2AC0"
             android:text="@string/sign_up"
-            android:onClick="@{()->viewModel.navigateToRegistration()}"
-            android:textColor="#131313"
-            android:textSize="20sp"
+            android:textColor="#ffffff"
+            android:textSize="17sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintHorizontal_bias="0.494"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/text4Welcome" />
+
+        <Button
+            android:id="@+id/button1Welcome"
+            android:layout_width="280dp"
+            android:layout_height="45dp"
+            android:layout_marginStart="@dimen/big"
+            android:layout_marginTop="40dp"
+            android:layout_marginEnd="@dimen/big"
+            android:background="@drawable/radius"
+            android:backgroundTint="#2A2AC0"
+            android:text="@string/sign_in_your_email"
+            android:textColor="#f0f8ff"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.483"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text3Welcome" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
