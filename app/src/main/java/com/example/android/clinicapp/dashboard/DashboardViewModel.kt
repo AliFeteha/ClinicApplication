@@ -5,7 +5,6 @@ import com.example.android.clinicapp.base.BaseViewModel
 import com.example.android.clinicapp.base.NavigationCommand
 import com.example.android.clinicapp.dashboard.fragments.DoctorDashboardDirections
 import com.example.android.clinicapp.dashboard.fragments.PatientDashboardDirections
-import com.example.android.clinicapp.data.consts.Type
 
 class DashboardViewModel(val app:Application): BaseViewModel(app) {
 
