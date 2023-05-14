@@ -6,7 +6,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".PatientActivity">
+        tools:context=".DoctorActivity">
 
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/nav_host_fragment"
@@ -14,7 +14,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:defaultNavHost="true"
-            app:navGraph="@navigation/nav"
+            app:navGraph="@navigation/nav_doctor"
             tools:layout="@layout/fragment_doctor_dashboard"
             tools:layout_editor_absoluteX="41dp"
             tools:layout_editor_absoluteY="0dp" />

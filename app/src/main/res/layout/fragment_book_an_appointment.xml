@@ -2,7 +2,12 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".bookAnAppointment">
+    tools:context="">
+    <data>
+        <variable
+            name="viewModel"
+            type="com.example.android.clinicapp.patiant.appointments.AppontmentsViewModel" />
+    </data>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"

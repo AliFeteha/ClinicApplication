@@ -33,8 +33,4 @@ class SignUp : BaseFragment() {
         binding.viewModel = _viewModel
         return binding.root
     }
-
-
-
-
 }
