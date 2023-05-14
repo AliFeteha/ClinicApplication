@@ -17,6 +17,7 @@
     <string name="password">password</string>
     <string name="Continue">continue</string>
     <string name="name">name</string>
+    <string name="type">type</string>
     <string name="choose">choose doctor or patient</string>
     <string name="dashboard">Dashboard</string>
     <string name="appointments">Appointments</string>
