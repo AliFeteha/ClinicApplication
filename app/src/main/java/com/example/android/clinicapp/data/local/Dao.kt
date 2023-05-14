@@ -4,6 +4,7 @@ package com.example.android.clinicapp.data.local
 import androidx.lifecycle.LiveData
 import androidx.room.*
 import com.example.android.clinicapp.data.consts.Comment
+import com.example.android.clinicapp.data.consts.Days
 import com.example.android.clinicapp.data.dto.*
 import com.example.android.clinicapp.utils.TypeConverter
 
@@ -51,6 +52,9 @@ interface DoctorsDao{
 
         @Query("SELECT * FROM doctors where id = :doctorId")
         suspend fun getProfileById(doctorId: String): DoctorsDTO
+
+        @Query("SELECT * FROM doctors WHERE :workingDays IN (working_days)")
+        suspend fun getProfileByDays(workingDays: Days): DoctorsDTO
 
         @Insert(onConflict = OnConflictStrategy.REPLACE)
         suspend fun saveRecord(doctor: DoctorsDTO)
