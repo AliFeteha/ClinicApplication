@@ -9,6 +9,7 @@
     <string name="sign_in_your_email">log in</string>
     <string name="sign_up">Sign up</string>
     <string name="login">Login</string>
+    <string name="Preference">preference</string>
     <string name="invalidInput">Invalid Input</string>
     <string name="invalidEmail">Email Not registered</string>
     <string name="invalidPassword">Password must be longer than 8 chars</string>

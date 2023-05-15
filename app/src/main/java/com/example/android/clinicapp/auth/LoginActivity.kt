@@ -15,6 +15,7 @@ import com.example.android.clinicapp.R
 import com.example.android.clinicapp.data.consts.Type
 import com.example.android.clinicapp.data.local.LocalDB
 import com.example.android.clinicapp.databinding.LoginActivityBinding
+import com.example.android.clinicapp.utils.PreferenceControl
 import org.koin.android.ext.android.inject
 
 class LoginActivity : AppCompatActivity() {
@@ -30,11 +31,6 @@ class LoginActivity : AppCompatActivity() {
                 initializeLoginUI(_viewModel.type!!)
         })
 
-        try{
-            val dao = LocalDB.createDaysDao(applicationContext)
-        }catch (e:Exception){
-            Log.i("dataBase",e.toString())
-        }
     }
 
 
@@ -57,6 +53,8 @@ class LoginActivity : AppCompatActivity() {
     }
     //initializing login UI for authentication
     private fun login(){
+        // todo for testing uncomment bellow
+          initializeLoginUI(Type.Patient)
         binding = DataBindingUtil.setContentView(this, R.layout.login_activity)
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment

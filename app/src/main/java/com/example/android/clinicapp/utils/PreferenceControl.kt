@@ -1,95 +1,113 @@
 package com.example.android.clinicapp.utils
 
-import android.app.Activity
+import android.app.Application
 import android.content.Context
+import android.content.Context.MODE_PRIVATE
+import android.content.SharedPreferences
 import android.content.res.Resources
+import android.preference.PreferenceManager
+import androidx.core.content.ContentProviderCompat.requireContext
+import com.example.android.clinicapp.App
 import com.example.android.clinicapp.R
 import com.example.android.clinicapp.data.consts.Doctor
 import com.example.android.clinicapp.data.consts.Patient
 import com.example.android.clinicapp.data.consts.Type
 
-class PreferenceControl {
-    
-    val sharedPreferences = Activity().getPreferences(Context.MODE_PRIVATE)
+
+class PreferenceControl(context: Context) {
+
+
+    val sharedPreferences: SharedPreferences =  PreferenceManager.getDefaultSharedPreferences(context)
 
     fun write(profile: Patient){
         with (sharedPreferences.edit()) {
-            putString(Resources.getSystem().getString(R.string.name), profile.name)
-            putString(Resources.getSystem().getString(R.string.email), profile.email)
-            putString(Resources.getSystem().getString(R.string.address), profile.address)
-            putString(Resources.getSystem().getString(R.string.preference_id), profile.id)
-            putString(Resources.getSystem().getString(R.string.birthDate), profile.birthDate)
-            putString(Resources.getSystem().getString(R.string.blood), profile.bloodType)
-            putString(Resources.getSystem().getString(R.string.city), profile.city)
-            putString(Resources.getSystem().getString(R.string.gender), profile.gender)
-            putString(Resources.getSystem().getString(R.string.imgUrl), profile.imageUrl)
-            putString(Resources.getSystem().getString(R.string.phone_number), profile.mobilePhone)
+            putString(name, profile.name)
+            putString(email, profile.email)
+            putString(address, profile.address)
+            putString(id, profile.id)
+            putString(birthday, profile.birthDate)
+            putString(blood, profile.bloodType)
+            putString(city, profile.city)
+            putString(gender, profile.gender)
+            putString(img_url, profile.imageUrl)
+            putString(phoneNumber, profile.mobilePhone)
             apply()
         }
-        writeType(Type.Patient.toString())
+        writeType(Type.Patient)
     }
     fun write(profile: Doctor){
         with (sharedPreferences.edit()) {
-            putString(Resources.getSystem().getString(R.string.name), profile.name)
-            putString(Resources.getSystem().getString(R.string.emailExample), profile.email)
-            putString(Resources.getSystem().getString(R.string.email), profile.email)
-            putString(Resources.getSystem().getString(R.string.address), profile.address)
-            putString(Resources.getSystem().getString(R.string.preference_id), profile.id)
-            putString(Resources.getSystem().getString(R.string.birthDate), profile.telephone)
-            putString(Resources.getSystem().getString(R.string.city), profile.city)
-            putString(Resources.getSystem().getString(R.string.imgUrl), profile.imageURL)
-            putString(Resources.getSystem().getString(R.string.phone_number), profile.telephone)
+            putString(name, profile.name)
+            putString(email, profile.email)
+            putString(address, profile.address)
+            putString(id, profile.id)
+            putString(birthday, profile.telephone)
+            putString(city, profile.city)
+            putString(img_url, profile.imageURL)
+            putString(phoneNumber, profile.telephone)
             apply()
         }
-        writeType(Type.Doctor.toString())
+        writeType(Type.Doctor)
     }
-    fun writeId(id:String){
+    fun writeId(value:String){
         with (sharedPreferences.edit()) {
-            putString(Resources.getSystem().getString(R.string.preference_id), id)
+            putString(id, value)
             apply()
         }
     }
-    fun readType():String? = sharedPreferences.getString(Resources.getSystem().getString(R.string.type),"Patient")
+    fun readType():String? = sharedPreferences.getString(type,"")
 
 
-    fun writeType(value :String ) {
-        sharedPreferences.edit().putString(Resources.getSystem().getString(R.string.type), value).apply()
+    fun writeType(value: Type ) {
+        sharedPreferences.edit().putString(type, value.toString()).apply()
     }
 
 
-    fun readId():String? = sharedPreferences.getString(Resources.getSystem().getString(R.string.preference_id),null)
+    fun readId():String? = sharedPreferences.getString(id,null)
     fun readPatient():Patient{
         val profile = Patient()
         with(sharedPreferences){
-            profile.name = getString(Resources.getSystem().getString(R.string.name),null)
-            profile.email = getString(Resources.getSystem().getString(R.string.email), null)
-            profile.address = getString(Resources.getSystem().getString(R.string.address), null)
-            profile.id = getString(Resources.getSystem().getString(R.string.preference_id), null)
-            profile.birthDate = getString(Resources.getSystem().getString(R.string.birthDate), null)
-            profile.bloodType = getString(Resources.getSystem().getString(R.string.blood), null)
-            profile.city = getString(Resources.getSystem().getString(R.string.city), null)
-            profile.gender = getString(Resources.getSystem().getString(R.string.gender), null)
-            profile.imageUrl = getString(Resources.getSystem().getString(R.string.imgUrl), null)
-            profile.mobilePhone = getString(Resources.getSystem().getString(R.string.phone_number), null)
+            profile.name = getString(name,null)
+            profile.email = getString(email, null)
+            profile.address = getString(address, null)
+            profile.id = getString(id, null)
+            profile.birthDate = getString(birthday, null)
+            profile.bloodType = getString(blood, null)
+            profile.city = getString(city, null)
+            profile.gender = getString(gender, null)
+            profile.imageUrl = getString(img_url, null)
+            profile.mobilePhone = getString(phoneNumber, null)
         }
         return profile
     }
     fun readDoctor():Doctor{
         val profile = Doctor()
         with(sharedPreferences){
-             profile.name = getString(Resources.getSystem().getString(R.string.name),null)
-             profile.email = getString(Resources.getSystem().getString(R.string.emailExample),null)
-             profile.email = getString(Resources.getSystem().getString(R.string.email),null)
-             profile.address = getString(Resources.getSystem().getString(R.string.address),null)
-             profile.id = getString(Resources.getSystem().getString(R.string.preference_id),null)
-             profile.telephone = getString(Resources.getSystem().getString(R.string.birthDate),null)
-             profile.city = getString(Resources.getSystem().getString(R.string.city),null)
-             profile.imageURL = getString(Resources.getSystem().getString(R.string.imgUrl),null)
-             profile.telephone = getString(Resources.getSystem().getString(R.string.phone_number),null)
+             profile.name = getString(name,null)
+             profile.email = getString(email,null)
+             profile.address = getString(address,null)
+             profile.id = getString(id,null)
+             profile.telephone = getString(birthday,null)
+             profile.city = getString(city,null)
+             profile.imageURL = getString(img_url,null)
+             profile.telephone = getString(phoneNumber,null)
         }
         return profile
     }
     fun clearPref(){
         sharedPreferences.all.clear()
+    }
+    companion object{
+        const val name = "name"
+        const val email = "email"
+        const val address = "address"
+        const val city = "city"
+        const val birthday = "birthday"
+        const val img_url = "img_url"
+        const val phoneNumber = "phoneNumber"
+        const val gender = "gender"
+        const val blood = "blood"
+        const val type = "type"
+        const val id = "id"
     }
 }

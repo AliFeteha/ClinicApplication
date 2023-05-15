@@ -1,6 +1,7 @@
 package com.example.android.clinicapp.patiant.appointments.fragments
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,7 +18,6 @@ import org.koin.android.ext.android.inject
 class patientAppointments() : BaseFragment() {
     override val _viewModel: AppointmentsViewModel by inject()
     private lateinit var binding: FragmentPatientAppointmentsBinding
-    private val preferenceControl=PreferenceControl()
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -25,10 +25,9 @@ class patientAppointments() : BaseFragment() {
     ): View {
         binding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_patient_appointments, container, false)
-        binding.viewModel = _viewModel
-        if(preferenceControl.readType()=="Doctor"){
             binding.newAppointmentButton.visibility = View.GONE
-        }
+
+        binding.viewModel = _viewModel
         return binding.root
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

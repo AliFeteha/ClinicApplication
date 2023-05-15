@@ -19,7 +19,7 @@
     </fragment>
     <fragment
         android:id="@+id/patientAppointments"
-        android:name="com.example.android.clinicapp.patiant.appointments.fragments.BookAnAppointment"
+        android:name="com.example.android.clinicapp.patiant.appointments.fragments.patientAppointments"
         android:label="fragmentPatientAppointments"
         tools:layout="@layout/fragment_patient_appointments" >
         <action
@@ -28,7 +28,7 @@
     </fragment>
     <fragment
         android:id="@+id/bookAnAppointment"
-        android:name="com.example.android.clinicapp.patiant.appointments.fragments.patientAppointments"
+        android:name="com.example.android.clinicapp.patiant.appointments.fragments.BookAnAppointment"
         android:label="fragmentBookAnAppointment"
         tools:layout="@layout/fragment_book_an_appointment" />
     <fragment

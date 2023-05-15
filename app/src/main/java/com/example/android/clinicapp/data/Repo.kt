@@ -22,7 +22,7 @@ class Repo(context: Context) {
     private val recordsDao: RecordsDao = LocalDB.createRecordsDao(context = context)
     private val formDao: FormDao = LocalDB.createFormDao(context = context)
     private val days:DaysDao = LocalDB.createDaysDao(context = context)
-
+    private val context = context
     var doctor = MutableLiveData<DoctorsDTO>()
     var patient = MutableLiveData<PatientsDTO>()
     var appointments = MutableLiveData<List<Appointment>>()
@@ -59,14 +59,14 @@ class Repo(context: Context) {
             remote.signUpPatient(patient,password)
             patientsDao.saveRecord(PatientsDTO(patient.id!!,patient.name,patient.gender,patient.email,patient.birthDate,patient.imageUrl,patient.address,patient.city,patient.mobilePhone,patient.bloodType,patient.medicalIssues,patient.emergencyContact,patient.insurance))
             patientsDao.saveRecord(TypeConverter().patientToPatientDto(patient))
-            PreferenceControl().write(patient)
+            PreferenceControl(context).write(patient)
         }
     }
     suspend fun signUpDoctor(doctor: Doctor, password:String){
         withContext(Dispatchers.Unconfined) {
             remote.signUpDoctor(doctor,password)
             doctorDao.saveRecord(TypeConverter().doctorToDoctorDTO(doctor))
-            PreferenceControl().write(doctor)
+            PreferenceControl(context).write(doctor)
         }
     }
 
@@ -92,7 +92,7 @@ class Repo(context: Context) {
             thing = remote.fireBaseAuthentication(email)
         }
         if (thing.email == email && thing.password == password) {
-            PreferenceControl().writeId(thing.id!!)
+            PreferenceControl(context).writeId(thing.id!!)
             return true
         }
         return false
@@ -100,7 +100,7 @@ class Repo(context: Context) {
 
     //check profile - get profile and write it on preference and liveData
     suspend fun loginAuth() {
-        val id = PreferenceControl().readId()
+        val id = PreferenceControl(context).readId()
         withContext(Dispatchers.Unconfined) {
             val type = checkProfile(id)
             if (type == Type.Patient)
@@ -112,9 +112,9 @@ class Repo(context: Context) {
     //controls the flow of the registration
     suspend fun registerAuth(type: Type ,password :String) {
         if (type == Type.Patient)
-            signUpPatient(PreferenceControl().readPatient(), password)
+            signUpPatient(PreferenceControl(context).readPatient(), password)
         else
-            signUpDoctor(PreferenceControl().readDoctor(), password)
+            signUpDoctor(PreferenceControl(context).readDoctor(), password)
         return
     }
     private suspend fun checkProfile(id: String?):Type {

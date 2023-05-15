@@ -13,26 +13,25 @@ import kotlinx.coroutines.launch
 
 
 class AppointmentsViewModel(app: Application) : BaseViewModel(app) {
-    val preferenceControl = PreferenceControl()
     private val repo = Repo(app.applicationContext)
+    private val context = app.applicationContext
     var appointments = MutableLiveData<List<Appointment>>()
     init {
         viewModelScope.launch {
             repo.refreshAllAppointments()
         }
-        val preferenceControl = PreferenceControl()
     }
 
     fun getRecoeds(){
-        val id = preferenceControl.readId()
-        val type = preferenceControl.readType()
+        val id = PreferenceControl(context).readId()
+        val type = PreferenceControl(context).readType()
         if(type =="Doctor"){
             viewModelScope.launch {
-                appointments = repo.getDoctorRecords(id!!)
+                appointments = id?.let { repo.getDoctorRecords(it) }!!
             }
         }else{
             viewModelScope.launch {
-                appointments = repo.getPatientRecords(id!!)
+                appointments = id?.let { repo.getPatientRecords(it) }!!
             }
         }
     }

@@ -23,7 +23,6 @@ import org.koin.android.ext.android.inject
 class SignUp : BaseFragment() {
     override val _viewModel: LoginViewModel by  inject()
     lateinit var binding:FragmentSignUpBinding
-    private val repo = _viewModel.repo
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

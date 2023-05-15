@@ -25,14 +25,19 @@ import org.koin.android.ext.android.inject
 class LogIn : BaseFragment() {
     override val _viewModel: LoginViewModel by  inject()
     lateinit var binding:FragmentLogInBinding
-    private val repo = _viewModel.repo
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         // Inflate the layout for this fragment
         binding = DataBindingUtil.inflate(inflater,R.layout.fragment_log_in,container,false)
+        binding.viewModel = _viewModel
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
     }
 
 }
