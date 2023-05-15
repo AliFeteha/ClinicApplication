@@ -1,5 +1,8 @@
 package com.example.android.clinicapp.base
 
+import android.app.Application
+import android.app.ProgressDialog
+import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -9,6 +12,7 @@ import com.google.android.material.snackbar.Snackbar
 abstract class BaseFragment : Fragment() {
 
     abstract val _viewModel: BaseViewModel
+
 
     override fun onStart() {
         super.onStart()

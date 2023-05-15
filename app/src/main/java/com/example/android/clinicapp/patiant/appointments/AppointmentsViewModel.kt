@@ -7,6 +7,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.android.clinicapp.base.BaseViewModel
 import com.example.android.clinicapp.data.Repo
 import com.example.android.clinicapp.data.consts.Appointment
+import com.example.android.clinicapp.data.consts.Type
 import com.example.android.clinicapp.data.dto.RecordsDTO
 import com.example.android.clinicapp.utils.PreferenceControl
 import kotlinx.coroutines.launch
@@ -25,7 +26,7 @@ class AppointmentsViewModel(app: Application) : BaseViewModel(app) {
     fun getRecoeds(){
         val id = PreferenceControl(context).readId()
         val type = PreferenceControl(context).readType()
-        if(type =="Doctor"){
+        if(type ==Type.Doctor.toString()){
             viewModelScope.launch {
                 appointments = id?.let { repo.getDoctorRecords(it) }!!
             }

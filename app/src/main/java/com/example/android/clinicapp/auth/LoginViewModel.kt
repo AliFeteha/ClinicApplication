@@ -1,14 +1,15 @@
 package com.example.android.clinicapp.auth
 
 import android.app.Application
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.android.clinicapp.R
 import com.example.android.clinicapp.base.BaseViewModel
 import com.example.android.clinicapp.base.NavigationCommand
 import com.example.android.clinicapp.data.Repo
+import com.example.android.clinicapp.data.consts.FirebaseControl
 import com.example.android.clinicapp.data.consts.Type
+import com.example.android.clinicapp.utils.PreferenceControl
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
@@ -23,10 +24,16 @@ class LoginViewModel(app: Application) : BaseViewModel(app) {
     val email :MutableLiveData<String> = MutableLiveData("")
     val password:MutableLiveData<String> = MutableLiveData("")
     val repo = Repo(app.applicationContext)
-    val inputAccountType:MutableLiveData<String> = MutableLiveData("")
+    val inputAccountType:MutableLiveData<Int> = MutableLiveData(1)
+    val showLoadingBar:MutableLiveData<Boolean> = MutableLiveData(false)
     var type:Type? = null
-    val login = MutableLiveData(false)
-    val register = MutableLiveData(false)
+    val firebaseControl:MutableLiveData<FirebaseControl> = MutableLiveData()
+
+    fun clear(){
+        name.value = ""
+        email.value = ""
+        password.value = ""
+    }
     // Welcoming and login viewModel
     fun navigateToLogin(){
         navigationCommand.value = NavigationCommand.To(WelcomeDirections.actionWelcomeToLogIn())
@@ -38,34 +45,43 @@ class LoginViewModel(app: Application) : BaseViewModel(app) {
         _finishedFlag.value = true
     }
     fun login(){
-        Log.i(" ViewModel-Login",email.value.toString())
         if (validate(true))
-            runBlocking {
-                if (checkAccountValidity(email.value!!)) {
-                    if (checkEmailAndPassword(email.value!!, password.value!!)) {
-                        finishActivity()
-                    }
-                }
+                checkAccountValidity(email.value!!)
             }
+
+    fun writeType(){
+        if (inputAccountType.value == 0){
+            type = Type.Doctor
+        }
+        else
+            type = Type.Patient
+    }
+    fun writePref(id:String?){
+        writeType()
+        if (id != null) {
+            PreferenceControl(context = getApplication<Application>().applicationContext).writeId(id)
+        }
+        PreferenceControl(context = getApplication<Application>().applicationContext).writeType(type!!)
+        PreferenceControl(context = getApplication<Application>().applicationContext).write(name.value!!,email.value!!)
     }
     fun register(){
         if (validate(false))
-            if (checkAccountValidityReg(email.value!!)) {
-                registerNewAccount()
-                finishActivity()
-            }
+            checkAccountValidityReg(email.value!!)
     }
     fun validate(loginType:Boolean): Boolean {
-        Log.i(" ViewModel-Login",email.value.toString())
         if (loginType){
-            if (email.value != "" || password.value != "")
-                return true
+            if (email.value != "") {
+                if (password.value != "")
+                    return true
+                else
+                    invalidPasswordLogin()
+            }
             else
                 showInvalidInput()
             return false
         }
         else{
-            if (email.value != "" || password.value != "" || inputAccountType.value != "" || name.value != ""){
+            if (email.value != "" || password.value != "" || name.value != ""){
                 if (password.value!!.length < 8)
                 {
                     invalidPassword()
@@ -78,11 +94,9 @@ class LoginViewModel(app: Application) : BaseViewModel(app) {
                 showInvalidInput()
             return false
         }
-
-
     }
     private fun convertType(){
-        type = if (inputAccountType.value == "Doctor")
+        type = if (inputAccountType.value == 0)
             Type.Doctor
         else
             Type.Patient
@@ -111,39 +125,48 @@ class LoginViewModel(app: Application) : BaseViewModel(app) {
 
 
     //check if the account already existed in the email remote database table and return
-    private fun checkAccountValidity(email:String) :Boolean{
-            if (repo.verifyEmailExists(email))
-                return true
-            else
-                invalidEmailLogin()
-            return false
+    private fun checkAccountValidity(email:String) {
+        repo.verifyEmailExists(firebaseControl,email)
+
     }
     // check the email and password and return it's id with the call
-    private suspend fun checkEmailAndPassword(email: String, password:String):Boolean{
-        if (repo.authenticate(email, password)) {
-            repo.loginAuth()
-            return true
-        } else {
-            invalidPasswordLogin()
-            return false
-        }
-    }
+//    private suspend fun checkEmailAndPassword(email: String, password:String):Boolean{
+//        repo.loginAuth()
+//        return true
+//    }
+
 
 
 
     //check if the account already existed in the email remote database table and return false if it does existed
-    private fun checkAccountValidityReg(email:String) :Boolean{
-        if (!repo.verifyEmailExists(email))
-            return true
-        else
-            invalidEmail()
-        return false
+    private fun checkAccountValidityReg(email:String){
+            repo.verifyEmailExists(firebaseControl,email)
     }
+
     private fun registerNewAccount(){
+        writePref(null)
         runBlocking {
              launch (Dispatchers.IO) {
                  repo.registerAuth(type!!, password.value!!)
              }
+            finishActivity()
         }
+    }
+
+    fun validityCallBackRegistration(firebaseControl: FirebaseControl){
+        if (firebaseControl.email == null)
+            registerNewAccount()
+        else
+            invalidEmail()
+    }
+
+    fun loginValidityCallBack(firebaseControl: FirebaseControl){
+        if (firebaseControl.email != null)
+            if (firebaseControl.email == email.value && password.value == firebaseControl.password) {
+                writePref(firebaseControl.id!!)
+                finishActivity()
+            }
+        else
+            invalidEmailLogin()
     }
 }
