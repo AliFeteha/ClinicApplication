@@ -118,9 +118,11 @@ class Remote {
                 value?.let { list.add(value.toString()) }
             }
             Log.i("aaa",list.toString())
-            firebaseControl.value = FirebaseControl(list[0],list[1],list[2])
+            if (list.size>0)
+                firebaseControl.value = FirebaseControl(list[0],list[1],list[2])
+            else
+                firebaseControl.value = FirebaseControl()
         }.addOnFailureListener {
-            firebaseControl.value = FirebaseControl()
             Log.i(Tag, "Error getting data", it)
         }
     }
