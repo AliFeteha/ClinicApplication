@@ -36,13 +36,13 @@
             android:textSize="@dimen/mid"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.045"
+            app:layout_constraintHorizontal_bias="0.066"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
             android:id="@+id/text5SignUp"
-            android:layout_width="385sp"
+            android:layout_width="360sp"
             android:layout_height="48dp"
             android:layout_marginLeft="5sp"
             android:layout_marginTop="8dp"
@@ -61,7 +61,7 @@
 
         <EditText
             android:id="@+id/text3SignUp"
-            android:layout_width="385sp"
+            android:layout_width="360sp"
             android:layout_height="48dp"
             android:layout_marginLeft="5sp"
             android:layout_marginTop="8dp"
@@ -80,7 +80,7 @@
 
         <EditText
             android:id="@+id/editTextTextEmailAddress"
-            android:layout_width="385sp"
+            android:layout_width="360sp"
             android:layout_height="48dp"
             android:layout_marginLeft="5sp"
             android:layout_marginTop="8dp"
@@ -98,7 +98,7 @@
 
         <EditText
             android:id="@+id/editTextTextPassword"
-            android:layout_width="385sp"
+            android:layout_width="360sp"
             android:layout_height="48dp"
             android:layout_marginLeft="5sp"
             android:layout_marginTop="8dp"
@@ -116,7 +116,7 @@
 
         <Button
             android:id="@+id/button1SignUp"
-            android:layout_width="385sp"
+            android:layout_width="360sp"
             android:layout_height="48dp"
             android:layout_marginLeft="5sp"
             android:layout_marginTop="8dp"

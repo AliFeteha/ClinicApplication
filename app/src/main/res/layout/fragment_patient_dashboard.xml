@@ -11,7 +11,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#e1e1ef">
+        android:background="#ECF1FA">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/card1"
@@ -38,17 +38,13 @@
                 tools:layout_editor_absoluteY="16dp" />
 
             <ImageView
+                android:layout_width="130dp"
+                android:layout_height="259dp"
+                android:contentDescription="@string/appointments"
                 android:onClick="@{()->viewModel.navigateToAppointments()}"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="@dimen/small"
-                android:layout_marginBottom="@dimen/small"
-                android:layout_marginLeft="@dimen/small"
-                android:layout_marginRight="@dimen/small"
                 android:src="@drawable/appointment"
-                tools:layout_editor_absoluteX="26dp"
-                tools:layout_editor_absoluteY="0dp"
-                android:contentDescription="@string/appointments" />
+                tools:layout_editor_absoluteX="20dp"
+                tools:layout_editor_absoluteY="21dp" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -74,16 +70,12 @@
                 tools:layout_editor_absoluteY="16dp" />
 
             <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="@dimen/small"
-                android:layout_marginBottom="@dimen/small"
-                android:layout_marginLeft="@dimen/small"
-                android:layout_marginRight="@dimen/small"
-                android:src="@drawable/records"
-                tools:layout_editor_absoluteX="26dp"
-                tools:layout_editor_absoluteY="0dp"
-                android:contentDescription="@string/records" />
+                android:layout_width="123dp"
+                android:layout_height="257dp"
+                android:contentDescription="@string/records"
+                android:src="@drawable/recordss"
+                tools:layout_editor_absoluteX="24dp"
+                tools:layout_editor_absoluteY="27dp" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -113,16 +105,12 @@
                 tools:layout_editor_absoluteY="16dp" />
 
             <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="@dimen/small"
-                android:layout_marginBottom="@dimen/small"
-                android:layout_marginLeft="@dimen/small"
-                android:layout_marginRight="@dimen/small"
-                android:src="@drawable/forum"
-                tools:layout_editor_absoluteX="26dp"
-                tools:layout_editor_absoluteY="0dp"
-                android:contentDescription="@string/forum" />
+                android:layout_width="124dp"
+                android:layout_height="259dp"
+                android:contentDescription="@string/forum"
+                android:src="@drawable/forumm"
+                tools:layout_editor_absoluteX="23dp"
+                tools:layout_editor_absoluteY="21dp" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -149,17 +137,13 @@
                 tools:layout_editor_absoluteY="16dp" />
 
             <ImageView
+                android:layout_width="120dp"
+                android:layout_height="267dp"
+                android:contentDescription="@string/profile"
                 android:onClick="@{()->viewModel.navigateToPatientProfile()}"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="@dimen/small"
-                android:layout_marginBottom="@dimen/small"
-                android:layout_marginLeft="@dimen/small"
-                android:layout_marginRight="@dimen/small"
-                android:src="@drawable/patient"
-                tools:layout_editor_absoluteX="26dp"
-                tools:layout_editor_absoluteY="0dp"
-                android:contentDescription="@string/profile" />
+                android:src="@drawable/patient3"
+                tools:layout_editor_absoluteX="23dp"
+                tools:layout_editor_absoluteY="18dp" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -169,12 +153,13 @@
             android:layout_width="160dp"
             android:layout_height="41dp"
             android:layout_marginTop="16dp"
+            android:gravity="center"
             android:text="@string/dashboard"
-            android:textSize="20sp"
-            android:textStyle="bold"
             android:textColor="#0d2b4e"
+            android:textSize="25sp"
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.045"
+            app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
