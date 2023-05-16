@@ -24,7 +24,6 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var binding: LoginActivityBinding
     val _viewModel: LoginViewModel by inject()
     private lateinit var appBarConfiguration: AppBarConfiguration
-    val remote = Remote()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         activityFlow()

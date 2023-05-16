@@ -7,7 +7,9 @@ import com.example.android.clinicapp.R
 import com.example.android.clinicapp.base.BaseViewModel
 import com.example.android.clinicapp.base.NavigationCommand
 import com.example.android.clinicapp.data.Repo
+import com.example.android.clinicapp.data.consts.Doctor
 import com.example.android.clinicapp.data.consts.FirebaseControl
+import com.example.android.clinicapp.data.consts.Patient
 import com.example.android.clinicapp.data.consts.Type
 import com.example.android.clinicapp.utils.PreferenceControl
 import kotlinx.coroutines.Dispatchers
@@ -25,7 +27,8 @@ class LoginViewModel(app: Application) : BaseViewModel(app) {
     val password:MutableLiveData<String> = MutableLiveData("")
     val repo = Repo(app.applicationContext)
     val inputAccountType:MutableLiveData<Int> = MutableLiveData(1)
-    val showLoadingBar:MutableLiveData<Boolean> = MutableLiveData(false)
+    val doctor :MutableLiveData<Doctor> = MutableLiveData()
+    val patient :MutableLiveData<Patient> = MutableLiveData()
     var type:Type? = null
     val firebaseControl:MutableLiveData<FirebaseControl> = MutableLiveData()
 
@@ -163,8 +166,7 @@ class LoginViewModel(app: Application) : BaseViewModel(app) {
     fun loginValidityCallBack(firebaseControl: FirebaseControl){
         if (firebaseControl.email != null)
             if (firebaseControl.email == email.value && password.value == firebaseControl.password) {
-                writePref(firebaseControl.id!!)
-                finishActivity()
+                repo.getRemoteProfile(doctor,patient,firebaseControl.id!!)
             }
         else
             invalidEmailLogin()

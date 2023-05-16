@@ -19,8 +19,6 @@ class Remote {
     private var remoteDataBase: DatabaseReference = Firebase.database.reference
     val doctors :MutableLiveData<List<Doctor>> = MutableLiveData()
     val patients :MutableLiveData<List<Patient>> = MutableLiveData()
-    val doctor :MutableLiveData<Doctor> = MutableLiveData()
-    val patient :MutableLiveData<Patient> = MutableLiveData()
     val appointments: MutableLiveData<List<Appointment>> = MutableLiveData()
     private fun generateId():String = UUID.randomUUID().toString()
 
@@ -38,7 +36,7 @@ class Remote {
         remoteDataBase.child(Authentication).child(patient.email!!).setValue(control)
     }
 
-    fun getDoctorProfile(id:String)
+    fun getDoctorProfile(doctor: MutableLiveData<Doctor>,id:String)
     {
         Log.i(Tag,"get i nto function")
         val list: MutableList<String> = mutableListOf()
@@ -49,16 +47,22 @@ class Remote {
                     value?.let { list.add(value.toString()) }
                 }
                 Log.i(Tag, list.toString())
+
+            if (list.size == 3)
+                doctor.value = typeConverter.fromStringToMiniDoctor(list)
+            if (list.size>0)
                 doctor.value = Doctor(
                     list[0], list[1], list[2], list[3], list[4],
                     list[5], list[6], list[7], typeConverter.stringToDaysList(list[8])
                 )
+            else
+                doctor.value = Doctor()
             }.addOnFailureListener {
                 Log.i(Tag, "Error getting data", it)
             }
     }
 
-    fun getPatientProfile(id:String){
+    fun getPatientProfile(patient: MutableLiveData<Patient>,id:String){
         Log.i(Tag,"get i nto function")
         val list: MutableList<String> = mutableListOf()
         remoteDataBase.child("Patients").child(id).get().addOnSuccessListener {
@@ -68,8 +72,12 @@ class Remote {
                 value?.let { list.add(value.toString()) }
             }
             Log.i(Tag,list.toString())
-            patient.value = typeConverter.fromStringToPatient(list)
-
+            if (list.size == 3)
+                patient.value = typeConverter.fromStringToMiniPatient(list)
+            else if (list.size>0)
+                patient.value = typeConverter.fromStringToPatient(list)
+            else
+                patient.value = Patient()
         }.addOnFailureListener {
             Log.i(Tag, "Error getting data", it)
         }

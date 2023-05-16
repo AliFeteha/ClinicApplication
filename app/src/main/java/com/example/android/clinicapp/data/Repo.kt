@@ -34,7 +34,7 @@ class Repo(context: Context) {
     //local db gets refresh by remote
     suspend fun refreshDoctorProfile(id:String){
         withContext(Dispatchers.Unconfined) {
-            val refreshedProfile = remote.getDoctorProfile(id)
+//            val refreshedProfile = remote.getDoctorProfile(id)
 //            doctorDao.saveRecord(TypeConverter().doctorToDoctorDTO(refreshedProfile))
         }
     }
@@ -47,7 +47,7 @@ class Repo(context: Context) {
     //local db gets refresh by remote
     suspend fun refreshPatientProfile(id:String){
         withContext(Dispatchers.Unconfined) {
-            val refreshedProfile = remote.getPatientProfile(id)
+//            val refreshedProfile = remote.getPatientProfile(id)
 //            patientsDao.saveRecord(TypeConverter().patientToPatientDto(refreshedProfile))
         }
     }
@@ -94,6 +94,8 @@ class Repo(context: Context) {
 //        return false
 //    }
 
+
+    //===>going to implement it in the view model
     //check profile - get profile and write it on preference and liveData
 //    suspend fun loginAuth() {
 //        val id = PreferenceControl(context).readId()
@@ -103,7 +105,7 @@ class Repo(context: Context) {
 //                id?.let { getPatientProfile(it) }
 //            else
 //                id?.let { getDoctorProfile(it) }
-//     todo somehting is wrong with the logic
+////     todo somehting is wrong with the logic
 //        }
 //    }
     //controls the flow of the registration
@@ -114,14 +116,10 @@ class Repo(context: Context) {
             signUpDoctor(PreferenceControl(context).readDoctor(), password)
         return
     }
-//    private fun checkProfile(id: String?):Type {
-//        //Todo get the things
-//        val profile = remote.getDoctorProfile(id!!)
-//        return if (profile.id == null)
-//            Type.Doctor
-//        else
-//            Type.Patient
-//    }
+    fun getRemoteProfile(doctor: MutableLiveData<Doctor>,patient: MutableLiveData<Patient>,id: String) {
+        remote.getDoctorProfile(doctor,id)
+        remote.getPatientProfile(patient,id)
+    }
     private fun appointmentsToRecords(it:List<Appointment>):List<RecordsDTO>{
         val records : MutableList<RecordsDTO> = mutableListOf()
         for (appointment in it){

@@ -54,6 +54,21 @@ class LogIn : BaseFragment() {
             _viewModel.loginValidityCallBack(it)
         })
 
+        _viewModel.patient.observe(viewLifecycleOwner, Observer {
+            if(it.id != null){
+                _viewModel.type = Type.Patient
+                PreferenceControl(requireContext()).write(it!!)
+                _viewModel.finishActivity()
+            }
+        })
+
+        _viewModel.doctor.observe(viewLifecycleOwner, Observer {
+            if(it.id != null){
+                _viewModel.type = Type.Doctor
+                PreferenceControl(requireContext()).write(it!!)
+                _viewModel.finishActivity()
+            }
+        })
 
     }
 
