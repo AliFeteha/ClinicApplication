@@ -236,6 +236,14 @@ class TypeConverter{
         stringToMedicalInsurance(list[9]),
         stringToList(list[10]),list[11],list[12])
     }
+
+
+    fun fromStringToMiniPatient(list: List<String>):Patient{
+        return Patient(name = list[0], id = list[1], email = list[2])
+    }
+    fun fromStringToMiniDoctor(list: List<String>):Doctor{
+        return Doctor(name = list[0], id = list[1], email = list[2])
+    }
     @TypeConverter
     fun fromPatientToString(patient: Patient): List<String?> {
         return listOf(patient.address, patient.birthDate, patient.bloodType, patient.city,

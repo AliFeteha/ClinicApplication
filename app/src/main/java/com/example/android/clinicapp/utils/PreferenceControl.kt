@@ -49,13 +49,20 @@ class PreferenceControl(context: Context) {
         }
         writeType(Type.Doctor)
     }
+    fun write(nameVal:String,emailVal:String){
+        with (sharedPreferences.edit()) {
+            putString(name, nameVal)
+            putString(email, emailVal)
+            apply()
+        }
+    }
     fun writeId(value:String){
         with (sharedPreferences.edit()) {
             putString(id, value)
             apply()
         }
     }
-    fun readType():String? = sharedPreferences.getString(type,"")
+    fun readType():String? = sharedPreferences.getString(type,null)
 
 
     fun writeType(value: Type ) {
@@ -95,7 +102,7 @@ class PreferenceControl(context: Context) {
         return profile
     }
     fun clearPref(){
-        sharedPreferences.all.clear()
+        sharedPreferences.edit().clear().apply()
     }
     companion object{
         const val name = "name"

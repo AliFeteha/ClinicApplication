@@ -12,6 +12,7 @@ import androidx.navigation.ui.AppBarConfiguration
 import com.example.android.clinicapp.DoctorActivity
 import com.example.android.clinicapp.PatientActivity
 import com.example.android.clinicapp.R
+import com.example.android.clinicapp.data.Remote
 import com.example.android.clinicapp.data.consts.Type
 import com.example.android.clinicapp.data.local.LocalDB
 import com.example.android.clinicapp.databinding.LoginActivityBinding
@@ -27,8 +28,11 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         activityFlow()
         _viewModel.finishedFlag.observe(this, Observer {
-            if (it)
+            if (it) {
+                _viewModel.loggedIn()
                 initializeLoginUI(_viewModel.type!!)
+                _viewModel.finishedFlag.value = false
+            }
         })
 
     }
@@ -44,18 +48,19 @@ class LoginActivity : AppCompatActivity() {
         }else {
             initializeLoginUI(Type.Patient)
         }
+        _viewModel.clear()
     }
     //Checks the saved preference if it already existed to require a login process
     private fun checkLogin(): String? {
-        val sharedPreferences = getSharedPreferences(getString(R.string.user_preferance_file), MODE_PRIVATE)
-        return sharedPreferences.getString(getString(R.string.preference_id),null)
+//        PreferenceControl(applicationContext).clearPref()
+        val type = PreferenceControl(applicationContext).readType()
+        Log.i(" testing", type.toString())
+        return type
 
     }
     //initializing login UI for authentication
     private fun login(){
-        // todo for testing uncomment bellow
-          initializeLoginUI(Type.Patient)
-        binding = DataBindingUtil.setContentView(this, R.layout.login_activity)
+      binding = DataBindingUtil.setContentView(this, R.layout.login_activity)
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         val navController = navHostFragment.navController

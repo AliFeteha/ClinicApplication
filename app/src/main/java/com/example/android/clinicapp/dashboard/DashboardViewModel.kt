@@ -14,6 +14,10 @@ class DashboardViewModel(val app:Application): BaseViewModel(app) {
                 NavigationCommand.To(PatientDashboardDirections.actionPatientDashboardToPatientAppointments())
     }
 
+    fun navigateToDoctorAppointments(){
+        navigationCommand.value =
+            NavigationCommand.To(DoctorDashboardDirections.actionDoctorDashboardToPatientAppointments2())
+    }
     fun navigateToDoctorProfile() {
         navigationCommand.value =
             NavigationCommand.To(DoctorDashboardDirections.actionDoctorDashboardToDoctorProfileFragment())

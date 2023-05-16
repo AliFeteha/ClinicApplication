@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_doctor"
     app:startDestination="@id/doctorDashboard">
 
@@ -16,5 +15,12 @@
         <action
             android:id="@+id/action_doctorDashboard_to_doctorProfileFragment"
             app:destination="@id/doctorProfileFragment" />
+        <action
+            android:id="@+id/action_doctorDashboard_to_patientAppointments2"
+            app:destination="@id/patientAppointments2" />
     </fragment>
+    <fragment
+        android:id="@+id/patientAppointments2"
+        android:name="com.example.android.clinicapp.patiant.appointments.fragments.patientAppointments"
+        android:label="patientAppointments" />
 </navigation>

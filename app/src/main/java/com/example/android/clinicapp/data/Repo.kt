@@ -2,6 +2,8 @@ package com.example.android.clinicapp.data
 
 import android.content.Context
 import android.text.BoringLayout
+import android.util.Log
+import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.MutableLiveData
 import com.example.android.clinicapp.data.consts.*
 import com.example.android.clinicapp.data.dto.DoctorsDTO
@@ -11,17 +13,19 @@ import com.example.android.clinicapp.data.local.*
 import com.example.android.clinicapp.utils.PreferenceControl
 import com.example.android.clinicapp.utils.TypeConverter
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.internal.synchronized
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
 
 class Repo(context: Context) {
-    private val remote = Remote()
     private val doctorDao:DoctorsDao = LocalDB.createDoctorDao(context = context)
     private val patientsDao: PatientsDao = LocalDB.createPatientDao(context = context)
     private val recordsDao: RecordsDao = LocalDB.createRecordsDao(context = context)
     private val formDao: FormDao = LocalDB.createFormDao(context = context)
     private val days:DaysDao = LocalDB.createDaysDao(context = context)
+
+    private val remote = Remote()
     private val context = context
     var doctor = MutableLiveData<DoctorsDTO>()
     var patient = MutableLiveData<PatientsDTO>()
@@ -30,8 +34,8 @@ class Repo(context: Context) {
     //local db gets refresh by remote
     suspend fun refreshDoctorProfile(id:String){
         withContext(Dispatchers.Unconfined) {
-            val refreshedProfile = remote.getDoctorProfile(id)
-            doctorDao.saveRecord(TypeConverter().doctorToDoctorDTO(refreshedProfile))
+//            val refreshedProfile = remote.getDoctorProfile(id)
+//            doctorDao.saveRecord(TypeConverter().doctorToDoctorDTO(refreshedProfile))
         }
     }
     //remote connection only
@@ -43,8 +47,8 @@ class Repo(context: Context) {
     //local db gets refresh by remote
     suspend fun refreshPatientProfile(id:String){
         withContext(Dispatchers.Unconfined) {
-            val refreshedProfile = remote.getPatientProfile(id)
-            patientsDao.saveRecord(TypeConverter().patientToPatientDto(refreshedProfile))
+//            val refreshedProfile = remote.getPatientProfile(id)
+//            patientsDao.saveRecord(TypeConverter().patientToPatientDto(refreshedProfile))
         }
     }
     //remote connection only
@@ -73,42 +77,37 @@ class Repo(context: Context) {
 
 
     //Remote Connections
-    fun verifyEmailExists(email :String): Boolean{
-        var thing = FirebaseControl()
-        runBlocking {
-            launch(Dispatchers.Unconfined) {
-                thing = remote.fireBaseAuthentication(email)
-            }
-        }
-        if (thing.password == null)
-            return false
-        return true
-
+    fun verifyEmailExists(firebaseControl:MutableLiveData<FirebaseControl>,email :String){
+        remote.fireBaseAuthentication(firebaseControl,email)
     }
+
+
+
     //fn to write on the preference if authenticated successfully
-    suspend fun authenticate(email:String, password:String):Boolean{
-        val thing: FirebaseControl
-        withContext(Dispatchers.Unconfined) {
-            thing = remote.fireBaseAuthentication(email)
-        }
-        if (thing.email == email && thing.password == password) {
-            PreferenceControl(context).writeId(thing.id!!)
-            return true
-        }
-        return false
-    }
+//    fun authenticate(email:String, password:String):Boolean{
+//        remote.fireBaseAuthentication(email)
+//        //
+//        if (thing.email == email && thing.password == password) {
+//            PreferenceControl(context = ).writeId(thing.id!!)
+//            return true
+//        }
+//        return false
+//    }
 
+
+    //===>going to implement it in the view model
     //check profile - get profile and write it on preference and liveData
-    suspend fun loginAuth() {
-        val id = PreferenceControl(context).readId()
-        withContext(Dispatchers.Unconfined) {
-            val type = checkProfile(id)
-            if (type == Type.Patient)
-                id?.let { getPatientProfile(it) }
-            else
-                id?.let { getDoctorProfile(it) }
-        }
-    }
+//    suspend fun loginAuth() {
+//        val id = PreferenceControl(context).readId()
+//        withContext(Dispatchers.Unconfined) {
+//            val type = checkProfile(id)
+//            if (type == Type.Patient)
+//                id?.let { getPatientProfile(it) }
+//            else
+//                id?.let { getDoctorProfile(it) }
+////     todo somehting is wrong with the logic
+//        }
+//    }
     //controls the flow of the registration
     suspend fun registerAuth(type: Type ,password :String) {
         if (type == Type.Patient)
@@ -117,12 +116,9 @@ class Repo(context: Context) {
             signUpDoctor(PreferenceControl(context).readDoctor(), password)
         return
     }
-    private suspend fun checkProfile(id: String?):Type {
-        val profile = remote.getDoctorProfile(id!!)
-        return if (profile.id == null)
-            Type.Doctor
-        else
-            Type.Patient
+    fun getRemoteProfile(doctor: MutableLiveData<Doctor>,patient: MutableLiveData<Patient>,id: String) {
+        remote.getDoctorProfile(doctor,id)
+        remote.getPatientProfile(patient,id)
     }
     private fun appointmentsToRecords(it:List<Appointment>):List<RecordsDTO>{
         val records : MutableList<RecordsDTO> = mutableListOf()
@@ -139,8 +135,9 @@ class Repo(context: Context) {
     }
     suspend fun refreshAllAppointments(){
         withContext(Dispatchers.Unconfined) {
+            //todo <<<<<>>>>>
             val refreshedAppointments = remote.getAllAppointments()
-            recordsDao.saveRecords(appointmentsToRecords(refreshedAppointments))
+//            recordsDao.saveRecords(appointmentsToRecords(refreshedAppointments))
         }
     }
     suspend fun getPatientRecords(id:String):MutableLiveData<List<Appointment>>{
