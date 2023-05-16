@@ -28,8 +28,11 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         activityFlow()
         _viewModel.finishedFlag.observe(this, Observer {
-            if (it)
+            if (it) {
+                _viewModel.loggedIn()
                 initializeLoginUI(_viewModel.type!!)
+                _viewModel.finishedFlag.value = false
+            }
         })
 
     }
@@ -45,6 +48,7 @@ class LoginActivity : AppCompatActivity() {
         }else {
             initializeLoginUI(Type.Patient)
         }
+        _viewModel.clear()
     }
     //Checks the saved preference if it already existed to require a login process
     private fun checkLogin(): String? {

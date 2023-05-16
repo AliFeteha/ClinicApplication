@@ -41,8 +41,14 @@ class SignUp : BaseFragment() {
     //observation
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         _viewModel.firebaseControl.observe(viewLifecycleOwner, Observer {
             _viewModel.validityCallBackRegistration(it)
         })
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _viewModel.clear()
     }
 }

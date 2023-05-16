@@ -3,6 +3,7 @@ package com.example.android.clinicapp
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
@@ -26,6 +27,7 @@ class PatientActivity : AppCompatActivity() {
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         val navController = navHostFragment.navController
+        Log.i(" testing", PreferenceControl(applicationContext).readId().toString())
         appBarConfiguration = AppBarConfiguration(navController.graph)
     }
 
@@ -46,6 +48,7 @@ class PatientActivity : AppCompatActivity() {
     }
     private fun logout(){
         PreferenceControl(applicationContext).clearPref()
+        Log.i(" testing",PreferenceControl(applicationContext).readId().toString())
         startActivity(Intent(this, LoginActivity::class.java))
         finish()
     }

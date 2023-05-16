@@ -18,9 +18,7 @@ import kotlinx.coroutines.runBlocking
 
 class LoginViewModel(app: Application) : BaseViewModel(app) {
 
-    private val _finishedFlag = MutableLiveData(false)
-    val finishedFlag :LiveData<Boolean>
-        get() = _finishedFlag
+    val finishedFlag = MutableLiveData(false)
     val id :MutableLiveData<String> = MutableLiveData(null)
     val name :MutableLiveData<String> = MutableLiveData("")
     val email :MutableLiveData<String> = MutableLiveData("")
@@ -36,6 +34,13 @@ class LoginViewModel(app: Application) : BaseViewModel(app) {
         name.value = ""
         email.value = ""
         password.value = ""
+        finishedFlag.value = false
+        doctor.value = Doctor()
+        id.value = ""
+        type = null
+        patient.value = Patient()
+        firebaseControl.value = FirebaseControl()
+
     }
     // Welcoming and login viewModel
     fun navigateToLogin(){
@@ -45,11 +50,12 @@ class LoginViewModel(app: Application) : BaseViewModel(app) {
         navigationCommand.value = NavigationCommand.To(WelcomeDirections.actionWelcomeToSignUp())
     }
     fun finishActivity(){
-        _finishedFlag.value = true
+        finishedFlag.value = true
     }
     fun login(){
         if (validate(true))
-                checkAccountValidity(email.value!!)
+            prepareEmail()
+            checkAccountValidity(email.value!!)
             }
 
     fun writeType(){
@@ -69,7 +75,18 @@ class LoginViewModel(app: Application) : BaseViewModel(app) {
     }
     fun register(){
         if (validate(false))
+            prepareEmail()
             checkAccountValidityReg(email.value!!)
+    }
+    fun prepareEmail(){
+        var str = ""
+        email.value?.forEach {
+            if (it == '.')
+                str += '_'
+            else
+                str += it
+        }
+        email.value = str
     }
     fun validate(loginType:Boolean): Boolean {
         if (loginType){
@@ -147,6 +164,7 @@ class LoginViewModel(app: Application) : BaseViewModel(app) {
     }
 
     private fun registerNewAccount(){
+        email.value?.replace('.','_')
         writePref(null)
         runBlocking {
              launch (Dispatchers.IO) {
@@ -157,10 +175,12 @@ class LoginViewModel(app: Application) : BaseViewModel(app) {
     }
 
     fun validityCallBackRegistration(firebaseControl: FirebaseControl){
-        if (firebaseControl.email == null)
-            registerNewAccount()
-        else
-            invalidEmail()
+        if (email.value != ""){
+            if (firebaseControl.email == null)
+                registerNewAccount()
+            else
+                invalidEmail()
+        }
     }
 
     fun loginValidityCallBack(firebaseControl: FirebaseControl){

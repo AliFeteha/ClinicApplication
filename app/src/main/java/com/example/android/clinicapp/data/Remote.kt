@@ -119,6 +119,7 @@ class Remote {
 
     fun fireBaseAuthentication(firebaseControl:MutableLiveData<FirebaseControl>,email : String){
         val list: MutableList<String> = mutableListOf()
+        try {
         remoteDataBase.child("Authentication").child(email).get().addOnSuccessListener {
             Log.i(Tag,"get i nto snapshot")
             for (childSnapshot in it.children) {
@@ -133,6 +134,7 @@ class Remote {
         }.addOnFailureListener {
             Log.i(Tag, "Error getting data", it)
         }
+        }catch (ignored:Exception){}
     }
 
     companion object{

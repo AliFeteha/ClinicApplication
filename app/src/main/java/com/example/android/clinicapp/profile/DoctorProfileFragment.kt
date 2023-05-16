@@ -13,25 +13,24 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.res.TypedArrayUtils.getTextArray
+import androidx.databinding.DataBindingUtil
 import com.example.android.clinicapp.base.BaseFragment
 import com.example.android.clinicapp.databinding.ProfileDoctorBinding
+import com.example.android.clinicapp.databinding.ProfilePatientBinding
 import org.koin.android.ext.android.inject
 
 
 class DoctorProfileFragment: BaseFragment() {
     override val _viewModel: ProfileViewModel by inject()
     lateinit var binding: ProfileDoctorBinding
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        binding.viewModel = _viewModel
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.profile_doctor, container, false)
+        binding = DataBindingUtil.inflate(inflater,R.layout.profile_patient,container,false)
+        binding.viewModel = _viewModel
+        return binding.root
     }
     //todo to be tested in the doctor profile view
     fun onClick(view:View) {
