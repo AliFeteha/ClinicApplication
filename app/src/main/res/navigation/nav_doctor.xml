@@ -15,5 +15,12 @@
         <action
             android:id="@+id/action_doctorDashboard_to_doctorProfileFragment"
             app:destination="@id/doctorProfileFragment" />
+        <action
+            android:id="@+id/action_doctorDashboard_to_patientAppointments2"
+            app:destination="@id/patientAppointments2" />
     </fragment>
+    <fragment
+        android:id="@+id/patientAppointments2"
+        android:name="com.example.android.clinicapp.patiant.appointments.fragments.patientAppointments"
+        android:label="patientAppointments" />
 </navigation>

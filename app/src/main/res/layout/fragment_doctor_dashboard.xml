@@ -39,6 +39,7 @@
 
             <ImageView
                 android:layout_width="127dp"
+                android:onClick="@{()->viewModel.navigateToDoctorAppointments()}"
                 android:layout_height="250dp"
                 android:contentDescription="@string/appointments"
                 android:src="@drawable/appointment"
