@@ -16,6 +16,9 @@
         <action
             android:id="@+id/action_patientDashboard_to_patientProfileFragment"
             app:destination="@id/patientProfileFragment" />
+        <action
+            android:id="@+id/action_patientDashboard_to_forum"
+            app:destination="@id/forum" />
     </fragment>
     <fragment
         android:id="@+id/patientAppointments"
@@ -47,6 +50,14 @@
         tools:layout="@layout/fragment_doctors">
         <action
             android:id="@+id/action_doctors_to_patientDashboard"
+            app:destination="@id/patientDashboard" />
+    </fragment>
+    <fragment
+        android:id="@+id/forum"
+        android:name="com.example.android.clinicapp.forum"
+        android:label="forum" >
+        <action
+            android:id="@+id/action_forum_to_patientDashboard"
             app:destination="@id/patientDashboard" />
     </fragment>
 </navigation>
