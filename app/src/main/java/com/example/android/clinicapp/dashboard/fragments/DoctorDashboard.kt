@@ -14,6 +14,7 @@ import com.example.android.clinicapp.base.BaseViewModel
 import com.example.android.clinicapp.dashboard.DashboardViewModel
 import com.example.android.clinicapp.databinding.FragmentDoctorDashboardBinding
 import com.example.android.clinicapp.databinding.FragmentPatientDashboardBinding
+import com.example.android.clinicapp.utils.PreferenceControl
 import org.koin.android.ext.android.inject
 
 class DoctorDashboard : BaseFragment() {
@@ -28,6 +29,15 @@ class DoctorDashboard : BaseFragment() {
             inflater, R.layout.fragment_doctor_dashboard, container, false
         )
         binding.viewModel = _viewModel
+        _viewModel.refreshDoctor()
         return binding.root
+    }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        _viewModel.doctor.observe(viewLifecycleOwner){
+            if (it.id != null){
+                context?.let { it1 -> PreferenceControl(it1.applicationContext).write(_viewModel.doctor.value!!) }
+            }
+        }
     }
 }

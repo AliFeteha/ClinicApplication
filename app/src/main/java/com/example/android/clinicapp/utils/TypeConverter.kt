@@ -113,9 +113,13 @@ class TypeConverter{
     }
     @TypeConverter
     fun stringToList(string: String): List<String> {
-        val trimmedString = string.trim('[', ']')
-        val elements = trimmedString.split(',')
-        return elements.map { it.trim() }
+        try {
+            val trimmedString = string.trim('[', ']')
+            val elements = trimmedString.split(',')
+            return elements.map { it.trim() }
+        }catch (e:Exception){
+            return listOf()
+        }
     }
     @TypeConverter
     fun listToString(list: List<String>): String {
@@ -123,10 +127,13 @@ class TypeConverter{
     }
     @TypeConverter
     fun stringToEmergencyContact(string: String): EmergencyContact {
+        var emergencyContact = EmergencyContact("","")
+        if (string != ""){
         val trimmedString = string.trim('{', '}')
         val keyValuePairs = trimmedString.split(',')
         val values = keyValuePairs.map { it.split('=')[1].trim() }
-        val emergencyContact = EmergencyContact(values[0],values[1]);
+        emergencyContact = EmergencyContact(values[0],values[1])
+        }
         return emergencyContact
     }
     @TypeConverter
@@ -141,11 +148,13 @@ class TypeConverter{
 
     @TypeConverter
     fun stringToMedicalInsurance(string: String): MedicalInsurance {
+        try {
         val trimmedString = string.trim('{', '}')
         val keyValuePairs = trimmedString.split(',')
         val values = keyValuePairs.map { it.split('=')[1].trim() }
         val medicalInsurance = MedicalInsurance(values[0],values[1]);
         return medicalInsurance
+        }catch (e:Exception){return MedicalInsurance("","")}
     }
     @TypeConverter
     fun medicalInsuranceToString(medicalInsurance: MedicalInsurance?): String {
@@ -229,10 +238,13 @@ class TypeConverter{
     }
     @TypeConverter
     fun fromStringToPatient(list: List<String>):Patient{
-        return Patient(list[0],list[1],list[2],list[3],list[4],
-        stringToEmergencyContact(list[5]),list[6],list[7],list[8],
-        stringToMedicalInsurance(list[9]),
-        stringToList(list[10]),list[11],list[12])
+        Log.i(" testing type converter", list.toString())
+        return Patient(
+            list[0], list[1], list[2], list[3], list[4],
+            stringToEmergencyContact(list[5]), list[6], list[7], list[8],
+            stringToMedicalInsurance(list[9]),
+            listOf(), list[10], list[11]
+        )
     }
 
 

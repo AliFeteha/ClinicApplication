@@ -1,14 +1,8 @@
 package com.example.android.clinicapp.utils
 
-import android.app.Application
 import android.content.Context
-import android.content.Context.MODE_PRIVATE
 import android.content.SharedPreferences
-import android.content.res.Resources
 import android.preference.PreferenceManager
-import androidx.core.content.ContentProviderCompat.requireContext
-import com.example.android.clinicapp.App
-import com.example.android.clinicapp.R
 import com.example.android.clinicapp.data.consts.Doctor
 import com.example.android.clinicapp.data.consts.Patient
 import com.example.android.clinicapp.data.consts.Type
@@ -19,7 +13,7 @@ class PreferenceControl(context: Context) {
 
     val sharedPreferences: SharedPreferences =  PreferenceManager.getDefaultSharedPreferences(context)
 
-    fun write(profile: Patient){
+    fun writePatient(profile: Patient){
         with (sharedPreferences.edit()) {
             putString(name, profile.name)
             putString(email, profile.email)
@@ -31,6 +25,10 @@ class PreferenceControl(context: Context) {
             putString(gender, profile.gender)
             putString(img_url, profile.imageUrl)
             putString(phoneNumber, profile.mobilePhone)
+            putString(medicalInsuranceName,profile.insurance.insuranceProvider)
+            putString(medicalInsuranceId,profile.insurance.id)
+            putString(emergencyContact,profile.emergencyContact?.name)
+            putString(emergencyNumber,profile.emergencyContact?.phoneNumber)
             apply()
         }
         writeType(Type.Patient)
@@ -49,7 +47,7 @@ class PreferenceControl(context: Context) {
         }
         writeType(Type.Doctor)
     }
-    fun write(nameVal:String,emailVal:String){
+    fun writePatient(nameVal:String, emailVal:String){
         with (sharedPreferences.edit()) {
             putString(name, nameVal)
             putString(email, emailVal)
@@ -75,30 +73,35 @@ class PreferenceControl(context: Context) {
     fun readPatient():Patient{
         val profile = Patient()
         with(sharedPreferences){
-            profile.name = getString(name,null)
-            profile.email = getString(email, null)
-            profile.address = getString(address, null)
-            profile.id = getString(id, null)
-            profile.birthDate = getString(birthday, null)
-            profile.bloodType = getString(blood, null)
-            profile.city = getString(city, null)
-            profile.gender = getString(gender, null)
-            profile.imageUrl = getString(img_url, null)
-            profile.mobilePhone = getString(phoneNumber, null)
+            profile.name = getString(name,"")
+            profile.email = getString(email, "")
+            profile.address = getString(address, "")
+            profile.id = getString(id, "")
+            profile.birthDate = getString(birthday, "")
+            profile.bloodType = getString(blood, "")
+            profile.city = getString(city, "")
+            profile.gender = getString(gender, "")
+            profile.imageUrl = getString(img_url, "")
+            profile.mobilePhone = getString(phoneNumber, "")
+            profile.emergencyContact?.name = getString(emergencyContact,"")
+            profile.emergencyContact?.phoneNumber = getString(emergencyNumber,"")
+            profile.medicalIssues = listOf()
+            profile.insurance.insuranceProvider = getString(medicalInsuranceName,"")!!
+            profile.insurance.id = getString(medicalInsuranceId,"")!!
         }
         return profile
     }
     fun readDoctor():Doctor{
         val profile = Doctor()
         with(sharedPreferences){
-             profile.name = getString(name,null)
-             profile.email = getString(email,null)
-             profile.address = getString(address,null)
-             profile.id = getString(id,null)
-             profile.telephone = getString(birthday,null)
-             profile.city = getString(city,null)
-             profile.imageURL = getString(img_url,null)
-             profile.telephone = getString(phoneNumber,null)
+             profile.name = getString(name,"")
+             profile.email = getString(email,"")
+             profile.address = getString(address,"")
+             profile.id = getString(id,"")
+             profile.telephone = getString(birthday,"")
+             profile.city = getString(city,"")
+             profile.imageURL = getString(img_url,"")
+             profile.telephone = getString(phoneNumber,"")
         }
         return profile
     }
@@ -117,5 +120,9 @@ class PreferenceControl(context: Context) {
         const val blood = "blood"
         const val type = "type"
         const val id = "id"
+        const val emergencyContact = "emergencyContactName"
+        const val emergencyNumber = "emergencyContactNum"
+        const val medicalInsuranceName = "Medical Insurance Provider"
+        const val medicalInsuranceId = "Medical Insurance ID"
     }
 }

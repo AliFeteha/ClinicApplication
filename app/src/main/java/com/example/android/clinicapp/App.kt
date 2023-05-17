@@ -6,6 +6,7 @@ import com.example.android.clinicapp.dashboard.DashboardViewModel
 import com.example.android.clinicapp.data.local.LocalDB
 import com.example.android.clinicapp.patiant.appointments.AppointmentsViewModel
 import com.example.android.clinicapp.patiant.appointments.BookViewModel
+import com.example.android.clinicapp.profile.ProfileViewModel
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 import org.koin.dsl.module
@@ -18,6 +19,7 @@ class App:Application() {
             //Declare a ViewModel - be later inject into Fragment with dedicated injector using by viewModel()
             single {LoginViewModel(get())}
             single {DashboardViewModel(get())}
+            single { ProfileViewModel(get()) }
             single { AppointmentsViewModel(get()) }
             single { BookViewModel(get()) }
             single{LocalDB.createDaysDao(this@App)}

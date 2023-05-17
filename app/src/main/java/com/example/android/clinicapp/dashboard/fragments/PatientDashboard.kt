@@ -11,6 +11,7 @@ import com.example.android.clinicapp.base.BaseFragment
 import com.example.android.clinicapp.dashboard.DashboardViewModel
 import com.example.android.clinicapp.data.Remote
 import com.example.android.clinicapp.databinding.FragmentPatientDashboardBinding
+import com.example.android.clinicapp.utils.PreferenceControl
 import org.koin.android.ext.android.inject
 
 class PatientDashboard : BaseFragment() {
@@ -23,8 +24,19 @@ class PatientDashboard : BaseFragment() {
     ): View {
         binding = DataBindingUtil.inflate(inflater,R.layout.fragment_patient_dashboard,container,false)
         binding.viewModel = _viewModel
+        Log.i(" testing 123456 ------->", PreferenceControl(requireContext()).readId().toString())
+        _viewModel.refreshPatient()
         return binding.root
 
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        _viewModel.patient.observe(viewLifecycleOwner){
+            if (it.id != null){
+                context?.let { it1 -> PreferenceControl(it1.applicationContext).writePatient(_viewModel.patient.value!!) }
+            }
+        }
     }
 
 }

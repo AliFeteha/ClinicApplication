@@ -1,6 +1,6 @@
 package com.example.android.clinicapp.data.consts
 
 data class MedicalInsurance (
-    val insuranceProvider: String,
-    val id:String
+    var insuranceProvider: String= "",
+    var id:String = ""
     )
