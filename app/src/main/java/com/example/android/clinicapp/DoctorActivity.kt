@@ -2,6 +2,7 @@ package com.example.android.clinicapp
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.PersistableBundle
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
@@ -20,7 +21,7 @@ class DoctorActivity: AppCompatActivity() {
     private lateinit var appBarConfiguration: AppBarConfiguration
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+        checkLogin()
         binding = DataBindingUtil.setContentView(this, R.layout.doctor_activity)
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
@@ -42,6 +43,10 @@ class DoctorActivity: AppCompatActivity() {
             }
             else -> super.onOptionsItemSelected(item)
         }
+    }
+    private fun checkLogin(){
+        if (PreferenceControl(applicationContext).readId() == null)
+            logout()
     }
     private fun logout(){
         PreferenceControl(applicationContext).clearPref()

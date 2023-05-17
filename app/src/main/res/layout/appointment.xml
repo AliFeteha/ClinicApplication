@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
     <data>
         <variable
-            name="viewModel"
+            name="item"
             type="com.example.android.clinicapp.data.consts.Appointment" />
     </data>
 
@@ -24,7 +24,7 @@
                 android:layout_height="18sp"
                 android:layout_marginTop="8sp"
                 android:hint="29/02/2022"
-                android:text="@{viewModel.date}"
+                android:text="@{item.date}"
                 android:textSize="10sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.008"
@@ -37,7 +37,7 @@
                 android:layout_height="18sp"
                 android:layout_marginStart="3sp"
                 android:hint="doctor name"
-                android:text="@{viewModel.DName}"
+                android:text="@{item.DName}"
                 android:textColor="#000000"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -65,7 +65,7 @@
                 android:layout_marginLeft="50sp"
                 android:layout_marginEnd="250dp"
                 android:hint="patient name"
-                android:text="@{viewModel.PId}"
+                android:text="@{item.PId}"
                 android:textColor="#000000"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="@+id/textView3"

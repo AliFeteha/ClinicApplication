@@ -22,6 +22,7 @@ interface RecordsDao{
 
         @Transaction
         suspend fun saveRecords(records : List<RecordsDTO>) {
+                clear()
                 records.forEach { saveRecord(it)}
         }
 
@@ -53,11 +54,16 @@ interface DoctorsDao{
         @Query("SELECT * FROM doctors where id = :doctorId")
         suspend fun getProfileById(doctorId: String): DoctorsDTO
 
-        @Query("SELECT * FROM doctors WHERE :workingDays IN (working_days)")
-        suspend fun getProfileByDays(workingDays: Days): DoctorsDTO
+        @Query("SELECT * FROM doctors WHERE working_days = :workingDays")
+        suspend fun getProfileByDays(workingDays: List<Days>): List<DoctorsDTO>
 
         @Insert(onConflict = OnConflictStrategy.REPLACE)
         suspend fun saveRecord(doctor: DoctorsDTO)
+        @Transaction
+        suspend fun saveRecords(records : List<DoctorsDTO>) {
+                clear()
+                records.forEach { saveRecord(it)}
+        }
 
         @Query("DELETE FROM doctors")
         suspend fun clear()

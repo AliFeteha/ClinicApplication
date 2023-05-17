@@ -16,6 +16,9 @@
         <action
             android:id="@+id/action_patientDashboard_to_patientProfileFragment"
             app:destination="@id/patientProfileFragment" />
+        <action
+            android:id="@+id/action_patientDashboard_to_forum"
+            app:destination="@id/forum" />
     </fragment>
     <fragment
         android:id="@+id/patientAppointments"
@@ -30,9 +33,31 @@
         android:id="@+id/bookAnAppointment"
         android:name="com.example.android.clinicapp.patiant.appointments.fragments.BookAnAppointment"
         android:label="fragmentBookAnAppointment"
-        tools:layout="@layout/fragment_book_an_appointment" />
+        tools:layout="@layout/fragment_book_an_appointment" >
+        <action
+            android:id="@+id/action_bookAnAppointment_to_doctors"
+            app:destination="@id/doctors" />
+    </fragment>
     <fragment
         android:id="@+id/patientProfileFragment"
         android:name="com.example.android.clinicapp.profile.PatientProfileFragment"
-        android:label="PatientProfileFragment" />
+        android:label="PatientProfileFragment"
+        />
+    <fragment
+        android:id="@+id/doctors"
+        android:name="com.example.android.clinicapp.patiant.appointments.fragments.doctors"
+        android:label="doctors"
+        tools:layout="@layout/fragment_doctors">
+        <action
+            android:id="@+id/action_doctors_to_patientDashboard"
+            app:destination="@id/patientDashboard" />
+    </fragment>
+    <fragment
+        android:id="@+id/forum"
+        android:name="com.example.android.clinicapp.forum"
+        android:label="forum" >
+        <action
+            android:id="@+id/action_forum_to_patientDashboard"
+            app:destination="@id/patientDashboard" />
+    </fragment>
 </navigation>
