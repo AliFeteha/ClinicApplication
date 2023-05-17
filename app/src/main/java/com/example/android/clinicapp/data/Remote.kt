@@ -24,14 +24,14 @@ class Remote {
 
     fun signUpDoctor(doctor: Doctor,password:String){
         doctor.id = generateId()
-        remoteDataBase.child("Doctors").child(doctor.id!!).setValue(doctor)
+        remoteDataBase.child(Doctors).child(doctor.id!!).setValue(doctor)
         val control = FirebaseControl(doctor.email,doctor.id,password)
         remoteDataBase.child(Authentication).child(doctor.email!!).setValue(control)
     }
 
     fun signUpPatient(patient: Patient,password:String){
         patient.id = generateId()
-        remoteDataBase.child("Patients").child(patient.id!!).setValue(patient)
+        remoteDataBase.child(Patients).child(patient.id!!).setValue(patient)
         val control = FirebaseControl(email = patient.email,patient.id,password)
         remoteDataBase.child(Authentication).child(patient.email!!).setValue(control)
     }
@@ -40,7 +40,7 @@ class Remote {
     {
         Log.i(Tag,"get i nto function")
         val list: MutableList<String> = mutableListOf()
-        remoteDataBase.child("Doctors").child(id).get().addOnSuccessListener {
+        remoteDataBase.child(Doctors).child(id).get().addOnSuccessListener {
                 Log.i(Tag, "get i nto snapshot")
                 for (childSnapshot in it.children) {
                     val value = childSnapshot.value
@@ -65,7 +65,7 @@ class Remote {
     fun getPatientProfile(patient: MutableLiveData<Patient>,id:String){
         Log.i(Tag,"get i nto function")
         val list: MutableList<String> = mutableListOf()
-        remoteDataBase.child("Patients").child(id).get().addOnSuccessListener {
+        remoteDataBase.child(Patients).child(id).get().addOnSuccessListener {
             Log.i(Tag,"get i nto snapshot")
             for (childSnapshot in it.children) {
                 val value = childSnapshot.value
@@ -83,13 +83,21 @@ class Remote {
         }
     }
 
+    fun overRideDoctor(doctor: Doctor, id: String?){
+        remoteDataBase.child(Doctors).child(id!!).setValue(doctor)
+    }
+
+    fun overRidePatient(patient: Patient, id: String?){
+        remoteDataBase.child(Patients).child(id!!).setValue(patient)
+    }
+
     fun addAppointment(appointment: Appointment){
-        remoteDataBase.child("Appointments").child(appointment.id).setValue(appointment)
+        remoteDataBase.child(Appointments).child(appointment.id).setValue(appointment)
     }
 
     fun getAllAppointments(){
         val list: MutableList<String> = mutableListOf()
-        remoteDataBase.child("Appointments").get().addOnSuccessListener {
+        remoteDataBase.child(Appointments).get().addOnSuccessListener {
             Log.i(Tag,"get i nto snapshot")
             for (childSnapshot in it.children) {
                 val value = childSnapshot.value
@@ -106,7 +114,7 @@ class Remote {
 
     fun getAllDoctors(){
         val list: MutableList<String> = mutableListOf()
-        remoteDataBase.child("Doctors").get()
+        remoteDataBase.child(Doctors).get()
                     .addOnFailureListener { Log.i(Tag, connectionFailed) }
                     .addOnSuccessListener {
                         for (childSnapshot in it.children) {
@@ -141,5 +149,8 @@ class Remote {
         const val Tag = "Remote Class"
         const val connectionFailed = "Connection Failed"
         const val Authentication = "Authentication"
+        const val Appointments = "Appointments"
+        const val Patients = "Patients"
+        const val Doctors = "Doctors"
     }
 }

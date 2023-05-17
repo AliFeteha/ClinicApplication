@@ -21,10 +21,14 @@
             android:label="@string/patient_activity"/>
         <activity
             android:name=".DoctorActivity"
-            android:label="@string/doctor_activity"/>
+            android:label="@string/doctor_activity"
+            android:exported="false">
+
+        </activity>
         <activity
             android:name=".auth.LoginActivity"
             android:exported="true" >
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

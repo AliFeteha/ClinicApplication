@@ -9,5 +9,5 @@ data class Doctor(
     var imageURL: String? = null,
     var name: String? = null,
     var telephone: String? = null,
-    val workingDays: List<Days>? = null
+    var workingDays: List<Days>? = null
 )

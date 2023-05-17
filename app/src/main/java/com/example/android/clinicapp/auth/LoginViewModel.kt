@@ -1,7 +1,6 @@
 package com.example.android.clinicapp.auth
 
 import android.app.Application
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.android.clinicapp.R
 import com.example.android.clinicapp.base.BaseViewModel
@@ -55,7 +54,7 @@ class LoginViewModel(app: Application) : BaseViewModel(app) {
     fun login(){
         if (validate(true))
             prepareEmail()
-            checkAccountValidity(email.value!!)
+        checkAccountValidity(email.value!!)
             }
 
     fun writeType(){
@@ -71,12 +70,13 @@ class LoginViewModel(app: Application) : BaseViewModel(app) {
             PreferenceControl(context = getApplication<Application>().applicationContext).writeId(id)
         }
         PreferenceControl(context = getApplication<Application>().applicationContext).writeType(type!!)
-        PreferenceControl(context = getApplication<Application>().applicationContext).write(name.value!!,email.value!!)
+        PreferenceControl(context = getApplication<Application>().applicationContext).writePatient(name.value!!,email.value!!)
     }
     fun register(){
-        if (validate(false))
+        if (validate(false)) {
             prepareEmail()
             checkAccountValidityReg(email.value!!)
+        }
     }
     fun prepareEmail(){
         var str = ""
@@ -133,14 +133,14 @@ class LoginViewModel(app: Application) : BaseViewModel(app) {
     fun registered(){
         showToast.value = "Signed Up successfully"
     }
-    fun invalidEmailLogin(){
-        showSnackBarInt.value = R.string.invalidEmail
+    private fun invalidEmailLogin(){
+        showSnackBar.value = "Email Not registered"
     }
     private fun invalidPassword(){
-        showSnackBarInt.value = R.string.invalidPassword
+        showSnackBar.value = "Password must be longer than 8 chars"
     }
-    fun invalidPasswordLogin(){
-        showSnackBarInt.value = R.string.invalidPasswordLogin
+    private fun invalidPasswordLogin(){
+        showSnackBar.value = "Incorrect Password"
     }
 
 
@@ -167,9 +167,7 @@ class LoginViewModel(app: Application) : BaseViewModel(app) {
         email.value?.replace('.','_')
         writePref(null)
         runBlocking {
-             launch (Dispatchers.IO) {
                  repo.registerAuth(type!!, password.value!!)
-             }
             finishActivity()
         }
     }
@@ -185,8 +183,13 @@ class LoginViewModel(app: Application) : BaseViewModel(app) {
 
     fun loginValidityCallBack(firebaseControl: FirebaseControl){
         if (firebaseControl.email != null)
-            if (firebaseControl.email == email.value && password.value == firebaseControl.password) {
+            if (firebaseControl.email == email.value) {
+                if (password.value == firebaseControl.password)
                 repo.getRemoteProfile(doctor,patient,firebaseControl.id!!)
+                else
+                    invalidPasswordLogin()
+            }else{
+                invalidEmailLogin()
             }
         else
             invalidEmailLogin()

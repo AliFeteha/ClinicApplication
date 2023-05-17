@@ -1,9 +1,7 @@
 package com.example.android.clinicapp.data
 
 import android.content.Context
-import android.text.BoringLayout
 import android.util.Log
-import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.MutableLiveData
 import com.example.android.clinicapp.data.consts.*
 import com.example.android.clinicapp.data.dto.DoctorsDTO
@@ -13,9 +11,6 @@ import com.example.android.clinicapp.data.local.*
 import com.example.android.clinicapp.utils.PreferenceControl
 import com.example.android.clinicapp.utils.TypeConverter
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.internal.synchronized
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
 
 class Repo(context: Context) {
@@ -63,7 +58,7 @@ class Repo(context: Context) {
             remote.signUpPatient(patient,password)
             patientsDao.saveRecord(PatientsDTO(patient.id!!,patient.name,patient.gender,patient.email,patient.birthDate,patient.imageUrl,patient.address,patient.city,patient.mobilePhone,patient.bloodType,patient.medicalIssues,patient.emergencyContact,patient.insurance))
             patientsDao.saveRecord(TypeConverter().patientToPatientDto(patient))
-            PreferenceControl(context).write(patient)
+            PreferenceControl(context).writePatient(patient)
         }
     }
     suspend fun signUpDoctor(doctor: Doctor, password:String){
@@ -73,8 +68,21 @@ class Repo(context: Context) {
             PreferenceControl(context).write(doctor)
         }
     }
+    fun overrideSign(doctor: Doctor){
+        remote.overRideDoctor(doctor,PreferenceControl(context).readId())
+    }
 
+    fun overrideSign(patient: Patient){
+        remote.overRidePatient(patient,PreferenceControl(context).readId())
+    }
 
+    fun refreshPatient(patient: MutableLiveData<Patient>){
+        remote.getPatientProfile(patient, PreferenceControl(context.applicationContext).readId()!!)
+    }
+
+    fun refreshDoctor(doctor: MutableLiveData<Doctor>){
+        remote.getDoctorProfile(doctor, PreferenceControl(context.applicationContext).readId()!!)
+    }
 
     //Remote Connections
     fun verifyEmailExists(firebaseControl:MutableLiveData<FirebaseControl>,email :String){

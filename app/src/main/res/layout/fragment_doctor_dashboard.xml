@@ -30,21 +30,23 @@
                 android:id="@+id/doctorText1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
                 android:text="@string/appointments"
                 android:textAlignment="center"
                 android:textColor="#0d2b4e"
                 android:textStyle="bold"
-                tools:layout_editor_absoluteX="-16dp"
-                tools:layout_editor_absoluteY="16dp" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
                 android:layout_width="127dp"
-                android:onClick="@{()->viewModel.navigateToDoctorAppointments()}"
                 android:layout_height="250dp"
+                android:layout_marginStart="22dp"
                 android:contentDescription="@string/appointments"
+                android:onClick="@{()->viewModel.navigateToDoctorAppointments()}"
                 android:src="@drawable/appointment"
-                tools:layout_editor_absoluteX="22dp"
-                tools:layout_editor_absoluteY="35dp" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/doctorText1" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -52,31 +54,37 @@
             android:id="@+id/card2"
             android:layout_width="172dp"
             android:layout_height="305dp"
+            android:layout_marginTop="30dp"
             android:layout_marginEnd="25dp"
             android:background="@drawable/radius"
             android:clickable="true"
             app:layout_constraintEnd_toEndOf="parent"
-            tools:ignore="MissingConstraints"
-            tools:layout_editor_absoluteY="87dp">
+            app:layout_constraintTop_toBottomOf="@+id/textView"
+            tools:ignore="MissingConstraints">
 
             <TextView
                 android:id="@+id/doctorText2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
                 android:text="@string/patient"
                 android:textAlignment="center"
                 android:textColor="#0d2b4e"
                 android:textStyle="bold"
-                tools:layout_editor_absoluteX="21dp"
-                tools:layout_editor_absoluteY="16dp" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
                 android:layout_width="128dp"
                 android:layout_height="239dp"
+                android:layout_marginTop="11dp"
+                android:layout_marginEnd="24dp"
+                android:layout_marginBottom="20dp"
                 android:contentDescription="@string/patient"
                 android:src="@drawable/recordss"
-                tools:layout_editor_absoluteX="20dp"
-                tools:layout_editor_absoluteY="46dp" />
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/doctorText2" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -96,21 +104,24 @@
                 android:id="@+id/doctorText4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
                 android:text="@string/profile"
                 android:textAlignment="center"
                 android:textColor="#0d2b4e"
                 android:textStyle="bold"
-                tools:layout_editor_absoluteX="-16dp"
-                tools:layout_editor_absoluteY="16dp" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
                 android:layout_width="119dp"
                 android:layout_height="260dp"
-                android:onClick="@{()->viewModel.navigateToDoctorProfile()}"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="8dp"
                 android:contentDescription="@string/profile"
+                android:onClick="@{()->viewModel.navigateToDoctorProfile()}"
                 android:src="@drawable/docprofilee"
-                tools:layout_editor_absoluteX="26dp"
-                tools:layout_editor_absoluteY="24dp" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/doctorText4" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -133,20 +144,22 @@
                 android:id="@+id/doctorText3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
                 android:text="@string/forum"
                 android:textAlignment="center"
                 android:textColor="#0d2b4e"
                 android:textStyle="bold"
-                tools:layout_editor_absoluteX="-16dp"
-                tools:layout_editor_absoluteY="16dp" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
                 android:layout_width="121dp"
                 android:layout_height="259dp"
+                android:layout_marginStart="25dp"
                 android:contentDescription="@string/forum"
                 android:src="@drawable/forumm"
-                tools:layout_editor_absoluteX="25dp"
-                tools:layout_editor_absoluteY="35dp" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/doctorText3" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
