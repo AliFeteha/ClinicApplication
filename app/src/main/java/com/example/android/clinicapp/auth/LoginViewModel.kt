@@ -183,12 +183,12 @@ class LoginViewModel(app: Application) : BaseViewModel(app) {
         }
     }
 
-    fun loginValidityCallBack(firebaseControl: FirebaseControl){
+   /* fun loginValidityCallBack(firebaseControl: FirebaseControl){
         if (firebaseControl.email != null)
             if (firebaseControl.email == email.value && password.value == firebaseControl.password) {
                 repo.getRemoteProfile(doctor,patient,firebaseControl.id!!)
             }
         else
             invalidEmailLogin()
-    }
+    }*/
 }

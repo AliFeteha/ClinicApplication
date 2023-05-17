@@ -5,6 +5,7 @@ import com.example.android.clinicapp.auth.LoginViewModel
 import com.example.android.clinicapp.dashboard.DashboardViewModel
 import com.example.android.clinicapp.data.local.LocalDB
 import com.example.android.clinicapp.patiant.appointments.AppointmentsViewModel
+import com.example.android.clinicapp.patiant.appointments.BookViewModel
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 import org.koin.dsl.module
@@ -18,6 +19,7 @@ class App:Application() {
             single {LoginViewModel(get())}
             single {DashboardViewModel(get())}
             single { AppointmentsViewModel(get()) }
+            single { BookViewModel(get()) }
             single{LocalDB.createDaysDao(this@App)}
             single{LocalDB.createFormDao(this@App)}
             single{LocalDB.createDoctorDao(this@App)}

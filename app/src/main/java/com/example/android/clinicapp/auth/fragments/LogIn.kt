@@ -49,10 +49,10 @@ class LogIn : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        _viewModel.firebaseControl.observe(viewLifecycleOwner, Observer {
+        /*_viewModel.firebaseControl.observe(viewLifecycleOwner, Observer {
             Log.i(" testing", it.toString())
             _viewModel.loginValidityCallBack(it)
-        })
+        })*/
 
         _viewModel.patient.observe(viewLifecycleOwner, Observer {
             if(it.id != null){

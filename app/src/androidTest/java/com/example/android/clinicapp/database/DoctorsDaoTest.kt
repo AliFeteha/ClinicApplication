@@ -105,7 +105,7 @@ class DoctorsDaoTest {
             id = "1",
             name = "John Doe",
             gender = "Male",
-            workDays = listOf(Days.Monday, Days.Wednesday, Days.Friday),
+            workDays = listOf(Days.Saturday),
             email = "johndoe@example.com",
             img_url = "https://example.com/johndoe.jpg",
             city = "New York",
@@ -113,20 +113,8 @@ class DoctorsDaoTest {
             address = "123 Main St"
         )
 
-        val doctor2 = DoctorsDTO(
-            id = "2",
-            name = "Jane Smith",
-            gender = "Female",
-            workDays = listOf(Days.Tuesday, Days.Thursday),
-            email = "janesmith@example.com",
-            img_url = "https://example.com/janesmith.jpg",
-            city = "Los Angeles",
-            telephone = "0987654321",
-            address = "456 Elm St"
-        )
         dao.saveRecord(doctor1)
-        dao.saveRecord(doctor2)
-        val result = dao.getProfileByDays(Days.Saturday)
-        assertEquals(result,doctor2)
+        val result = dao.getProfileByDays(listOf(Days.Saturday))
+        assertEquals(result,doctor1)
     }
 }

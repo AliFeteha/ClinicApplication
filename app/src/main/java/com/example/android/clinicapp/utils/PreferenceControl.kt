@@ -62,7 +62,7 @@ class PreferenceControl(context: Context) {
             apply()
         }
     }
-    fun readType():String? = sharedPreferences.getString(type,null)
+    fun readType():String? = sharedPreferences.getString(type,"Patient")
 
 
     fun writeType(value: Type ) {
@@ -70,7 +70,8 @@ class PreferenceControl(context: Context) {
     }
 
 
-    fun readId():String? = sharedPreferences.getString(id,null)
+    fun readId():String? = sharedPreferences.getString(id,"aa")
+    fun readName():String? = sharedPreferences.getString(name,"ali")
     fun readPatient():Patient{
         val profile = Patient()
         with(sharedPreferences){

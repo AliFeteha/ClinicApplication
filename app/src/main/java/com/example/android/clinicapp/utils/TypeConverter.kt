@@ -111,7 +111,6 @@ class TypeConverter{
         }
         return dayStrings.joinToString(separator = ", ", prefix = "[", postfix = "]")
     }
-
     @TypeConverter
     fun stringToList(string: String): List<String> {
         val trimmedString = string.trim('[', ']')
@@ -165,7 +164,8 @@ class TypeConverter{
             val trimmedString = str.trim('{', '}')
             val keyValuePairs = trimmedString.split(',')
             val values = keyValuePairs.map { it.split('=')[1].trim() }
-            val appointment = Appointment(values[0],values[1],values[2],values[3],values[4],values[5],values[6])
+            Log.i(" remote",values.toString())
+            val appointment = Appointment(values[0],values[6],values[3],values[4],values[2],values[1],values[5])
             appointments.add(appointment)
         }
         return appointments
@@ -196,12 +196,10 @@ class TypeConverter{
         val doctors : MutableList<Doctor> = mutableListOf()
         if (string != null) {
             for(str in string){
-                Log.i(" Testing",str)
-                val trimmedString = str.trim('[', '}',']')
+                val trimmedString = str.trim('{', '}',)
                 val keyValuePairs = trimmedString.split(',')
-                val values = keyValuePairs.map { it.split('=')[0].trim() }
-                Log.i(" Testing",values.toString())
-                val doctor = Doctor(values[0],values[1],values[2],values[3],values[4],values[5],values[6],values[7],stringToDaysList(values[8]))
+                val values = keyValuePairs.map { it.split('=')[1].trim() }
+                val doctor = Doctor(values[0],values[2],values[8],values[1],values[7],values[4],values[5],values[6],stringToDaysList(values[3]))
                 doctors.add(doctor)
             }
         }
