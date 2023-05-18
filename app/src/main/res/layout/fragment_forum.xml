@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:tools="http://schemas.android.com/tools"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
 
@@ -169,7 +168,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:gravity="center_horizontal|center_vertical"
-        android:text="write here your problem"
+        android:text="@string/write_here_your_problem"
         android:textAlignment="center"
         android:textAllCaps="false"
         android:textColor="@color/black"
@@ -183,7 +182,7 @@
         android:id="@+id/btnPilihKonselor"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:text="Submit"
+        android:text="@string/submit"
         android:textAllCaps="false"
         android:textSize="16sp"
         app:layout_constraintBottom_toTopOf="@+id/guideline157"

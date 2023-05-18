@@ -146,7 +146,7 @@
                 <EditText
                     android:id="@+id/emailEditText"
                     android:layout_width="350dp"
-                    android:layout_height="63dp"
+                    android:layout_height="51dp"
                     android:layout_marginStart="34dp"
                     android:layout_marginTop="8dp"
                     android:layout_marginEnd="35dp"
@@ -263,6 +263,7 @@
                     android:layout_marginStart="172dp"
                     android:layout_marginTop="24dp"
                     android:layout_weight="1"
+                    android:selectedItemPosition="@={viewModel.spinnerItems}"
                     android:entries="@array/daysOfWeek"
                     android:spinnerMode="dialog"
                     app:layout_constraintStart_toStartOf="parent"

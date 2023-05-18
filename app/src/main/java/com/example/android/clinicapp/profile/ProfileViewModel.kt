@@ -2,7 +2,6 @@ package com.example.android.clinicapp.profile
 
 import android.app.Application
 import android.util.Log
-import android.view.FocusFinder
 import androidx.lifecycle.MutableLiveData
 import com.example.android.clinicapp.R
 import com.example.android.clinicapp.base.BaseViewModel
@@ -30,17 +29,20 @@ class ProfileViewModel(app:Application) :BaseViewModel(app){
     val emergencyContact : MutableLiveData<String?> = MutableLiveData("")
     val contactNumber : MutableLiveData<String> = MutableLiveData("")
     val workingDays : MutableLiveData<List<Days>> = MutableLiveData(listOf())
+    val spinnerItems:MutableLiveData<Int> = MutableLiveData(0)
     val firebaseControl : MutableLiveData<FirebaseControl> = MutableLiveData(FirebaseControl(email.value,"",""))
     var type: Type? = null
+    val flag:MutableLiveData<Boolean> = MutableLiveData(false)
     private val patient: Patient
     private val doctor :Doctor
 
     fun navigateBack(){
-            NavigationCommand.Back
+            navigationCommand.value = NavigationCommand.Back
     }
     init {
         patient = PreferenceControl(app.applicationContext).readPatient()
         doctor = PreferenceControl(app.applicationContext).readDoctor()
+        Log.i(" lolat neek", doctor.toString())
 
     }
 
@@ -53,16 +55,13 @@ class ProfileViewModel(app:Application) :BaseViewModel(app){
         patient.mobilePhone = mobileNumber.value
         patient.city = city.value
         patient.gender = gender.value
-
+        patient.id = PreferenceControl(app.applicationContext).readId()
         patient.bloodType = blood.value
         patient.name = name.value
-        patient.insurance = insuranceProvider.value?.let { insuranceId.value?.let { it1 ->
-            MedicalInsurance(it,
-                it1
-            )
-        } }
+        patient.insurance = MedicalInsurance(insuranceProvider.value!!,insuranceId.value!!)
         patient.emergencyContact = EmergencyContact(emergencyContact.value,contactNumber.value)
         patient.birthDate = birthDate.value
+        val workingDay:MutableLiveData<Int> = MutableLiveData(0)
         return patient
     }
 
@@ -73,6 +72,7 @@ class ProfileViewModel(app:Application) :BaseViewModel(app){
         doctor.city = city.value
         doctor.workingDays = workingDays.value
         doctor.telephone = mobileNumber.value
+        doctor.id = PreferenceControl(app.applicationContext).readId()
         doctor.imageURL = imgURL.value
         return doctor
     }
@@ -97,18 +97,27 @@ class ProfileViewModel(app:Application) :BaseViewModel(app){
     fun invalidEmail(){
         showToast.value = "Email is already registered"
     }
+
+    private fun modificationMessage(){
+        showToast.value = "modified successfully"
+    }
+
     fun modifyDoctor(){
         convertToDoctor()
+        val oldEmail = PreferenceControl(app.applicationContext).readPatient().email
         PreferenceControl(app.applicationContext).write(doctor)
-        repo.overrideSign(doctor)
+        repo.overrideSign(doctor,oldEmail!!,flag)
+    }
+    fun finishReg(){
+        modificationMessage()
         navigateBack()
     }
 
     fun modifyPatient(){
         convertToPatient()
+        val oldEmail = PreferenceControl(app.applicationContext).readPatient().email
+        repo.overrideSignPatient(patient, oldEmail!!, flag)
         PreferenceControl(app.applicationContext).writePatient(patient)
-        repo.overrideSign(patient)
-        navigateBack()
     }
 
     //check if the account already existed in the email remote database table and return false if it does existed
@@ -129,6 +138,18 @@ class ProfileViewModel(app:Application) :BaseViewModel(app){
 
     }
 
+    private fun loadSpinnerValue():Days{
+        return when(spinnerItems.value){
+            0->  Days.Sunday
+            1->  Days.Monday
+            2->  Days.Tuesday
+            3->  Days.Wednesday
+            4->  Days.Thursday
+            5->  Days.Friday
+            6->  Days.Saturday
+            else -> Days.Sunday
+        }
+    }
     fun loadValues(){
         val type = PreferenceControl(app.applicationContext).readType()
         if (type == Type.Patient.toString())
@@ -144,7 +165,7 @@ class ProfileViewModel(app:Application) :BaseViewModel(app){
          address.value = doctor.address!!
          email.value = doctor.email!!
          city.value = doctor.city!!
-         workingDays.value = doctor.workingDays!!
+        workingDays.value = listOf(loadSpinnerValue())
          mobileNumber.value = doctor.telephone!!
          imgURL.value = doctor.imageURL!!
 
@@ -162,9 +183,9 @@ class ProfileViewModel(app:Application) :BaseViewModel(app){
           city.value = patient.city
           gender.value = patient.gender
           blood.value = patient.bloodType
-        insuranceProvider.value = patient.insurance?.insuranceProvider
-        insuranceId.value = patient.insurance?.id
-        emergencyContact.value = patient.emergencyContact?.name
+        insuranceProvider.value = patient.insurance.insuranceProvider
+        insuranceId.value = patient.insurance.id
+        emergencyContact.value = patient.emergencyContact.name
         birthDate.value = patient.birthDate
 
     }

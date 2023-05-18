@@ -64,11 +64,8 @@ class LoginViewModel(app: Application) : BaseViewModel(app) {
         else
             type = Type.Patient
     }
-    fun writePref(id:String?){
+    private fun writePref(){
         writeType()
-        if (id != null) {
-            PreferenceControl(context = getApplication<Application>().applicationContext).writeId(id)
-        }
         PreferenceControl(context = getApplication<Application>().applicationContext).writeType(type!!)
         PreferenceControl(context = getApplication<Application>().applicationContext).writePatient(name.value!!,email.value!!)
     }
@@ -78,7 +75,7 @@ class LoginViewModel(app: Application) : BaseViewModel(app) {
             checkAccountValidityReg(email.value!!)
         }
     }
-    fun prepareEmail(){
+    private fun prepareEmail(){
         var str = ""
         email.value?.forEach {
             if (it == '.')
@@ -165,7 +162,6 @@ class LoginViewModel(app: Application) : BaseViewModel(app) {
 
     private fun registerNewAccount(){
         email.value?.replace('.','_')
-        writePref(null)
         runBlocking {
                  repo.registerAuth(type!!, password.value!!)
             finishActivity()
@@ -173,6 +169,7 @@ class LoginViewModel(app: Application) : BaseViewModel(app) {
     }
 
     fun validityCallBackRegistration(firebaseControl: FirebaseControl){
+        writePref()
         if (email.value != ""){
             if (firebaseControl.email == null)
                 registerNewAccount()
@@ -181,11 +178,11 @@ class LoginViewModel(app: Application) : BaseViewModel(app) {
         }
     }
 
-   /* fun loginValidityCallBack(firebaseControl: FirebaseControl){
+    fun loginValidityCallBack(firebaseControl: FirebaseControl){
         if (firebaseControl.email != null)
             if (firebaseControl.email == email.value) {
                 if (password.value == firebaseControl.password)
-                repo.getRemoteProfile(doctor,patient,firebaseControl.id!!)
+                repo.getRemoteProfile(doctor,patient,firebaseControl.id!!,)
                 else
                     invalidPasswordLogin()
             }else{
@@ -193,5 +190,5 @@ class LoginViewModel(app: Application) : BaseViewModel(app) {
             }
         else
             invalidEmailLogin()
-    }*/
+    }
 }

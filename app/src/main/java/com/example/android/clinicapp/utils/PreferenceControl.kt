@@ -3,6 +3,7 @@ package com.example.android.clinicapp.utils
 import android.content.Context
 import android.content.SharedPreferences
 import android.preference.PreferenceManager
+import android.util.Log
 import com.example.android.clinicapp.data.consts.Doctor
 import com.example.android.clinicapp.data.consts.Patient
 import com.example.android.clinicapp.data.consts.Type
@@ -27,8 +28,8 @@ class PreferenceControl(context: Context) {
             putString(phoneNumber, profile.mobilePhone)
             putString(medicalInsuranceName,profile.insurance.insuranceProvider)
             putString(medicalInsuranceId,profile.insurance.id)
-            putString(emergencyContact,profile.emergencyContact?.name)
-            putString(emergencyNumber,profile.emergencyContact?.phoneNumber)
+            putString(emergencyContact,profile.emergencyContact.name)
+            putString(emergencyNumber,profile.emergencyContact.phoneNumber)
             apply()
         }
         writeType(Type.Patient)
@@ -60,7 +61,7 @@ class PreferenceControl(context: Context) {
             apply()
         }
     }
-    fun readType():String? = sharedPreferences.getString(type,"Patient")
+    fun readType():String? = sharedPreferences.getString(type,null)
 
 
     fun writeType(value: Type ) {
@@ -68,8 +69,8 @@ class PreferenceControl(context: Context) {
     }
 
 
-    fun readId():String? = sharedPreferences.getString(id,"aa")
-    fun readName():String? = sharedPreferences.getString(name,"ali")
+    fun readId():String? {return sharedPreferences.getString(id,null)}
+
     fun readPatient():Patient{
         val profile = Patient()
         with(sharedPreferences){
@@ -83,8 +84,8 @@ class PreferenceControl(context: Context) {
             profile.gender = getString(gender, "")
             profile.imageUrl = getString(img_url, "")
             profile.mobilePhone = getString(phoneNumber, "")
-            profile.emergencyContact?.name = getString(emergencyContact,"")
-            profile.emergencyContact?.phoneNumber = getString(emergencyNumber,"")
+            profile.emergencyContact.name = getString(emergencyContact,"")
+            profile.emergencyContact.phoneNumber = getString(emergencyNumber,"")
             profile.medicalIssues = listOf()
             profile.insurance.insuranceProvider = getString(medicalInsuranceName,"")!!
             profile.insurance.id = getString(medicalInsuranceId,"")!!
@@ -108,6 +109,10 @@ class PreferenceControl(context: Context) {
     fun clearPref(){
         sharedPreferences.edit().clear().apply()
     }
+
+    fun readName(): String? = sharedPreferences.getString(name,"")
+
+
     companion object{
         const val name = "name"
         const val email = "email"

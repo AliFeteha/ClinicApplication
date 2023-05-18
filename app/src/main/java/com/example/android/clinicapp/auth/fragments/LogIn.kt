@@ -50,7 +50,7 @@ class LogIn : BaseFragment() {
         })
 
         _viewModel.doctor.observe(viewLifecycleOwner, Observer {
-            if(it.id != null){
+            if(it.email != null){
                 _viewModel.type = Type.Doctor
                 PreferenceControl(requireContext()).write(it!!)
                 _viewModel.finishActivity()

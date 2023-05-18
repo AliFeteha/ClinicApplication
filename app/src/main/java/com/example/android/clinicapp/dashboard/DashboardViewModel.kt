@@ -31,6 +31,26 @@ class DashboardViewModel(val app:Application): BaseViewModel(app) {
         navigationCommand.value =
             NavigationCommand.To(PatientDashboardDirections.actionPatientDashboardToPatientProfileFragment())
     }
+    fun navigatePatientToForm(){
+        navigationCommand.value =
+            NavigationCommand.To(PatientDashboardDirections.actionPatientDashboardToForum())
+    }
+    fun navigateDoctorToForm(){
+        navigationCommand.value =
+            NavigationCommand.To(DoctorDashboardDirections.actionDoctorDashboardToForum2())
+    }
+    fun navigateDoctorToBroken(){
+        navigationCommand.value =
+            NavigationCommand.To(DoctorDashboardDirections.actionDoctorDashboardToForum2())
+    }
+    fun navigatePatientToBroken(){
+        navigationCommand.value =
+            NavigationCommand.To(PatientDashboardDirections.actionPatientDashboardToBroken2())
+    }
+    fun navigateDoctorToPatients(){
+        navigationCommand.value =
+            NavigationCommand.To(DoctorDashboardDirections.actionDoctorDashboardToBroken())
+    }
     fun refreshPatient(){
         repo.refreshPatient(patient)
     }

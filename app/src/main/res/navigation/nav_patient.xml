@@ -19,6 +19,9 @@
         <action
             android:id="@+id/action_patientDashboard_to_forum"
             app:destination="@id/forum" />
+        <action
+            android:id="@+id/action_patientDashboard_to_broken2"
+            app:destination="@id/broken2" />
     </fragment>
     <fragment
         android:id="@+id/patientAppointments"
@@ -50,14 +53,17 @@
         tools:layout="@layout/fragment_doctors">
         <action
             android:id="@+id/action_doctors_to_patientDashboard"
-            app:destination="@id/patientDashboard" />
+            app:destination="@id/patientDashboard"
+            app:popUpTo="@id/patientDashboard"
+            app:popUpToInclusive="true"
+            app:popEnterAnim="@anim/nav_default_enter_anim" />
     </fragment>
     <fragment
         android:id="@+id/forum"
-        android:name="com.example.android.clinicapp.forum"
-        android:label="forum" >
-        <action
-            android:id="@+id/action_forum_to_patientDashboard"
-            app:destination="@id/patientDashboard" />
-    </fragment>
+        android:name="com.example.android.clinicapp.form.Form"
+        android:label="forum" />
+    <fragment
+        android:id="@+id/broken2"
+        android:name="com.example.android.clinicapp.utils.Broken"
+        android:label="Broken" />
 </navigation>

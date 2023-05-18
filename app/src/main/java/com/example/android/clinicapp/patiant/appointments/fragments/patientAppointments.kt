@@ -1,5 +1,6 @@
 package com.example.android.clinicapp.patiant.appointments.fragments
 
+import android.app.Application
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -13,9 +14,11 @@ import com.example.android.clinicapp.base.NavigationCommand
 import com.example.android.clinicapp.dashboard.fragments.DoctorDashboardDirections
 import com.example.android.clinicapp.dashboard.fragments.PatientDashboardDirections
 import com.example.android.clinicapp.data.Repo
+import com.example.android.clinicapp.data.consts.Type
 import com.example.android.clinicapp.databinding.FragmentPatientAppointmentsBinding
 import com.example.android.clinicapp.patiant.appointments.AppointmentsViewModel
 import com.example.android.clinicapp.patiant.appointments.appointmentsListAdapter
+import com.example.android.clinicapp.utils.PreferenceControl
 import com.example.android.clinicapp.utils.setup
 import kotlinx.coroutines.runBlocking
 import org.koin.android.ext.android.inject
@@ -30,13 +33,15 @@ class patientAppointments() : BaseFragment() {
     ): View {
         binding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_patient_appointments, container, false)
-        Log.i(" patientttttt","lolllllll")
+        Log.i(" patientttttt","lol")
         binding.viewModel = _viewModel
         binding.newAppointmentButton.setOnClickListener {
             _viewModel.navigationCommand.value =
                 NavigationCommand.To(patientAppointmentsDirections.actionPatientAppointmentsToBookAnAppointment())
 
         }
+        if (PreferenceControl(_viewModel.getApplication<Application>().applicationContext).readType() == Type.Doctor.toString())
+            binding.newAppointmentButton.visibility = View.GONE
         return binding.root
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

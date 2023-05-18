@@ -24,8 +24,7 @@ class PatientDashboard : BaseFragment() {
     ): View {
         binding = DataBindingUtil.inflate(inflater,R.layout.fragment_patient_dashboard,container,false)
         binding.viewModel = _viewModel
-        Log.i(" testing 123456 ------->", PreferenceControl(requireContext()).readId().toString())
-        _viewModel.refreshPatient()
+       _viewModel.refreshPatient()
         return binding.root
 
     }

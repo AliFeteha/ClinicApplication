@@ -204,12 +204,25 @@ class TypeConverter{
     fun listStringsToListDoctors(string: List<String>?):List<Doctor>{
         val doctors : MutableList<Doctor> = mutableListOf()
         if (string != null) {
+
             for(str in string){
-                val trimmedString = str.trim('{', '}',)
-                val keyValuePairs = trimmedString.split(',')
-                val values = keyValuePairs.map { it.split('=')[1].trim() }
-                val doctor = Doctor(values[0],values[2],values[8],values[1],values[7],values[4],values[5],values[6],stringToDaysList(values[3]))
-                doctors.add(doctor)
+                try {
+                    val trimmedString = str.trim('{', '}',)
+                    val keyValuePairs = trimmedString.split(',')
+                    val values = keyValuePairs.map { it.split('=')[1].trim() }
+                    val doctor = Doctor(
+                        values[0],
+                        values[1],
+                        values[7],
+                        "",
+                        values[6],
+                        values[3],
+                        values[4],
+                        values[5],
+                        stringToDaysList(values[3])
+                    )
+                    doctors.add(doctor)
+                }catch (ignore:Exception){}
             }
         }
         return doctors
@@ -272,7 +285,36 @@ class TypeConverter{
         return DoctorsDTO(doctor.id!!,doctor.name,doctor.gender,doctor.workingDays!!,doctor.email,doctor.imageURL,doctor.city,doctor.telephone,doctor.address)
      }
 
+    fun fromStringToDoctor(dataString:String): Doctor {
+        // Split the string into key-value pairs
+        val keyValuePairs = dataString.trim('{', '}').split(", ")
+        Log.i(" tag", dataString)
+        // Create a map to hold the values
+        val values = mutableMapOf<String, String>()
+        for (pair in keyValuePairs) {
+            if (pair != ""){
+            try {
+                Log.i(" testing",pair.toString())
+                val (key, value) = pair.split("=")
+                values[key.trim()] = value.trim()
+            }catch (e:Exception){
+                values[pair.substring(0,pair.length-2)] = ""
+            }
+            }
+        }
 
+    // Create a Doctor object and assign the values from the map
+        return Doctor(
+            address = values["address"],
+            city = values["city"],
+            email = values["email"],
+            gender = values["gender"],
+            id = values["id"],
+            imageURL = values["imageURL"],
+            name = values["name"],
+            telephone = values["telephone"]
+        )
+    }
 
 
 }

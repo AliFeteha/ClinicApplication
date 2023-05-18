@@ -1,6 +1,7 @@
 package com.example.android.clinicapp.data
 
 import android.content.Context
+import android.provider.ContactsContract.CommonDataKinds.Email
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.example.android.clinicapp.data.consts.*
@@ -10,7 +11,6 @@ import com.example.android.clinicapp.data.dto.RecordsDTO
 import com.example.android.clinicapp.data.local.*
 import com.example.android.clinicapp.utils.PreferenceControl
 import com.example.android.clinicapp.utils.TypeConverter
-import com.google.firebase.database.core.Tag
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
@@ -58,24 +58,19 @@ class Repo(context: Context) {
     suspend fun signUpPatient(patient: Patient,password:String){
         withContext(Dispatchers.Unconfined) {
             remote.signUpPatient(patient,password)
-            patientsDao.saveRecord(PatientsDTO(patient.id!!,patient.name,patient.gender,patient.email,patient.birthDate,patient.imageUrl,patient.address,patient.city,patient.mobilePhone,patient.bloodType,patient.medicalIssues,patient.emergencyContact,patient.insurance))
-            patientsDao.saveRecord(TypeConverter().patientToPatientDto(patient))
             PreferenceControl(context).writePatient(patient)
         }
     }
-    suspend fun signUpDoctor(doctor: Doctor, password:String){
-        withContext(Dispatchers.Unconfined) {
-            remote.signUpDoctor(doctor,password)
-            doctorDao.saveRecord(TypeConverter().doctorToDoctorDTO(doctor))
-            PreferenceControl(context).write(doctor)
-        }
+    private fun signUpDoctor(doctor: Doctor, password:String){
+        PreferenceControl(context).write(doctor)
+        remote.signUpDoctor(doctor,password)
     }
-    fun overrideSign(doctor: Doctor){
-        remote.overRideDoctor(doctor,PreferenceControl(context).readId())
+    fun overrideSign(doctor: Doctor,oldEmail: String,flag:MutableLiveData<Boolean>){
+        remote.overRide(doctor,Patient(),oldEmail,flag)
     }
 
-    fun overrideSign(patient: Patient){
-        remote.overRidePatient(patient,PreferenceControl(context).readId())
+    fun overrideSignPatient(patient: Patient,email: String,flag:MutableLiveData<Boolean>){
+        remote.overRide(Doctor(),patient, email, flag)
     }
 
     fun refreshPatient(patient: MutableLiveData<Patient>){
@@ -83,6 +78,7 @@ class Repo(context: Context) {
     }
 
     fun refreshDoctor(doctor: MutableLiveData<Doctor>){
+        Log.i(" testing thing", PreferenceControl(context.applicationContext).readId().toString())
         remote.getDoctorProfile(doctor, PreferenceControl(context.applicationContext).readId()!!)
     }
 
@@ -104,25 +100,18 @@ class Repo(context: Context) {
 //        return false
 //    }
 
-    //check profile - get profile and write it on preference and liveData
-//    suspend fun loginAuth() {
-//        val id = PreferenceControl(context).readId()
-//        withContext(Dispatchers.Unconfined) {
-//            val type = checkProfile(id)
-//            if (type == Type.Patient)
-//                id?.let { getPatientProfile(it) }
-//            else
-//                id?.let { getDoctorProfile(it) }
-//     todo somehting is wrong with the logic
-//        }
-//    }
+    //the fn checks the id in both tables doctors and patients and what returns non-null it defines the type of email
+    fun getRemoteProfile(doctor: MutableLiveData<Doctor>,patient: MutableLiveData<Patient>,id: String) {
+        remote.getDoctorProfile(doctor,id)
+        remote.getPatientProfile(patient,id)
+    }
     //controls the flow of the registration
     suspend fun registerAuth(type: Type ,password :String) {
         if (type == Type.Patient)
             signUpPatient(PreferenceControl(context).readPatient(), password)
-        else
+        else {
             signUpDoctor(PreferenceControl(context).readDoctor(), password)
-        return
+        }
     }
 //    private fun checkProfile(id: String?):Type {
 //        //Todo get the things
@@ -163,6 +152,7 @@ class Repo(context: Context) {
 
         val getDoctors = mutableListOf<Doctor>()
         val doctor = doctorDao.getProfileByDays(listOf(date))
+        Log.i(" testing from the repo though", doctor.toString())
         Log.i(" alooo from getDoctors",doctor.toString())
         for (app in doctor) {
                 getDoctors.add(

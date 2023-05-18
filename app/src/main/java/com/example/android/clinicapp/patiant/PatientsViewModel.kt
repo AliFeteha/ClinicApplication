@@ -1,4 +1,4 @@
-package com.example.android.clinicapp.patients
+package com.example.android.clinicapp.patiant
 
 import android.app.Application
 import androidx.lifecycle.MutableLiveData

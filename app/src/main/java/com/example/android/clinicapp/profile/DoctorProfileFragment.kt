@@ -31,17 +31,22 @@ class DoctorProfileFragment: BaseFragment() {
         binding = DataBindingUtil.inflate(inflater,R.layout.profile_doctor,container,false)
         binding.viewModel = _viewModel
         _viewModel.loadValues()
-        return binding.root
-    }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        _viewModel.firebaseControl.observe(viewLifecycleOwner, Observer {
-            if (it.email == null)
+        //observations
+        _viewModel.firebaseControl.observe(viewLifecycleOwner){
+            if (it.email == null && it.password != "")
                 _viewModel.modifyDoctor()
             else
                 _viewModel.invalidEmail()
-        })
+        }
+        _viewModel.flag.observe(viewLifecycleOwner) {
+            if (it) {
+                _viewModel.finishReg()
+                _viewModel.flag.value = false
+            }
+        }
+        return binding.root
     }
+
 
 }

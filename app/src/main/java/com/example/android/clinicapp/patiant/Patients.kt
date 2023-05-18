@@ -1,4 +1,4 @@
-package com.example.android.clinicapp.patients
+package com.example.android.clinicapp.patiant
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -31,7 +31,7 @@ class Patients : BaseFragment() {
         binding.lifecycleOwner = this
     }
     private fun setupRecyclerView() {
-        val adapter = patientsListAdapter {
+        val adapter = PatientsListAdapter {
         }
 //        setup the recycler view using the extension function
         binding.patientsRecyclerView.setup(adapter)

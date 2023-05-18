@@ -52,9 +52,8 @@ class LoginActivity : AppCompatActivity() {
     }
     //Checks the saved preference if it already existed to require a login process
     private fun checkLogin(): String? {
-        PreferenceControl(applicationContext).clearPref()
+//        PreferenceControl(applicationContext).clearPref()
         val type = PreferenceControl(applicationContext).readType()
-        Log.i(" testing", type.toString())
         return type
 
     }

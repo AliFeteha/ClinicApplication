@@ -4,12 +4,11 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.example.android.clinicapp.data.consts.*
 import com.example.android.clinicapp.utils.TypeConverter
-import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
-import kotlinx.coroutines.*
 import java.util.*
+import kotlin.math.log
 
 
 class Remote {
@@ -40,26 +39,26 @@ class Remote {
     {
         Log.i(Tag,"get i nto function")
         val list: MutableList<String> = mutableListOf()
+        Log.i(" testing any thing", id)
+        Log.i(" testing LiveData ", doctor.value.toString())
         remoteDataBase.child(Doctors).child(id).get().addOnSuccessListener {
                 Log.i(Tag, "get i nto snapshot")
                 for (childSnapshot in it.children) {
+                    Log.i(" from the inside of the remote call ", childSnapshot.value.toString())
                     val value = childSnapshot.value
                     value?.let { list.add(value.toString()) }
                 }
-                Log.i(Tag, list.toString())
-
             if (list.size == 3)
                 doctor.value = typeConverter.fromStringToMiniDoctor(list)
             if (list.size>0)
-                doctor.value = Doctor(
-                    list[0], list[1], list[2], list[3], list[4],
-                    list[5], list[6], list[7], typeConverter.stringToDaysList(list[8])
-                )
+                doctor.value = typeConverter.fromStringToDoctor(list[0])
+
             else
                 doctor.value = Doctor()
-            }.addOnFailureListener {
-                Log.i(Tag, "Error getting data", it)
-            }
+            Log.i(Tag, list.toString())
+        }.addOnFailureListener {
+            Log.i(Tag, "Error getting data", it)
+        }
     }
 
     fun getPatientProfile(patient: MutableLiveData<Patient>,id:String){
@@ -83,13 +82,40 @@ class Remote {
         }
     }
 
-    fun overRideDoctor(doctor: Doctor, id: String?){
-        remoteDataBase.child(Doctors).child(id!!).setValue(doctor)
+    fun overRide(doctor: Doctor,patient: Patient,oldEmail: String, flag: MutableLiveData<Boolean>){
+        var firebaseControl: FirebaseControl
+        val list: MutableList<String> = mutableListOf()
+        remoteDataBase.child(Authentication).child(oldEmail).get().addOnSuccessListener {
+            for (childSnapshot in it.children) {
+                val value = childSnapshot.value
+                value?.let { list.add(value.toString()) }
+            }
+            try {
+                firebaseControl= FirebaseControl(list[0],list[1],list[2])
+                remoteDataBase.child(Authentication).child(oldEmail).removeValue().addOnSuccessListener {
+                    remoteDataBase.child(Authentication).child(firebaseControl.email!!).setValue(firebaseControl).addOnSuccessListener {
+                        if (patient.id == null)
+                            overRideDoctorCall(doctor,flag)
+                        else{
+                            overRidePatientCall(patient,flag)
+                        }
+                    }
+                }
+            }catch (_:Exception){}
+        }
+    }
+    private fun overRideDoctorCall(doctor: Doctor, flag: MutableLiveData<Boolean>) {
+        remoteDataBase.child(Doctors).child(doctor.id!!).setValue(doctor).addOnSuccessListener {
+            flag.value = true
+        }
+    }
+    private fun overRidePatientCall(patient: Patient, flag: MutableLiveData<Boolean>) {
+        remoteDataBase.child(Patients).child(patient.id!!).setValue(patient).addOnSuccessListener {
+            flag.value = true
+        }
     }
 
-    fun overRidePatient(patient: Patient, id: String?){
-        remoteDataBase.child(Patients).child(id!!).setValue(patient)
-    }
+
 
     fun addAppointment(appointment: Appointment){
         remoteDataBase.child("Appointments").child(appointment.id).setValue(appointment)
@@ -137,11 +163,10 @@ class Remote {
                 val value = childSnapshot.value
                 value?.let { list.add(value.toString()) }
             }
-            Log.i("aaa",list.toString())
             if (list.size>0)
                 firebaseControl.value = FirebaseControl(list[0],list[1],list[2])
             else
-                firebaseControl.value = FirebaseControl()
+                firebaseControl.value = FirebaseControl(password = null)
         }.addOnFailureListener {
             Log.i(Tag, "Error getting data", it)
         }

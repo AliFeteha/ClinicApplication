@@ -6,5 +6,5 @@ import com.google.firebase.database.IgnoreExtraProperties
 data class FirebaseControl(
     val email: String? = null,
     val id:String? = null,
-    val password :String?=null
+    val password :String?= ""
 )
